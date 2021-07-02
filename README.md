@@ -23,8 +23,6 @@
 
 ## 設計書
 
-ER 図、テーブル定義書、詳細設計書、ワイヤーフレーム
-
 ## チャレンジ要素一覧
 
 https://docs.google.com/spreadsheets/d/1pnR5TLdrZG-aVqDHHvB9sQlPxV0-zRIKNboJTWKUAvs/edit#gid=0

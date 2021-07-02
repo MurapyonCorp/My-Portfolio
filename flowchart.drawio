@@ -1,0 +1,22 @@
+<mxfile>
+    <diagram id="Qnd2GNUHv-fDcFbU8rVS" name="ページ1">
+        <mxGraphModel dx="990" dy="614" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="7RXzzW3xQ9l9ULZc5Kob-0"/>
+                <mxCell id="7RXzzW3xQ9l9ULZc5Kob-1" parent="7RXzzW3xQ9l9ULZc5Kob-0"/>
+                <mxCell id="NTu9omubN2moPuGAKBJW-5" value="Header" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#ffe6cc;strokeColor=#BD8800;strokeWidth=3;rounded=1;fontColor=#000000;" parent="7RXzzW3xQ9l9ULZc5Kob-1" vertex="1">
+                    <mxGeometry x="10" y="10" width="200" height="104" as="geometry"/>
+                </mxCell>
+                <mxCell id="NTu9omubN2moPuGAKBJW-6" value="・ロゴをクリック" style="text;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;perimeterSpacing=0;strokeWidth=1;rounded=1;glass=0;sketch=0;fontColor=#000000;labelBorderColor=none;strokeColor=#BD8800;" parent="NTu9omubN2moPuGAKBJW-5" vertex="1">
+                    <mxGeometry y="26" width="200" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="NTu9omubN2moPuGAKBJW-7" value="・Aboutボタンをクリック" style="text;strokeColor=#BD8800;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=1;fontColor=#000000;" parent="NTu9omubN2moPuGAKBJW-5" vertex="1">
+                    <mxGeometry y="52" width="200" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="NTu9omubN2moPuGAKBJW-8" value="・ログインボタンをクリック" style="text;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=1;fontColor=#000000;strokeColor=#BD8800;" parent="NTu9omubN2moPuGAKBJW-5" vertex="1">
+                    <mxGeometry y="78" width="200" height="26" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
