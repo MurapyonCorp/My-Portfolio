@@ -177,7 +177,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="50" value="タスク一覧" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#e51400;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;rounded=1;glass=0;sketch=0;strokeWidth=3;fontColor=#ffffff;strokeColor=#B20000;" parent="7RXzzW3xQ9l9ULZc5Kob-1" vertex="1">
-                    <mxGeometry x="604" y="519" width="232" height="78" as="geometry">
+                    <mxGeometry x="606" y="515" width="232" height="78" as="geometry">
                         <mxRectangle x="212" y="53" width="60" height="26" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
@@ -321,14 +321,6 @@
                             <mxPoint x="563" y="104"/>
                             <mxPoint x="563" y="132"/>
                             <mxPoint x="395" y="132"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="94" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=-0.002;entryY=0.144;entryDx=0;entryDy=0;entryPerimeter=0;fontColor=#000000;strokeColor=#FF3333;" parent="7RXzzW3xQ9l9ULZc5Kob-1" source="7" target="50" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="236" y="432"/>
-                            <mxPoint x="236" y="530"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
@@ -637,6 +629,14 @@
                         <Array as="points">
                             <mxPoint x="1504" y="182"/>
                             <mxPoint x="1504" y="539"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="207" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;strokeColor=#FF3333;" edge="1" parent="7RXzzW3xQ9l9ULZc5Kob-1" source="7" target="50">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="239" y="432"/>
+                            <mxPoint x="239" y="535"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
