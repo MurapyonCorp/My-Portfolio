@@ -4,12 +4,34 @@
     <title>Eventas</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #00ff9c">
+        <div class="container">
+          <%= link_to root_path do %>
+            <%= image_tag 'logo2.png', size: "75x75" %>
+          <% end %>
+        </div>
+      </nav>
+    </header>
+    <% if user_signed_in? %>
+      <li>
+        <%= link_to "log out", destroy_user_session_path, method: :delete %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to "新規登録", new_user_registration_path %>
+      </li>
+      <li>
+        <%= link_to "log in", new_user_session_path %>
+      </li>
+    <% end %>
     <%= yield %>
   </body>
 </html>
