@@ -26,6 +26,15 @@
 
 ## 設計書
 
+・アプリケーション詳細設計書
+https://docs.google.com/spreadsheets/d/1xzIAAuVGu7kVxCX9QFdISH2AOLVhi-KoRranfgE2Fto/edit#gid=0
+
+・テーブル定義書
+https://docs.google.com/spreadsheets/d/15XoIuLKHupXlPVB4AVqVkTEw1sNNk__fdGHkmpNHj8w/edit#gid=0
+
+・WBSシート
+https://docs.google.com/spreadsheets/d/1R-oBBRl4Fhfz00hDaoFoC6f3eRxlgZMNS0RrX75SndQ/edit#gid=1773513600
+
 ## チャレンジ要素一覧
 
 https://docs.google.com/spreadsheets/d/1pnR5TLdrZG-aVqDHHvB9sQlPxV0-zRIKNboJTWKUAvs/edit#gid=0
