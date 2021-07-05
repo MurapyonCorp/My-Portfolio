@@ -16,3 +16,8 @@
  @import "bootstrap";
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
+
+ a {
+  text-decoration: none;
+  display: flex;
+ }

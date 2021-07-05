@@ -15,23 +15,41 @@
       <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #00ff9c">
         <div class="container">
           <%= link_to root_path do %>
-            <%= image_tag 'logo2.png', size: "75x75" %>
+            <%= image_tag 'logo3.png', size: "60x60" %>
+            <p style="font-size: 30px; color: #000">Eventas</p>
           <% end %>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+              <% if user_signed_in? %>
+                <li>
+                  <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+                </li>
+              <% else %>
+                <li class="me-3">
+                  <%= link_to "About", home_about_path, class:"btn btn-outline-secondary" %>
+                </li>
+                <li class="me-3">
+                  <%= link_to "Sign up", new_user_registration_path, class:"btn btn-outline-secondary" %>
+                </li>
+                <li>
+                  <%= link_to "Log in", new_user_session_path, class:"btn btn-outline-secondary" %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
       </nav>
     </header>
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to "log out", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "log in", new_user_session_path %>
-      </li>
-    <% end %>
     <%= yield %>
+    <footer class="container fixed-bottom" style="background-color: #00ff9c"><div >
+      <div class="row">
+        <div class="col-2 offset-md-5">
+          <p>©2021 Eventas Inc.</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
