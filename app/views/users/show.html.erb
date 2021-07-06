@@ -1,0 +1,37 @@
+<main>
+  <p id="notice"></p>
+  <div class="container">
+    <!--ユーザー詳細ページにアクセスしたユーザーが現在ログインしているユーザーならばマイページを表示させる-->
+    <% if @user == current_user %>
+      <%= render '/layouts/mypage', user: @user %>
+    <% else %>
+      <div class="row">
+        <h1 class="text-center">User details</h1>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mt-5">
+          <%= attachment_image_tag @user, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "500x500" %>
+        </div>
+        <div class="col-md-7 offset-md-1">
+          <!--ユーザー情報を表示させる-->
+          <div class="row my-5 px-3">
+            <div class="col-md-6">
+              <p style="font-size: 20px;">ユーザー名</p>
+            </div>
+            <div class="col-md-6">
+              <p style="font-size: 20px;"><%= @user.name %></p>
+            </div>
+          </div>
+          <div class="row my-5 px-3">
+            <div class="col-md-6">
+              <p style="font-size: 20px;">イントロダクション</p>
+            </div>
+            <div class="col-md-6">
+              <p style="font-size: 20px;"><%= @user.introduction %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</main>
