@@ -8,11 +8,11 @@
 </div>
 <div class="row">
   <div class="col-md-4 mt-5">
-    <%= attachment_image_tag user, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "500x500" %>
+    <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "400x400" %>
   </div>
   <div class="col-md-7 offset-md-1">
     <!--ユーザー情報を表示させる-->
-    <div class="row my-5 px-3">
+    <div class="row my-5 py-4 px-3">
       <div class="col-md-6">
         <p style="font-size: 20px;">ユーザー名</p>
       </div>
@@ -20,7 +20,15 @@
         <p style="font-size: 20px;"><%= user.name %></p>
       </div>
     </div>
-    <div class="row my-5 px-3">
+    <div class="row my-5 py-4 px-3">
+      <div class="col-md-6">
+        <p style="font-size: 20px;">メールアドレス</p>
+      </div>
+      <div class="col-md-6">
+        <p style="font-size: 20px;"><%= user.email %></p>
+      </div>
+    </div>
+    <div class="row my-5 py-4 px-3">
       <div class="col-md-6">
         <p style="font-size: 20px;">イントロダクション</p>
       </div>

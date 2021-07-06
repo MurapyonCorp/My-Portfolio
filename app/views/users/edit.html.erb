@@ -1,1 +1,65 @@
-<h1>User edit</h1>
+<main>
+  <p id="notice"></p>
+  <div class="container">
+    <div class="row">
+      <h1 class="text-center">My Page editing</h1>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mt-5">
+        <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "400x400" %>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <!--編集フォームを作成する-->
+        <%= form_with model: @user, local:true do |f| %>
+          <div class="form-group">
+            <div class="row my-5 py-2">
+              <div class="col-md-3">
+                <%= f.label "プロフィール画像" %>
+              </div>
+              <div class="col-md-7">
+                <%= f.attachment_field :profile_image, class:"col-md-7 offset-md-4 form-control-file user_image" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row my-5 py-2">
+              <div class="col-md-4">
+                <%= f.label "ユーザー名" %>
+              </div>
+              <div class="col-md-4">
+                <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"Taroken", class: "form-control"%>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row my-5 py-2">
+              <div class="col-md-4">
+                <%= f.label "メールアドレス" %>
+              </div>
+              <div class="col-md-6">
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class:"form-control" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row my-5 py-2">
+              <div class="col-md-4">
+                <%= f.label "イントロダクション" %>
+              </div>
+              <div class="col-md-6">
+                <%= f.text_area :introduction, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row my-5 py-2">
+              <div class="col-md-4">
+                <%= f.submit "保存", class:"col-md-5 btn btn-info" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</main>
