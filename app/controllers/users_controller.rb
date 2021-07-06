@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    # ログインしているユーザーがログインユーザー以外の編集ページにURLから直接遷移出来ないようにする。
     if @user != current_user
       redirect_to user_path(current_user)
     end
