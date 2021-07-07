@@ -10,7 +10,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body data-turbolinks="false">
     <header>
       <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #00ff9c">
         <div class="container">
@@ -31,21 +31,18 @@
                   </p>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Second group">
-                  <%= link_to "Calender", home_about_path, class:"btn btn-outline-secondary" %>
-                </li>
-                <li class="btn-group me-3" role="group" aria-label="Third group">
                   <%= link_to "Users", users_path, class:"btn btn-outline-secondary" %>
                 </li>
+                <li class="btn-group me-3" role="group" aria-label="Third group">
+                  <%= link_to "Event Calendar", events_path, class:"btn btn-outline-secondary" %>
+                </li>
                 <li class="btn-group me-3" role="group" aria-label="Fourth group">
-                  <%= link_to "イベント一覧", home_about_path, class:"btn btn-outline-secondary" %>
+                  <%= link_to "Task calendar", home_about_path, class:"btn btn-outline-secondary" %>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Fifth group">
-                  <%= link_to "タスク一覧", home_about_path, class:"btn btn-outline-secondary" %>
-                </li>
-                <li class="btn-group me-3" role="group" aria-label="Sixth group">
                   <%= link_to "My Page", user_path(current_user), class:"btn btn-outline-secondary" %>
                 </li>
-                <li class="btn-group me-3" role="group" aria-label="Seventh group">
+                <li class="btn-group me-3" role="group" aria-label="Sixth group">
                   <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-outline-secondary" %>
                 </li>
               <% else %>
