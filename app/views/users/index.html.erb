@@ -8,9 +8,9 @@
         <table class="table table-hover table-inverse text-center">
           <thead>
             <tr class="table-warning">
-              <th></th>
-              <th>ユーザー名</th>
-              <th>イントロダクション</th>
+              <th style="width: 10%;"></th>
+              <th style="width: 20%;">ユーザー名</th>
+              <th style="width: 70%;">イントロダクション</th>
             </tr>
           </thead>
           <tbody>
@@ -19,7 +19,7 @@
               <tr>
                 <td><%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
                 <td><%= link_to user.name, user_path(user.id) %></td>
-                <td><%= user.introduction %></td>
+                <td class="text-break"><%= user.introduction %></td>
               </tr>
             <% end %>
             <!---->
