@@ -72,5 +72,5 @@ gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 gem 'carrierwave', '~> 2.0'
 
-gem 'fullcalendar-rails', '~>5.0'
+gem 'fullcalendar-rails'
 gem 'momentjs-rails'
