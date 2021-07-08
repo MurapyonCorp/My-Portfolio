@@ -43,8 +43,8 @@ $(function () {
 
             //events: '/events.json', 以下に追加
             $('#calendar').fullCalendar({
-              googleCalendarApiKey: '',
-              googleCalendarId: '',
+              googleCalendarApiKey: 'AIzaSyCjIBxK831ZBXf_FdGOuqJRS4GRL1d_2bo',
+              googleCalendarId: 'ja.japanese#holiday@group.v.calendar.google.com',
                 events: '/events.json',
                 //カレンダー上部を年月で表示させる
                 titleFormat: 'YYYY年 M月',
@@ -81,6 +81,44 @@ $(function () {
                     element.css("padding", "5px");
                 }
             });
+            google_cal_load();
         }
     });
 });
+function google_cal_load(){
+
+
+    const API_KEY = 'AIzaSyCjIBxK831ZBXf_FdGOuqJRS4GRL1d_2bo'
+    const CALENDAR_ID = 'ja.japanese#holiday@group.v.calendar.google.com';
+
+    function start() {
+      gapi.client.init({
+        'apiKey': API_KEY,
+      }).then(function() {
+        return gapi.client.request({
+          'path': 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(CALENDAR_ID) + '/events'
+        })
+      }).then(function(response) {
+
+        let items = response.result.items;
+        for(let i = 0; i < items.length; i++){
+          console.log('beforeend', items[i].summary + items[i].start.date + '<br>');
+          $('#calendar').fullCalendar('addEventSource', {
+            events: [
+              {
+                  title: items[i].summary ,
+                  start: items[i].start.date,
+                  backgroundColor: '#ff0000'
+              }
+            ]
+          });
+        }
+      }, function(reason) {
+        console.log('Error: ' + reason.result.error.message);
+      });
+    };
+
+
+
+    gapi.load('client', start);
+  }
