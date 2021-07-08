@@ -43,8 +43,8 @@ $(function () {
 
             //events: '/events.json', 以下に追加
             $('#calendar').fullCalendar({
-              googleCalendarApiKey: 'AIzaSyCjIBxK831ZBXf_FdGOuqJRS4GRL1d_2bo',
-              googleCalendarId: 'ja.japanese#holiday@group.v.calendar.google.com',
+              googleCalendarApiKey: '',
+              googleCalendarId: '',
                 events: '/events.json',
                 //カレンダー上部を年月で表示させる
                 titleFormat: 'YYYY年 M月',
