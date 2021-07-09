@@ -52,9 +52,9 @@ $(function () {
                 dayNamesShort: ['日', '月', '火', '水', '木', '金', '土'],
                 //ボタンのレイアウト
                 header: {
-                    left: '',
+                    left: 'today prev,next',
                     center: 'title',
-                    right: 'today prev,next'
+                    right: ''
                 },
                 //終了時刻がないイベントの表示間隔
                 defaultTimedEventDuration: '03:00:00',
