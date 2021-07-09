@@ -1,4 +1,37 @@
 <!--<script type='text/javascript' src='fullcalendar/gcal.js'></script>-->
 <!--script type="text/javascript" src="https://unpkg.com/@fullcalendar/google-calendar@5.8.0/main.global.min.js"></script-->
 <!--script type="text/javascript" src="https://raw.githubusercontent.com/fullcalendar/fullcalendar/v3.7.0/dist/gcal.js"></script-->
+
+<!--新規投稿フォーム作成-->
+<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  投稿する
+</button>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">新規投稿</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <%= form_with model: @event, local:true do |f| %>
+        <div class="modal-body">
+          <%= f.label "タイトル" %>
+          <%= f.text_field :title, class:"form-control" %>
+          <%= f.label "概要" %>
+          <%= f.text_area :body, class:"form-control" %>
+          <%= f.label "場所" %>
+          <%= f.text_field :location, class:"form-control" %>
+          <%= f.label "開始" %>
+          <%= f.datetime_field :start_date, class:"form-select" %>
+          <%= f.label "終了" %>
+          <%= f.datetime_field :end_date, class:"form-select" %>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "投稿！", class:"btn btn-info" %>
+          <!--<button type="button" class="btn btn-info">投稿！</button>-->
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 <div id="calendar"></div>

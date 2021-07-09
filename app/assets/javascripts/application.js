@@ -106,9 +106,9 @@ function google_cal_load(){
           $('#calendar').fullCalendar('addEventSource', {
             events: [
               {
-                  title: items[i].summary ,
-                  start: items[i].start.date,
-                  backgroundColor: '#ff0000'
+                title: items[i].summary ,
+                start: items[i].start.date,
+                backgroundColor: '#ff0000'
               }
             ]
           });
