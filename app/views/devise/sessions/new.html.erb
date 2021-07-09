@@ -17,6 +17,9 @@
         <div class="col-1 offset-md-3"><%= f.label "パスワード" %></div>
         <div class="col-2 offset-md-3"><%= f.password_field :password, autocomplete: "current-password", class:"form-control" %></div>
       </div>
+      <div class="row">
+        <div class="col-2 offset-md-7"><%= link_to "パスワードを忘れました", new_password_path(resource_name) %></div>
+      </div>
 
       <% if devise_mapping.rememberable? %>
         <div class="row">
@@ -33,8 +36,8 @@
     <% end %>
 
     <div class="row">
-      <div class="col-2 offset-md-10">
-        <p>まだ登録がお済みでない方は<%= render "devise/shared/links" %>から新規登録してください。</p>
+      <div class="col-4 offset-md-8">
+        <p>まだ登録がお済みでない方は<%= link_to "こちら", new_user_registration_path %>から新規登録してください。</p>
       </div>
     </div>
   </div>
