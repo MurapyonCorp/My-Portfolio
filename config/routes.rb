@@ -9,6 +9,6 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
   # ——————————— ここまでネストさせる ———————————
   end
-  resources :events
+  resources :events, only: [:create, :index, :show, :edit, :update, :destroy]
 end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

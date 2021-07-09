@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-secondary table-hover table-inverse text-center">
+        <thead>
+          <tr>
+            <th style="width: 10%;">タイトル</th>
+            <th class="text-break" style="width: 40%;">概要</th>
+            <th style="width: 10%;">場所</th>
+            <th style="width: 20%;">開始</th>
+            <th style="width: 20%;">終了</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @event.title %></td>
+            <td><%= @event.body %></td>
+            <td><%= @event.location %></td>
+            <td><%= @event.start_date.strftime("%Y年 %m月 %d日 %H時 %M分") %></td>
+            <td><%= @event.end_date.strftime("%Y年 %m月 %d日 %H時 %M分") %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
