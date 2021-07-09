@@ -12,6 +12,18 @@
   </div>
   <div class="col-md-7 offset-md-1">
     <!--ユーザー情報を表示させる-->
+    <div class="row offset-md-1 my-5 px-3">
+      <div class="col-md-3">
+        <%= link_to user_followings_path(user) do %>
+          <p style="font-size: 20px;">フォロー&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= user.followings.count %></p>
+        <% end %>
+      </div>
+      <div class="col-md-3">
+        <%= link_to user_followers_path(user) do %>
+          <p style="font-size: 20px;">フォロワー&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= user.followers.count %></p>
+        <% end %>
+      </div>
+    </div>
     <div class="row my-5 py-4 px-3">
       <div class="col-md-6">
         <p style="font-size: 20px;">ユーザー名</p>
