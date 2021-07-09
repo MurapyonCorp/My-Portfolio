@@ -20,7 +20,6 @@
                 <td><%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
                 <td><%= link_to user.name, user_path(user.id) %></td>
                 <td class="text-break"><%= user.introduction %></td>
-              </tr>
             <% end %>
             <!---->
           </tbody>
