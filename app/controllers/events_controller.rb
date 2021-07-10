@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
+    # 投稿者IDとログインユーザーのIDを結びつける。
     @event.user_id = current_user.id
     if @event.save
       redirect_to request.referer
@@ -21,12 +22,28 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @event = Event.find(params[:id])
+    @user = @event.user
+    # ログインしているユーザーがログインユーザー以外の編集ページにURLから直接遷移出来ないようにする。
+    if @user != current_user
+      redirect_to event_path(@event)
+    end
   end
 
   def update
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to events_path
+    else
+      @user = @event.user
+      render :edit
+    end
   end
 
   def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    redirect_to events_path
   end
 
   private

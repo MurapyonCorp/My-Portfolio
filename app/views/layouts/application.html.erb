@@ -15,7 +15,7 @@
 
   <body data-turbolinks="false">
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #00ff9c">
+      <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
           <%= link_to root_path, class:"logo" do %>
             <%= image_tag 'logo3.png', size: "60x60" %>
@@ -64,11 +64,13 @@
         </div>
       </nav>
     </header>
+    <main>
     <%= yield %>
-    <footer class="container fixed-bottom" style="background-color: #00ff9c">
+    </main>
+    <footer class="container fixed-bottom">
       <div class="row">
         <div class="col-2 offset-md-5 text-center">
-          <p class="mb-0" style="font-size: 20px;">©2021 Eventas Inc.</p>
+          <p class="mb-0">©2021 Eventas Inc.</p>
         </div>
       </div>
     </footer>
