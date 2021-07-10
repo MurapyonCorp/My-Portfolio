@@ -4,20 +4,33 @@
       <table class="table table-secondary table-hover table-inverse text-center">
         <thead>
           <tr>
-            <th style="width: 10%;">タイトル</th>
-            <th class="text-break" style="width: 40%;">概要</th>
-            <th style="width: 10%;">場所</th>
-            <th style="width: 20%;">開始</th>
-            <th style="width: 20%;">終了</th>
+            <th>User</th>
+            <th>タイトル</th>
+            <th class="text-break">概要&nbsp;&nbsp;【投稿者は概要リンクをクリックすると編集できます】</th>
+            <th>場所</th>
+            <th>開始</th>
+            <th>終了</th>
           </tr>
         </thead>
         <tbody>
           <tr>
+            <td>
+              <%= link_to user_path(@user) do %>
+                <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %>
+              <% end %>
+            </td>
             <td><%= @event.title %></td>
-            <td><%= @event.body %></td>
+            <td>
+              <!--投稿者にだけイベントの編集権限を付与-->
+              <% if @user == current_user %>
+                <%= link_to @event.body, edit_event_path(@event) %>
+              <% else %>
+                <%= @event.body %>
+              <% end %>
+            </td>
             <td><%= @event.location %></td>
-            <td><%= @event.start_date.strftime("%Y年 %m月 %d日 %H時 %M分") %></td>
-            <td><%= @event.end_date.strftime("%Y年 %m月 %d日 %H時 %M分") %></td>
+            <td><%= @event.start_date.strftime("%Y,%m/%d %H:%M") %></td>
+            <td><%= @event.end_date.strftime("%Y,%m/%d %H:%M") %></td>
           </tr>
         </tbody>
       </table>
