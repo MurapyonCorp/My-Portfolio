@@ -21,7 +21,7 @@
             </td>
             <td><%= @task.title %></td>
             <td>
-              <!--投稿者にだけイベントの編集権限を付与-->
+              <!--投稿者にだけタスクの編集権限を付与-->
               <% if @user == current_user %>
                 <%= link_to @task.body, edit_task_path(@task) %>
               <% else %>
@@ -29,14 +29,18 @@
               <% end %>
             </td>
             <td>
-              <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                <%= form_with model: @task_new, local:true do |f| %>
-                  <%= f.check_box :pratical, class:"btn-check", autocomplete: "off" %>
-                  <%= f.label "check" %>
+              <!--投稿者にだけタスクの編集権限を付与-->
+              <% if @user == current_user %>
+                <%= form_with model: @task, local:true do |f| %>
+                  <%= f.check_box :pratical %>
                 <% end %>
-                <!--<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">-->
-                <!--<label class="btn btn-outline-primary" for="btncheck1">Checkbox 1</label>-->
-              </div>
+              <% else %>
+                <% if @task.pratical == false %>
+                  未実施
+                <% else %>
+                  実施済
+                <% end %>
+              <% end %>
             </td>
             <td><%= @task.start_date.strftime("%Y,%m/%d %H:%M") %></td>
             <td><%= @task.end_date.strftime("%Y,%m/%d %H:%M") %></td>
