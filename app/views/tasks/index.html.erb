@@ -1,0 +1,29 @@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  タスクを作成
+</button>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">新規タスク</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <%= form_with model: @task, local:true do |f| %>
+        <div class="modal-body">
+          <%= f.label "タスク" %>
+          <%= f.text_field :title, class:"form-control" %>
+          <%= f.label "詳細" %>
+          <%= f.text_area :body, class:"form-control" %>
+          <%= f.label "開始" %>
+          <%= f.datetime_field :start_date, class:"form-select" %>
+          <%= f.label "終了" %>
+          <%= f.datetime_field :end_date, class:"form-select" %>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "登録！", class:"btn btn-dark" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div id="tasks_calendar"></div>

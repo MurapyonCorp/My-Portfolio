@@ -22,18 +22,31 @@
 //= require jquery
 //= require moment
 //= require fullcalendar
-
+var element = ''
 $(function () {
     // 画面遷移を検知
     $(document).on('turbolinks:load', function () {
-        if ($('#calendar').length) {
-
+        element = '';
+        var json_url = ''
+        // .lengthはそれが存在するか、（直前のIDが）何個あるか？というチェックをしている。events_controllerからのデータであれば直下のif文が呼び出される。
+        if ( $('#events_calendar').length){
+            element = '#events_calendar';
+            json_url = '/events.json';
+        }
+        // tasks_controllerからのデータであれば直下のif文が呼び出される。
+        if ( $('#tasks_calendar').length){
+            element = '#tasks_calendar';
+            json_url = '/tasks.json';
+        }
+        // 上記で呼び出された変数を元にelementにevent or taskのカレンダーが代入されるかつデータも分岐する。 
+        if ($(element).length) {
+            console.log('events');
             function Calendar() {
-                return $('#calendar').fullCalendar({
+                return $(element).fullCalendar({
                 });
             }
             function clearCalendar() {
-                $('#calendar').html('');
+                $(element).html('');
             }
 
             $(document).on('turbolinks:load', function () {
@@ -42,10 +55,10 @@ $(function () {
             $(document).on('turbolinks:before-cache', clearCalendar);
 
             //events: '/events.json', 以下に追加
-            $('#calendar').fullCalendar({
+            $(element).fullCalendar({
               googleCalendarApiKey: 'AIzaSyCjIBxK831ZBXf_FdGOuqJRS4GRL1d_2bo',
               googleCalendarId: 'ja.japanese#holiday@group.v.calendar.google.com',
-                events: '/events.json',
+                events: json_url,
                 //カレンダー上部を年月で表示させる
                 titleFormat: 'YYYY年 M月',
                 //曜日を日本語表示
@@ -102,16 +115,25 @@ function google_cal_load(){
 
         let items = response.result.items;
         for(let i = 0; i < items.length; i++){
-          console.log('beforeend', items[i].summary + items[i].start.date + '<br>');
-          $('#calendar').fullCalendar('addEventSource', {
+          //console.log('beforeend', items[i].summary + items[i].start.date + '<br>');
+          $(element).fullCalendar('addEventSource', {
             events: [
               {
                 title: items[i].summary ,
                 start: items[i].start.date,
-                backgroundColor: '#ff0000'
               }
-            ]
-          });
+            ],
+            backgroundColor: '#ff0000',
+          }
+
+
+          );
+          //if(event.source.googleCalendarId == 'ja.japanese#holiday@group.v.calendar.google.com') {
+          //  $('.fc-day-top[data-date=' + event.start._i + ']').css('color', '#FF0066');
+          //}
+            // }
+          $('[data-date=' + items[i].start.date + ']').addClass("fc-holiday");
+
         }
       }, function(reason) {
         console.log('Error: ' + reason.result.error.message);

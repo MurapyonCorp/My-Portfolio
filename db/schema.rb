@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_09_012429) do
+ActiveRecord::Schema.define(version: 2021_07_10_015005) do
 
   create_table "events", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -26,6 +26,17 @@ ActiveRecord::Schema.define(version: 2021_07_09_012429) do
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "title", null: false
+    t.text "body", null: false
+    t.boolean "pratical", default: false, null: false
+    t.datetime "start_date", null: false
+    t.datetime "end_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

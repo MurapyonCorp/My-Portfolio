@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-success table-hover table-inverse text-center">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>タスク</th>
+            <th>詳細&nbsp;&nbsp;【投稿者は詳細リンクをクリックすると編集できます】</th>
+            <th>実施状況</th>
+            <th>開始</th>
+            <th>終了</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to user_path(@user) do %>
+                <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %>
+              <% end %>
+            </td>
+            <td><%= @task.title %></td>
+            <td>
+              <!--投稿者にだけイベントの編集権限を付与-->
+              <% if @user == current_user %>
+                <%= link_to @task.body, edit_task_path(@task) %>
+              <% else %>
+                <%= @task.body %>
+              <% end %>
+            </td>
+            <td>
+              <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                <%= form_with model: @task_new, local:true do |f| %>
+                  <%= f.check_box :pratical, class:"btn-check", autocomplete: "off" %>
+                  <%= f.label "check" %>
+                <% end %>
+                <!--<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">-->
+                <!--<label class="btn btn-outline-primary" for="btncheck1">Checkbox 1</label>-->
+              </div>
+            </td>
+            <td><%= @task.start_date.strftime("%Y,%m/%d %H:%M") %></td>
+            <td><%= @task.end_date.strftime("%Y,%m/%d %H:%M") %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
