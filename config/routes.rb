@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   # ——————————— ここまでネストさせる ———————————
   end
   resources :events, only: [:create, :index, :show, :edit, :update, :destroy]
-  resources :tasks, only: [:create, :index, :show, :edit, :update, :destroy]
+  resources :tasks, only: [:create, :index, :show, :edit, :update, :destroy] do
+    resource :checks, only: [:update]
+  end
 end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
