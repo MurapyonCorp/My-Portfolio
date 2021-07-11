@@ -28,19 +28,8 @@
                 <%= @task.body %>
               <% end %>
             </td>
-            <td>
-              <!--投稿者にだけタスクの編集権限を付与-->
-              <% if @user == current_user %>
-                <%= form_with model: @task, local:true do |f| %>
-                  <%= f.check_box :pratical %>
-                <% end %>
-              <% else %>
-                <% if @task.pratical == false %>
-                  <p style="color: red;">未実施</p>
-                <% else %>
-                  <p>未実施</p>
-                <% end %>
-              <% end %>
+            <td class="check_box">
+              <%= render 'checks/check_box', task: @task %>
             </td>
             <td><%= @task.start_date.strftime("%Y,%m/%d %H:%M") %></td>
             <td><%= @task.end_date.strftime("%Y,%m/%d %H:%M") %></td>

@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <h1 class="text-center">task edit</h1>
+  </div>
+  <%= form_with model: @task, local:true do |f| %>
+    <div class="row my-5">
+      <div class="col-md-1 offset-md-4">
+        <%= f.label "タスク" %>
+      </div>
+      <div class="col-md-3 offset-md-1">
+        <%= f.text_field :title, class:"form-control" %>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-md-1 offset-md-4">
+        <%= f.label "詳細" %>
+      </div>
+      <div class="col-md-5 offset-md-1">
+        <%= f.text_area :body, class:"form-control" %>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-md-1 offset-md-4">
+        <%= f.label "開始" %>
+      </div>
+      <div class="col-md-3 offset-md-1">
+        <%= f.datetime_field :start_date, class:"form-select" %>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-md-1 offset-md-4">
+        <%= f.label "終了" %>
+      </div>
+      <div class="col-md-3 offset-md-1">
+        <%= f.datetime_field :end_date, class:"form-select" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2 offset-md-4">
+        <%= f.submit "更新", class:"col-10 btn btn-outline-success" %>
+      </div>
+      <!--削除ボタンを生成-->
+      <div class="col-md-2" >
+        <%= link_to "削除", task_path(@task), method: :delete, "data-confirm" => "本当に消しますか？", class:"col-10 btn btn-danger" %>
+      </div>
+    </div>
+  <% end %>
+</div>

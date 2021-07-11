@@ -22,12 +22,28 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @task = Task.find(params[:id])
+    @user = @task.user
+    # ログインしているユーザーがログインユーザー以外の編集ページにURLから直接遷移出来ないようにする。
+    if @user != current_user
+      redirect_to task_path(@task)
+    end
   end
 
   def update
+    @task = Task.find(params[:id])
+    if @task.update(task_params)
+      redirect_to tasks_path
+    else
+      @user = @task.user
+      render :edit
+    end
   end
 
   def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+    redirect_to tasks_path
   end
 
   private
