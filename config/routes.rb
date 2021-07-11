@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
   # ——————————— ここまでネストさせる ———————————
   end
-  resources :events, only: [:create, :index, :show, :edit, :update, :destroy]
+
+  resources :events, only: [:create, :index, :show, :edit, :update, :destroy] do
+    resource :favorites, only: [:create, :destroy]
+  end
+
   resources :tasks, only: [:create, :index, :show, :edit, :update, :destroy] do
     resource :checks, only: [:update]
   end

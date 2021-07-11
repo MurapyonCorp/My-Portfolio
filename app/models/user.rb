@@ -29,4 +29,9 @@ class User < ApplicationRecord
   has_many :events
   # タスクモデルとのアソシエーションの関係
   has_many :tasks
+  # いいねモデルとのアソシエーションの関係
+  has_many :favorites, dependent: :destroy
+  def own?(object)
+    id == object.user_id
+  end
 end
