@@ -76,3 +76,4 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
 gem 'dotenv-rails'
+gem 'enum_help'
