@@ -27,7 +27,7 @@ class TasksController < ApplicationController
   def update
   end
 
-  def destory
+  def destroy
   end
 
   private

@@ -27,6 +27,6 @@ class User < ApplicationRecord
 
   # イベントモデルとのアソシエーションの関係
   has_many :events
-  # タスクトモデルとのアソシエーションの関係
+  # タスクモデルとのアソシエーションの関係
   has_many :tasks
 end
