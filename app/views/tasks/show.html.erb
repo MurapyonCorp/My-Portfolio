@@ -8,6 +8,7 @@
             <th>タスク</th>
             <th>詳細&nbsp;&nbsp;【投稿者は詳細リンクをクリックすると編集できます】</th>
             <th>実施状況</th>
+            <th></th>
             <th>開始</th>
             <th>終了</th>
           </tr>
@@ -31,6 +32,15 @@
             <td class="check_box">
               <%= render 'checks/check_box', task: @task %>
             </td>
+            <% if current_user.own?(@task) %>
+              <td>
+                <i class="far fa-heart" style="font-size: 20px;"><%= @task.likes.count %></i>
+              </td>
+            <% else %>
+              <td id="like_buttons_<%= @task.id %>">
+                <%= render "likes/like_button", task: @task %>
+              </td>
+            <% end %>
             <td><%= @task.start_date.strftime("%Y,%m/%d %H:%M") %></td>
             <td><%= @task.end_date.strftime("%Y,%m/%d %H:%M") %></td>
           </tr>

@@ -1,0 +1,9 @@
+<% if task.liked_by?(current_user) %>
+  <%= link_to task_likes_path(task), method: :delete, remote:true do %>
+    <i class="fas fa-heart" style="color: red; font-size: 20px;"><%= task.likes.count %></i>
+  <% end %>
+<% else %>
+  <%= link_to task_likes_path(task), method: :post, remote:true do %>
+    <i class="far fa-heart" style="font-size: 20px;"><%= task.likes.count %></i>
+  <% end %>
+<% end %>

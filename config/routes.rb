@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :tasks, only: [:create, :index, :show, :edit, :update, :destroy] do
     resource :checks, only: [:update]
+    resource :likes, only: [:create, :destroy]
   end
 end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

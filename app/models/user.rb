@@ -34,4 +34,9 @@ class User < ApplicationRecord
   def own?(object)
     id == object.user_id
   end
+  # タスクのいいねモデルとアソシエーションの関係
+  has_many :likes, dependent: :destroy
+  def own?(object)
+    id == object.user_id
+  end
 end
