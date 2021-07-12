@@ -39,4 +39,7 @@ class User < ApplicationRecord
   def own?(object)
     id == object.user_id
   end
+
+  # イベントコメントモデルとのアソシエーションの関係
+  has_many :event_comments, dependent: :destroy
 end

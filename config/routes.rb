@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :events, only: [:create, :index, :show, :edit, :update, :destroy] do
     resource :favorites, only: [:create, :destroy]
+    resources :event_comments, only: [:create, :destroy]
   end
 
   resources :tasks, only: [:create, :index, :show, :edit, :update, :destroy] do

@@ -1,0 +1,24 @@
+<div class="d-flex flex-row-reverse">
+  <div class="col-1">
+    <div class="d-flex flex-row-reverse col-9">
+      <div class="col-1 offset-2">
+        <%= attachment_image_tag event_comment.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
+      </div>
+      <div class="col-1">
+        <!--もしコメントしたユーザーとログインしているユーザーが一致している場合に削除できるようにする-->
+        <% if event_comment.user == current_user %>
+          <%= link_to event_event_comment_path(event_comment.event, event_comment), method: :delete do %>
+            <i class="fas fa-trash"></i>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="d-flex flex-row-reverse">
+      <%= event_comment.user.name %>
+    </div>
+    <div class="d-flex flex-row-reverse">
+      <%= event_comment.created_at.strftime("%m/%d %H:%M") %>
+    </div>
+  </div>
+  <%= event_comment.comment %>
+</div>
