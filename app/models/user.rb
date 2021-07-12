@@ -42,4 +42,6 @@ class User < ApplicationRecord
 
   # イベントコメントモデルとのアソシエーションの関係
   has_many :event_comments, dependent: :destroy
+   # タスクコメントモデルとのアソシエーションの関係
+  has_many :task_comments, dependent: :destroy
 end

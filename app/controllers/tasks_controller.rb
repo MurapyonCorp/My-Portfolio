@@ -19,6 +19,8 @@ class TasksController < ApplicationController
   def show
     @task = Task.find(params[:id])
     @user = @task.user
+    # 記入されたコメントを受ける空の箱を用意する。
+    @task_comment = TaskComment.new
   end
 
   def edit
