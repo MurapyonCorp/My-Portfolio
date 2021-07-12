@@ -8,10 +8,7 @@
             <th>タイトル</th>
             <th class="text-break">概要&nbsp;&nbsp;【投稿者は概要リンクをクリックすると編集できます】</th>
             <th>場所</th>
-            <% if current_user.own?(@event) %>
-            <% else %>
-              <th></th>
-            <% end %>
+            <th></th>
             <th>開始</th>
             <th>終了</th>
           </tr>
@@ -35,6 +32,9 @@
             <td><%= @event.location %></td>
             <!--自分の投稿か否かをここから判断-->
             <% if current_user.own?(@event) %>
+              <td>
+                <i class="far fa-heart" style="font-size: 20px;"><%= @event.favorites.count %></i>
+              </td>
             <% else %>
               <td id="favorite_buttons_<%= @event.id %>">
                 <%= render "favorites/favorite_button", event: @event %>
