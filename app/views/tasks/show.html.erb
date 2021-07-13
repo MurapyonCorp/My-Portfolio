@@ -53,32 +53,12 @@
     </div>
   </div>
   <!--コメント一覧を表示する-->
-  <% @task.task_comments.each do |task_comment| %>
-    <!--もしコメントしたユーザーとログインしているユーザーが一致している場合表示を変更する。-->
-    <% if task_comment.user == current_user %>
-      <%= render "task_comments/task_comment", task_comment: task_comment %>
-    <% else %>
-      <div class="row">
-        <div class="col-1 px-0">
-          <div class="row" style="width: 1%;">
-            <div class="col-1">
-              <%= attachment_image_tag task_comment.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
-            </div>
-          </div>
-          <div class="row px-2">
-            <%= task_comment.user.name %>
-          </div>
-          <div class="row px-2">
-            <%= task_comment.created_at.strftime("%m/%d %H:%M") %>
-          </div>
-        </div>
-        <%= task_comment.comment %>
-      </div>
-    <% end %>
-  <% end %>
+  <div id="comment_area">
+    <%= render "task_comments/index", task: @task %>
+  </div>
   <!--コメント投稿フォームを表示する-->
   <div class="row">
-    <%= form_with(model:[@task, @task_comment], local: true) do |f| %>
+    <%= form_with(model:[@task, @task_comment], remote: true) do |f| %>
       <%= f.text_area :comment, rows:'5',placeholder: "コメント投稿欄", class:"form-control" %>
       <div class="col-12 d-flex justify-content-end my-2">
         <%= f.submit "送信", class:"btn btn-outline-warning" %>

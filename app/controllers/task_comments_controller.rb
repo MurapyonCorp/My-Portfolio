@@ -4,12 +4,13 @@ class TaskCommentsController < ApplicationController
     comment = current_user.task_comments.new(task_comment_params)
     comment.task_id = task.id
     comment.save
-    redirect_to request.referer
+    @task = comment.task
   end
 
   def destroy
-    TaskComment.find_by(id: params[:id], task_id: params[:task_id]).destroy
-    redirect_to request.referer
+    task_comment = TaskComment.find_by(id: params[:id], task_id: params[:task_id])
+    task_comment.destroy
+    @task = task_comment.task
   end
 
   private
