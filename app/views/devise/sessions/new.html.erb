@@ -18,11 +18,6 @@
         <div class="col-2 offset-md-3"><%= f.password_field :password, autocomplete: "current-password", class:"form-control" %></div>
       </div>
 
-      <div class="row my-5">
-        <div class="col-2 offset-md-3"><%= f.label "パスワード(確認用)" %></div>
-        <div class="col-2 offset-md-2"><%= f.password_field :password_confirmation, autocomplete: "current-password", class:"form-control" %></div>
-      </div>
-
       <div class="row">
         <div class="col-2 offset-md-7"><%= link_to "パスワードを忘れました", new_password_path(resource_name) %></div>
       </div>
