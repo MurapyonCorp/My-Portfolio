@@ -75,5 +75,9 @@ gem 'carrierwave', '~> 2.0'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
-gem 'dotenv-rails'
 gem 'enum_help'
+gem 'dotenv-rails'
+
+group :production do
+  gem 'mysql2'
+end
