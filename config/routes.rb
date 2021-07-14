@@ -22,5 +22,6 @@ Rails.application.routes.draw do
   end
   # 検索機能実装のためのルーティングを設定する
   get "search" => "searches#search"
+  resources :notifications, only: [:index]
 end
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

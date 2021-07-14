@@ -46,7 +46,7 @@ class User < ApplicationRecord
   has_many :event_comments, dependent: :destroy
   # タスクコメントモデルとのアソシエーションの関係
   has_many :task_comments, dependent: :destroy
-  
+
   # 検索方法分岐を分岐させる
   def self.looks(search, word)
     if search == "perfect_match"
@@ -55,6 +55,21 @@ class User < ApplicationRecord
       @user = User.where("name LIKE?","%#{word}%")
     else
       @user = User.all
+    end
+  end
+
+  # 通知モデルのとアソシエーション関係(自分が送った通知と自分宛の通知で分ける。)
+  has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
+  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
+  #フォロー時の通知
+  def create_notification_follow!(current_user)
+    temp = Notification.where(["visiter_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        visited_id: id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
     end
   end
 end
