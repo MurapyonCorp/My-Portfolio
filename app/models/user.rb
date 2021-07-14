@@ -62,11 +62,12 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
   #フォロー時の通知
-  def create_notification_follow!(current_user)
+  def create_notification_follow!(current_user,visited_id)
     temp = Notification.where(["visiter_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
     if temp.blank?
+      binding.pry
       notification = current_user.active_notifications.new(
-        visited_id: id,
+        visited_id: visited_id,
         action: 'follow'
       )
       notification.save if notification.valid?

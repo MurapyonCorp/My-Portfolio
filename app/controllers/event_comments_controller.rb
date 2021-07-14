@@ -6,7 +6,7 @@ class EventCommentsController < ApplicationController
     comment.save
     @event = comment.event
     #通知の作成
-    @comment_event.create_notification_event_comment!(current_user, @event_comment.id)
+    @event.create_notification_event_comment!(current_user, comment.id)
   end
 
   def destroy
