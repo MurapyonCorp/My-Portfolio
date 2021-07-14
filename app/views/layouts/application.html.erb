@@ -15,10 +15,10 @@
 
   <body data-turbolinks="false">
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light">
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #efe0ff;">
         <div class="container">
           <%= link_to root_path, class:"logo" do %>
-            <%= image_tag 'logo3.png', size: "60x60" %>
+            <%= image_tag 'logo4.png', size: "60x60" %>
             <h1 style="font-size: 30px; color: #000; line-height: 52px;">&nbsp;&nbsp;Eventas</h1>
           <% end %>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,29 +34,29 @@
                   </p>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Second group">
-                  <%= link_to "Users", users_path, class:"btn btn-outline-secondary" %>
+                  <%= link_to "Users", users_path, class:"btn btn-secondary" %>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Third group">
-                  <%= link_to "Event Calendar", events_path, class:"btn btn-outline-secondary" %>
+                  <%= link_to "Event Calendar", events_path, class:"btn btn-success" %>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Fourth group">
-                  <%= link_to "Task Calendar", tasks_path, class:"btn btn-outline-secondary" %>
+                  <%= link_to "Task Calendar", tasks_path, class:"btn btn-primary" %>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Fifth group">
-                  <%= link_to "My Page", user_path(current_user), class:"btn btn-outline-secondary" %>
+                  <%= link_to "My Page", user_path(current_user), class:"btn btn-warning" %>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Sixth group">
-                  <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-outline-secondary" %>
+                  <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-danger" %>
                 </li>
               <% else %>
                 <li class="btn-group me-3" role="group" aria-label="First group">
-                  <%= link_to "About", home_about_path, class:"btn btn-outline-secondary" %>
+                  <%= link_to "About", home_about_path, class:"btn btn-outline-dark" %>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Second group">
-                  <%= link_to "Sign up", new_user_registration_path, class:"btn btn-outline-secondary" %>
+                  <%= link_to "Sign up", new_user_registration_path, class:"btn btn-outline-info" %>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Third group">
-                  <%= link_to "Log in", new_user_session_path, class:"btn btn-outline-secondary" %>
+                  <%= link_to "Log in", new_user_session_path, class:"btn btn-outline-success" %>
                 </li>
               <% end %>
             </ul>
