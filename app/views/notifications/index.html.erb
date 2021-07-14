@@ -1,0 +1,21 @@
+<div class="dropdown">
+  <a class="dropdown-toggle fs-1" href="notifications" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
+    <i class="fas fa-bell" style="color: black;"></i>
+  </a>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <h5 class="text-center">通知</h5>
+    <i class="fas fa-trash" style="color: black;"></i>
+    <%#= link_to destroy_all_users_notifications_path, method: :delete do %>
+      <h7 style="color: black;">全削除</h7>
+    <%# end %>
+    <hr>
+    <% if @notifications.exists? %>
+      <li class="users-index">
+        <%= render @notifications %>
+      </li>
+    <% else %>
+      <li>通知はありません</li>
+    <% end %>
+  </ul>
+</div>

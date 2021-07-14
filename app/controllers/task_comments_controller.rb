@@ -5,6 +5,8 @@ class TaskCommentsController < ApplicationController
     comment.task_id = task.id
     comment.save
     @task = comment.task
+    #通知の作成
+    @task.create_notification_task_comment!(current_user, comment.id)
   end
 
   def destroy
