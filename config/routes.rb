@@ -20,5 +20,7 @@ Rails.application.routes.draw do
     resource :likes, only: [:create, :destroy]
     resources :task_comments, only: [:create, :destroy]
   end
+  # 検索機能実装のためのルーティングを設定する
+  get "search" => "searches#search"
 end
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

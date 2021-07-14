@@ -46,4 +46,15 @@ class User < ApplicationRecord
   has_many :event_comments, dependent: :destroy
   # タスクコメントモデルとのアソシエーションの関係
   has_many :task_comments, dependent: :destroy
+  
+  # 検索方法分岐を分岐させる
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @user = User.where("name LIKE?", "#{word}")
+    elsif search == "partial_match"
+      @user = User.where("name LIKE?","%#{word}%")
+    else
+      @user = User.all
+    end
+  end
 end

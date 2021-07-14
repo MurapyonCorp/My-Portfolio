@@ -7,4 +7,15 @@ class Event < ApplicationRecord
   end
 
   has_many :event_comments, dependent: :destroy
+  
+  # 検索方法を分岐させる
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @event = Event.where("title LIKE?","#{word}")
+    elsif search == "partial_match"
+      @event = Event.where("title LIKE?","%#{word}%")
+    else
+      @event = Event.all
+    end
+  end
 end

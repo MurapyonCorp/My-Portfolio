@@ -1,0 +1,94 @@
+<div class="container">
+  <!--対象のモデルがUserのとき-->
+  <% if @range == "User" %>
+    <div class="row">
+      <h1 class="text-center">Search&nbsp;Results&nbsp;&nbsp;"<%= params[:word] %>"</h1>
+    </div>
+    <div class="row">
+      <table class="table table-hover table-inverse text-center">
+        <thead>
+          <tr class="table-primary">
+            <th></th>
+            <th>ユーザー名</th>
+            <th>イントロダクション</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--検索でヒットしたユーザーのリストを取得する。-->
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
+              <td><%= link_to user.name, user_path(user.id) %></td>
+              <td class="text-break"><%= user.introduction %></td>
+            </tr>
+          <% end %>
+          <!---->
+        </tbody>
+      </table>
+    </div>
+  <!--対象のモデルがEventのとき-->
+  <% elsif @range == "Event" %>
+    <div class="row">
+      <h1 class="text-center">Search&nbsp;Results&nbsp;&nbsp;"<%= params[:word] %>"</h1>
+    </div>
+    <div class="row">
+      <table class="table table-hover table-inverse text-center">
+        <thead>
+          <tr class="table-dark">
+            <th>User</th>
+            <th>タイトル</th>
+            <th class="text-break">概要</th>
+            <th>場所</th>
+            <th>開始</th>
+            <th>終了</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--検索でヒットしたイベントのリストを取得する。-->
+          <% @events.each do |event| %>
+            <tr>
+              <td><%= attachment_image_tag event.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
+              <td><%= link_to event.title, event_path(event) %></td>
+              <td><%= event.body %></td>
+              <td><%= event.location %></td>
+              <td><%= event.start_date.strftime("%Y,%m/%d %H:%M") %></td>
+              <td><%= event.end_date.strftime("%Y,%m/%d %H:%M") %></td>
+            </tr>
+          <% end %>
+          <!---->
+        </tbody>
+      </table>
+    </div>
+  <!--対象のモデルがTaskのとき-->
+  <% else %>
+    <div class="row">
+      <h1 class="text-center">Search&nbsp;Results&nbsp;&nbsp;"<%= params[:word] %>"</h1>
+    </div>
+    <div class="row">
+      <table class="table table-hover table-inverse text-center">
+        <thead>
+          <tr class="table-danger">
+            <th>User</th>
+            <th>タスク</th>
+            <th>詳細</th>
+            <th>開始</th>
+            <th>終了</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--検索でヒットしたイベントのリストを取得する。-->
+          <% @tasks.each do |task| %>
+            <tr>
+              <td><%= attachment_image_tag task.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
+              <td><%= link_to task.title, task_path(task) %></td>
+              <td><%= task.body %></td>
+              <td><%= task.start_date.strftime("%Y,%m/%d %H:%M") %></td>
+              <td><%= task.end_date.strftime("%Y,%m/%d %H:%M") %></td>
+            </tr>
+          <% end %>
+          <!---->
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

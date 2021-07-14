@@ -9,4 +9,15 @@ class Task < ApplicationRecord
 
   # タスクコメントモデルとのアソシエーションの関係
   has_many :task_comments, dependent: :destroy
+
+  # 検索方法を分岐させる
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @task = Task.where("title LIKE?","#{word}")
+    elsif search == "partial_match"
+      @task = Task.where("title LIKE?","%#{word}%")
+    else
+      @task = Task.all
+    end
+  end
 end

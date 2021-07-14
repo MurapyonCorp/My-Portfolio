@@ -28,25 +28,25 @@
             <ul class="navbar-nav ms-auto">
               <% if user_signed_in? %>
                 <li class="btn-group me-3" role="group" aria-label="First group">
-                  <p>welcome to
-                    <strong><%= current_user.name %></strong>
-                    ！
-                  </p>
+                  <%= render "layouts/search" %>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Second group">
-                  <%= link_to "Users", users_path, class:"btn btn-secondary" %>
+                  <p class="d-flex align-items-center mb-0">welcome to&nbsp;<strong><%= current_user.name %></strong>！</p>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Third group">
-                  <%= link_to "Event Calendar", events_path, class:"btn btn-success" %>
+                  <%= link_to "Users", users_path, class:"btn btn-secondary d-flex align-items-center" %>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Fourth group">
-                  <%= link_to "Task Calendar", tasks_path, class:"btn btn-primary" %>
+                  <%= link_to "Event Calendar", events_path, class:"btn btn-success d-flex align-items-center" %>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Fifth group">
-                  <%= link_to "My Page", user_path(current_user), class:"btn btn-warning" %>
+                  <%= link_to "Task Calendar", tasks_path, class:"btn btn-primary d-flex align-items-center" %>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Sixth group">
-                  <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-danger" %>
+                  <%= link_to "My Page", user_path(current_user), class:"btn btn-warning d-flex align-items-center" %>
+                </li>
+                <li class="btn-group me-3" role="group" aria-label="Seventh group">
+                  <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-danger d-flex align-items-center" %>
                 </li>
               <% else %>
                 <li class="btn-group me-3" role="group" aria-label="First group">
