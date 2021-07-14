@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!,except: [:top, :about]
+  before_action :authenticate_user!, except: [:top, :about]
 
   # ログイン後にヘッダーにユーザー名を表示させる
   before_action :get_current_user

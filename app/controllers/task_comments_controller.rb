@@ -14,6 +14,7 @@ class TaskCommentsController < ApplicationController
   end
 
   private
+
   def task_comment_params
     params.require(:task_comment).permit(:comment)
   end
