@@ -144,3 +144,12 @@ function google_cal_load(){
 
     gapi.load('client', start);
   }
+  
+  let mapInstance;   //変数を宣言
+
+  function initMap() {  //initMapという関数を定義
+    mapInstance = new google.maps.Map(document.getElementById("map"), {   //getElementByIdで指定したIDとマッチするドキュメンを取得するメソッド。
+      center: { lat: -34.397, lng: 150.644 },  //地図の中央位置を指定。位置座標を表すパラメーター(lat:緯度、lng:経度)
+      zoom: 15, //15がおすすめかもしれない  ///数字で地図の拡大範囲を表す
+    });
+  }

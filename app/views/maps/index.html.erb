@@ -1,0 +1,12 @@
+<h2>gmap</h2>
+<!-- form_withはデフォルトでremote: trueの挙動になります -->
+<%= form_with url: map_request_path, method: :get do |f|%>
+  <div class="col-3 d-flex flex-row">
+    <%= f.text_field :address, class:"form-control" %>
+    <%= f.submit '地図表示', class:"btn btn-secondary btn-sm ms-2" %>
+  </div>
+<% end %>
+<div id='map'></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTFdSZ_g1FE_ILA-YRgsaOC81GigY6ZBM&callback=initMap" async defer></script>
+<!--Google Map APIの指定URLを記述。-->
+<%#= ENV['G_MAP'] %>

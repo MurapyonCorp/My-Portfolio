@@ -29,7 +29,7 @@
                 <%= @event.body %>
               <% end %>
             </td>
-            <td><%= @event.location %></td>
+            <td><%= link_to @event.location, maps_path %></td>
             <!--自分の投稿か否かをここから判断-->
             <% if current_user.own?(@event) %>
               <td>
