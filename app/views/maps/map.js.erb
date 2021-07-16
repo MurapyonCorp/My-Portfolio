@@ -1,0 +1,13 @@
+(function(){
+  // 位置情報をもつ変数を用意
+  let pos = new google.maps.LatLng(
+   <%= @latlng[0] %>,  <!--配列の1個目が緯度-->
+   <%= @latlng[1] %>   <!--配列の2個目が経度-->
+  );
+
+  mapInstance.setCenter(pos)
+  let marker = new google.maps.Marker({
+    map: mapInstance,
+    position: pos  <!--変数posで得た緯度経度が代入される-->
+  });
+})()

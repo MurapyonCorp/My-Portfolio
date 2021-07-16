@@ -77,9 +77,12 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
 gem 'enum_help'
+gem 'gon'
 gem 'dotenv-rails'
 
 gem 'kaminari','~> 1.2.1'
+
+gem 'geocoder'
 
 group :production do
   gem 'mysql2'
