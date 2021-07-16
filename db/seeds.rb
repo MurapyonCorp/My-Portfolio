@@ -39,3 +39,26 @@ Task.create!(
   start_date: '2021-07-12 9:27:00',
   end_date: '2021-07-12 10:27:00'
   )
+
+# 50.times do |n|
+#   Event.create!(
+#     [
+#       {
+#         user_id: 1,
+#         title: "Live#{n + 1}",
+#         body: 'Winter Live',
+#         location: '幕張メッセ',
+#         start_date: '2021-07-14 14:27:00',
+#         end_date: '2021-07-15 15:27:00'
+#       },
+#       {
+#         user_id: 2,
+#         title: "Summer Festival#{n + 1}",
+#         body: 'Summer Live',
+#         location: '東京ドーム',
+#         start_date: '2021-07-17 14:27:00',
+#         end_date: '2021-07-18 15:27:00'
+#       }
+#     ]
+#   )
+# end
