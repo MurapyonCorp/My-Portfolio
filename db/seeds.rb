@@ -26,7 +26,7 @@ Event.create!(
   user_id: 1,
   title: 'full calendar',
   body: '大きくてとても見やすいカレンダー',
-  location: 'home',
+  location: '東京ドーム',
   start_date: '2021-07-12 14:27:00',
   end_date: '2021-07-12 15:27:00'
   )

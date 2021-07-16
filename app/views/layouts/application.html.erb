@@ -17,84 +17,85 @@
   <body data-turbolinks="false">
     <header class="sticky-top">
       <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #efe0ff;">
-        <div class="container">
+        <div class="ms-5">
           <%= link_to root_path, class:"logo" do %>
-            <%= image_tag 'logo4.png', size: "70x70" %>
-            <h1 class="d-flex align-items-center" style="font-size: 30px; color: #000;">&nbsp;&nbsp;Eventas</h1>
+            <%= image_tag 'logo4.png', size: "65x65" %>
+            <h1 class="d-flex align-items-center" style="font-size: 30px; color: #000;">&nbsp;Eventas</h1>
           <% end %>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto">
-              <% if user_signed_in? %>
-                <li class="btn-group me-3" role="group" aria-label="First group">
-                  <%= render "layouts/search" %>
-                </li>
-                <li class="btn-group me-3" role="group" aria-label="Second group">
-                  <div class="d-flex align-items-center">
-                    <div class="d-flex flex-column">
-                      <p class="d-flex align-items-center mb-0 text-center">welcome to</p>
-                      <p class="d-flex align-items-center mb-0"><strong><%= current_user.name %></strong>！</p>
-                    </div>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <% if user_signed_in? %>
+            <ul class="navbar-nav ms-5">
+              <li class="btn-group me-3 d-flex align-items-center" role="group" aria-label="First group">
+                <%= render "layouts/search" %>
+              </li>
+              <li class="btn-group me-3" role="group" aria-label="Second group">
+                <div class="d-flex align-items-center">
+                  <div class="d-flex flex-row">
+                    <p class="d-flex align-items-center mb-0 text-center">Hi,&nbsp;</p>
+                    <p class="d-flex align-items-center mb-0"><strong><%= current_user.name %></strong>！</p>
+                  </div>
+                </div>
+              </li>
+              <li class="btn-group me-3" role="group" aria-label="Third group">
+                <%= link_to "Users", users_path, class:"btn btn-secondary d-flex align-items-center" %>
+              </li>
+              <li class="btn-group me-3" role="group" aria-label="Fourth group">
+                <%= link_to "Event Calendar", events_path, class:"btn btn-success d-flex align-items-center" %>
+              </li>
+              <li class="btn-group me-3" role="group" aria-label="Fifth group">
+                <%= link_to "Task Calendar", tasks_path, class:"btn btn-primary d-flex align-items-center" %>
+              </li>
+              <li class="btn-group me-3" role="group" aria-label="Sixth group">
+                <%= link_to "My Page", user_path(current_user), class:"btn btn-warning d-flex align-items-center" %>
+              </li>
+              <li class="btn-group me-3" role="group" aria-label="Seventh group">
+                <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-danger d-flex align-items-center" %>
+              </li>
+              <li class="btn-group me-3" role="group" aria-label="eighth group">
+                <% if unchecked_notifications.any? %>
+                    <i class="fa fa-circle" style="color: #00fa9a;"></i>
+                <% end %>
+                <li>
+                  <div class="dropstart">
+                    <a class="fs-3" href="notifications" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
+                      <i class="fas fa-bell" style="color: black;"></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <h5 class="text-center">通知</h5>
+                      <%= link_to notifications_destroy_all_path, method: :delete do %>
+                        <i class="fas fa-trash" style="color: black;"></i>
+                        <h7 style="color: black;">全削除</h7>
+                      <% end %>
+                      <hr>
+                      <% if @notifications.exists? %>
+                        <li class="users-index">
+                          <%= render @notifications %>
+                        </li>
+                      <% else %>
+                        <li>通知はありません</li>
+                      <% end %>
+                    </ul>
                   </div>
                 </li>
-                <li class="btn-group me-3" role="group" aria-label="Third group">
-                  <%= link_to "Users", users_path, class:"btn btn-secondary d-flex align-items-center" %>
-                </li>
-                <li class="btn-group me-3" role="group" aria-label="Fourth group">
-                  <%= link_to "Event Calendar", events_path, class:"btn btn-success d-flex align-items-center" %>
-                </li>
-                <li class="btn-group me-3" role="group" aria-label="Fifth group">
-                  <%= link_to "Task Calendar", tasks_path, class:"btn btn-primary d-flex align-items-center" %>
-                </li>
-                <li class="btn-group me-3" role="group" aria-label="Sixth group">
-                  <%= link_to "My Page", user_path(current_user), class:"btn btn-warning d-flex align-items-center" %>
-                </li>
-                <li class="btn-group me-3" role="group" aria-label="Seventh group">
-                  <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-danger d-flex align-items-center" %>
-                </li>
-                <li class="btn-group me-3" role="group" aria-label="eighth group">
-                  <% if unchecked_notifications.any? %>
-                      <i class="fa fa-circle" style="color: #00fa9a;"></i>
-                  <% end %>
-                  <li>
-                    <div class="dropdown">
-                      <a class="dropdown-toggle fs-1" href="notifications" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
-                        <i class="fas fa-bell" style="color: black;"></i>
-                      </a>
-
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <h5 class="text-center">通知</h5>
-                        <%= link_to notifications_destroy_all_path, method: :delete do %>
-                          <i class="fas fa-trash" style="color: black;"></i>
-                          <h7 style="color: black;">全削除</h7>
-                        <% end %>
-                        <hr>
-                        <% if @notifications.exists? %>
-                          <li class="users-index">
-                            <%= render @notifications %>
-                          </li>
-                        <% else %>
-                          <li>通知はありません</li>
-                        <% end %>
-                      </ul>
-                    </div>
-                  </li>
-                </li>
-              <% else %>
-                <li class="btn-group me-3" role="group" aria-label="First group">
-                  <%= link_to "About", home_about_path, class:"btn btn-outline-dark" %>
-                </li>
-                <li class="btn-group me-3" role="group" aria-label="Second group">
-                  <%= link_to "Sign up", new_user_registration_path, class:"btn btn-outline-info" %>
-                </li>
-                <li class="btn-group me-3" role="group" aria-label="Third group">
-                  <%= link_to "Log in", new_user_session_path, class:"btn btn-outline-success" %>
-                </li>
-              <% end %>
+              </li>
             </ul>
-          </div>
+          <% else %>
+            <ul class="navbar-nav ms-auto">
+              <li class="btn-group me-3" role="group" aria-label="First group">
+                <%= link_to "About", home_about_path, class:"btn btn-outline-dark" %>
+              </li>
+              <li class="btn-group me-3" role="group" aria-label="Second group">
+                <%= link_to "Sign up", new_user_registration_path, class:"btn btn-outline-info" %>
+              </li>
+              <li class="btn-group me-3" role="group" aria-label="Third group">
+                <%= link_to "Log in", new_user_session_path, class:"btn btn-outline-success" %>
+              </li>
+            </ul>
+          <% end %>
         </div>
       </nav>
     </header>

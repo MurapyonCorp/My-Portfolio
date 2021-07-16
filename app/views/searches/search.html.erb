@@ -26,7 +26,6 @@
         </tbody>
       </table>
     </div>
-    <%= paginate @users %>
   <!--対象のモデルがEventのとき-->
   <% elsif @range == "Event" %>
     <div class="row">
@@ -60,7 +59,6 @@
         </tbody>
       </table>
     </div>
-    <%= paginate @events %>
   <!--対象のモデルがTaskのとき-->
   <% else %>
     <div class="row">
@@ -92,6 +90,5 @@
         </tbody>
       </table>
     </div>
-    <%= paginate @tasks %>
   <% end %>
 </div>
