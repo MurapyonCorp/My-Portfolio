@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :events, only: [:create, :index, :show, :edit, :update, :destroy] do
     resource :favorites, only: [:create, :destroy]
     resources :event_comments, only: [:create, :destroy]
+    resources :maps, only: [:index]
   end
 
   resources :tasks, only: [:create, :index, :show, :edit, :update, :destroy] do
@@ -24,7 +25,6 @@ Rails.application.routes.draw do
   get "search" => "searches#search"
   delete 'notifications/destroy_all' => 'notifications#destroy_all'
   resources :notifications, only: [:index, :destroy]
-  resources :maps, only: [:index]
   get '/map_request', to: 'maps#map', as: 'map_request'
 end
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
