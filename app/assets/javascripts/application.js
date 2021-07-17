@@ -38,7 +38,7 @@ $(function () {
             element = '#tasks_calendar';
             json_url = '/tasks.json';
         }
-        // 上記で呼び出された変数を元にelementにevent or taskのカレンダーが代入されるかつデータも分岐する。 
+        // 上記で呼び出された変数を元にelementにevent or taskのカレンダーが代入されるかつデータも分岐する。
         if ($(element).length) {
             console.log('events');
             function Calendar() {
@@ -56,7 +56,7 @@ $(function () {
 
             //events: '/events.json', 以下に追加
             $(element).fullCalendar({
-              googleCalendarApiKey: 'AIzaSyCjIBxK831ZBXf_FdGOuqJRS4GRL1d_2bo',
+              googleCalendarApiKey: gon.g_key,
               googleCalendarId: 'ja.japanese#holiday@group.v.calendar.google.com',
                 events: json_url,
                 //カレンダー上部を年月で表示させる
@@ -98,10 +98,12 @@ $(function () {
         }
     });
 });
+
+
 function google_cal_load(){
 
 
-    const API_KEY = 'AIzaSyCjIBxK831ZBXf_FdGOuqJRS4GRL1d_2bo'
+    const API_KEY = gon.g_key
     const CALENDAR_ID = 'ja.japanese#holiday@group.v.calendar.google.com';
 
     function start() {
@@ -116,23 +118,35 @@ function google_cal_load(){
         let items = response.result.items;
         for(let i = 0; i < items.length; i++){
           //console.log('beforeend', items[i].summary + items[i].start.date + '<br>');
+          let day = items[i].start.date;
+          console.log(day);
+          console.log(items[i].summary);
           $(element).fullCalendar('addEventSource', {
             events: [
               {
-                title: items[i].summary ,
+
+                title: items[i].summary,
                 start: items[i].start.date,
+                end: items[i].end.date,
+                //rendering: 'background',
+                //className: items[i].summary
+                //backgroundColor: '',
               }
             ],
             backgroundColor: '#ff0000',
           }
 
-
           );
+
+
           //if(event.source.googleCalendarId == 'ja.japanese#holiday@group.v.calendar.google.com') {
           //  $('.fc-day-top[data-date=' + event.start._i + ']').css('color', '#FF0066');
           //}
             // }
+
+
           $('[data-date=' + items[i].start.date + ']').addClass("fc-holiday");
+
 
         }
       }, function(reason) {
@@ -144,12 +158,13 @@ function google_cal_load(){
 
     gapi.load('client', start);
   }
-  
+
+
   let mapInstance;   //変数を宣言
 
   function initMap() {  //initMapという関数を定義
     mapInstance = new google.maps.Map(document.getElementById("map"), {   //getElementByIdで指定したIDとマッチするドキュメンを取得するメソッド。
-      center: { lat: -34.397, lng: 150.644 },  //地図の中央位置を指定。位置座標を表すパラメーター(lat:緯度、lng:経度)
+      center: { lat: 35.681236, lng: 139.767125 },  //地図の中央位置を指定。位置座標を表すパラメーター(lat:緯度、lng:経度)
       zoom: 15, //15がおすすめかもしれない  ///数字で地図の拡大範囲を表す
     });
   }

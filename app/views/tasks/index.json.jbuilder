@@ -3,4 +3,5 @@ json.array!(@tasks) do |task|
   json.start task.start_date
   json.end task.end_date
   json.url task_url(task, format: :html)
+  json.className "yellow"
 end
