@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   def index
     @events = Event.all
     @event = Event.new
+    gon.g_key = "#{ENV['GCAL_API']}"
   end
 
   def show
