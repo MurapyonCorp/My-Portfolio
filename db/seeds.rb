@@ -23,22 +23,46 @@ User.create!(
   )
 
 Event.create!(
-  user_id: 1,
-  title: 'full calendar',
-  body: '大きくてとても見やすいカレンダー',
-  location: '東京ドーム',
-  start_date: '2021-07-12 14:27:00',
-  end_date: '2021-07-12 15:27:00'
-  )
+  [
+    {
+      user_id: 1,
+      title: 'full calendar',
+      body: '大きくてとても見やすいカレンダー',
+      location: '東京ドーム',
+      start_date: '2021-07-12 14:27:00',
+      end_date: '2021-07-12 15:27:00'
+    },
+    {
+      user_id: 2,
+      title: 'work tour',
+      body: 'すごく楽しみ！',
+      location: '通天閣',
+      start_date: '2021-07-21 15:00:00',
+      end_date: '2021-07-22 18:00:00'
+    }
+  ]
+)
 
 Task.create!(
-  user_id: 2,
-  title: 'running',
-  body: '今日も朝に公園で走ります',
-  pratical: '未実施',
-  start_date: '2021-07-12 9:27:00',
-  end_date: '2021-07-12 10:27:00'
-  )
+  [
+    {
+      user_id: 2,
+      title: 'running',
+      body: '今日も朝に公園で走ります',
+      pratical: '未実施',
+      start_date: '2021-07-12 9:27:00',
+      end_date: '2021-07-12 10:27:00'
+    },
+    {
+      user_id: 1,
+      title: 'ジムに行く',
+      body: '今日もしっかりと鍛え上げるぞ～',
+      pratical: '未実施',
+      start_date: '2021-07-23 13:00:00',
+      end_date: '2021-07-23 16:00:00'
+    }
+  ]
+)
 
 # 50.times do |n|
 #   Event.create!(
