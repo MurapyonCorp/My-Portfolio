@@ -1,1 +1,2 @@
 $('#comment_area').html("<%= j(render "event_comments/index", event_comments: @event_comments) %>")
+$('#count_area').html("<%= j(render "event_comments/comment_count", event_comments: @event_comments) %>")

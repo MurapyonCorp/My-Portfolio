@@ -34,14 +34,18 @@
             <% if current_user.own?(@event) %>
               <td>
                 <i class="far fa-heart" style="font-size: 20px;"><%= @event.favorites.count %></i>
-                <p>コメント件数:&nbsp;<%= @event.event_comments.count %></p>
+                <div id="count_area">
+                  <%= render "event_comments/comment_count", event_comments: @event_comments %>
+                </div>
               </td>
             <% else %>
               <td>
                 <div id="favorite_buttons_<%= @event.id %>">
                   <%= render "favorites/favorite_button", event: @event %>
                 </div>
-                <p>コメント件数:&nbsp;<%= @event.event_comments.count %></p>
+                <div id="comment_count">
+                  <%= render "event_comments/comment_count", event_comments: @event_comments %>
+                </div>
               </td>
             <% end %>
             <td><%= @event.start_date.strftime("%Y,%m/%d %H:%M") %></td>
