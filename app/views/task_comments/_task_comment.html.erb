@@ -7,7 +7,7 @@
       <div class="col-1">
         <!--もしコメントしたユーザーとログインしているユーザーが一致している場合に削除できるようにする-->
         <% if task_comment.user == current_user %>
-          <%= link_to task_task_comment_path(task_comment.task, task_comment), method: :delete, remote:true do %>
+          <%= link_to task_task_comment_path(@task.id, task_comment), method: :delete, remote:true do %>
             <i class="fas fa-trash"></i>
           <% end %>
         <% end %>

@@ -20,6 +20,7 @@ class TasksController < ApplicationController
   def show
     @task = Task.find(params[:id])
     @user = @task.user
+    @task_comments = TaskComment.includes(:user).where(task_id: @task.id)
     # 記入されたコメントを受ける空の箱を用意する。
     @task_comment = TaskComment.new
   end
