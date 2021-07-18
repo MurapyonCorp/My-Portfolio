@@ -35,14 +35,18 @@
             <% if current_user.own?(@task) %>
               <td>
                 <i class="far fa-heart" style="font-size: 20px;"><%= @task.likes.count %></i>
-                <p>コメント件数:&nbsp;<%= @task.task_comments.count %></p>
+                <div id="count_area">
+                  <%= render "task_comments/comment_count", task_comments: @task_comments %>
+                </div>
               </td>
             <% else %>
               <td>
                 <div id="like_buttons_<%= @task.id %>">
                   <%= render "likes/like_button", task: @task %>
                 </div>
-                <p>コメント件数:&nbsp;<%= @task.task_comments.count %></p>
+                <div id="count_area">
+                  <%= render "task_comments/comment_count", task_comments: @task_comments %>
+                </div>
               </td>
             <% end %>
             <td><%= @task.start_date.strftime("%Y,%m/%d %H:%M") %></td>
