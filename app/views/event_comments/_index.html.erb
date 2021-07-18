@@ -1,4 +1,4 @@
-<% event.event_comments.each do |event_comment| %>
+<% event_comments.each do |event_comment| %>
   <!--もしコメントしたユーザーとログインしているユーザーが一致している場合表示を変更する。-->
   <% if event_comment.user == current_user %>
     <%= render "event_comments/event_comment", event_comment: event_comment %>

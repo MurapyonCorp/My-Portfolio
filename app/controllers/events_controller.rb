@@ -20,6 +20,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @user = @event.user
+    @event_comments = EventComment.includes(:user).where(event_id: @event.id)
     # コメント投稿するための空のメソッドを呼び出す
     @event_comment = EventComment.new
   end

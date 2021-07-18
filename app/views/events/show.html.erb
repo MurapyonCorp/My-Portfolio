@@ -29,7 +29,7 @@
                 <%= @event.body %>
               <% end %>
             </td>
-            <td><%= link_to @event.location, event_maps_path(event_id: @event.id) %></td>
+            <td><%= link_to event_maps_path(event_id: @event.id)%></td>
             <!--自分の投稿か否かをここから判断-->
             <% if current_user.own?(@event) %>
               <td>
@@ -53,7 +53,7 @@
   </div>
   <!--コメント一覧を表示する-->
   <div id="comment_area">
-    <%= render "event_comments/index", event: @event %>
+    <%= render "event_comments/index", event_comments: @event_comments %>
   </div>
   <!--コメント投稿フォームを表示する-->
   <div class="row">

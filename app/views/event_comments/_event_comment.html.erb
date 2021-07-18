@@ -7,7 +7,7 @@
       <div class="col-1">
         <!--もしコメントしたユーザーとログインしているユーザーが一致している場合に削除できるようにする-->
         <% if event_comment.user == current_user %>
-          <%= link_to event_event_comment_path(event_comment.event, event_comment), method: :delete, remote:true do %>
+          <%= link_to event_event_comment_path(@event.id, event_comment), method: :delete, remote:true do %>
             <i class="fas fa-trash"></i>
           <% end %>
         <% end %>

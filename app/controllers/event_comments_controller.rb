@@ -5,6 +5,7 @@ class EventCommentsController < ApplicationController
     comment.event_id = event.id
     comment.save
     @event = comment.event
+    @event_comments = EventComment.includes(:event, :user).where(event_id: params[:event_id])
     #通知の作成
     @event.create_notification_event_comment!(current_user, comment.id)
   end
@@ -13,6 +14,7 @@ class EventCommentsController < ApplicationController
     event_comment = EventComment.find_by(id: params[:id], event_id: params[:event_id])
     event_comment.destroy
     @event = event_comment.event
+    @event_comments = EventComment.includes(:event, :user).where(event_id: params[:event_id])
   end
 
   private
