@@ -10,13 +10,7 @@ class Event < ApplicationRecord
 
   # 検索方法を分岐させる
   def self.looks(search, word)
-    if search == "perfect_match"
-      @event = Event.where("title LIKE?","#{word}")
-    elsif search == "partial_match"
-      @event = Event.where("title LIKE?","%#{word}%")
-    else
-      @event = Event.all
-    end
+    @event = Event.where("title LIKE?","%#{word}%")
   end
 
   # 通知モデルとのアソシエーション関係

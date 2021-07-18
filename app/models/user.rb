@@ -49,13 +49,7 @@ class User < ApplicationRecord
 
   # 検索方法分岐を分岐させる
   def self.looks(search, word)
-    if search == "perfect_match"
-      @user = User.where("name LIKE?", "#{word}")
-    elsif search == "partial_match"
-      @user = User.where("name LIKE?","%#{word}%")
-    else
-      @user = User.all
-    end
+    @user = User.where("name LIKE?","%#{word}%")
   end
 
   # 通知モデルのとアソシエーション関係(自分が送った通知と自分宛の通知で分ける。)

@@ -12,13 +12,7 @@ class Task < ApplicationRecord
 
   # 検索方法を分岐させる
   def self.looks(search, word)
-    if search == "perfect_match"
-      @task = Task.where("title LIKE?","#{word}")
-    elsif search == "partial_match"
-      @task = Task.where("title LIKE?","%#{word}%")
-    else
-      @task = Task.all
-    end
+    @task = Task.where("title LIKE?","%#{word}%")
   end
 
   # 通知モデルとのアソシエーション関係
