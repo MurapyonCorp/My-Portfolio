@@ -127,7 +127,6 @@ function google_cal_load(){
 
                 title: items[i].summary,
                 start: items[i].start.date,
-                end: items[i].end.date,
                 //rendering: 'background',
                 //className: items[i].summary
                 //backgroundColor: '',
@@ -160,7 +159,7 @@ function google_cal_load(){
   }
 
 
-  let mapInstance;   //変数を宣言
+  var mapInstance;   //変数を宣言
 
   function initMap() {  //initMapという関数を定義
     mapInstance = new google.maps.Map(document.getElementById("map"), {   //getElementByIdで指定したIDとマッチするドキュメンを取得するメソッド。
