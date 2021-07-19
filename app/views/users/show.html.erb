@@ -77,15 +77,15 @@
             <tbody>
               <% @tasks.each do |task| %>
                 <tr>
-                  <td style="height:41px">
+                  <td>
                     <%= link_to task.title, task_path(task) %>
                   </td>
-                  <td style="height:41px"><%= task.body %></td>
-                  <td style="height:41px">
+                  <td><%= task.body %></td>
+                  <td>
                     <% if task.pratical == "実施済" %>
                       <%= task.pratical %>
                     <% else %>
-                      <p style="color: red;"><%= task.pratical %></p>
+                      <p class="mb-0" style="color: red;"><%= task.pratical %></p>
                     <% end %>
                   </td>
                 </tr>
