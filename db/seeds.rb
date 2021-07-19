@@ -9,7 +9,7 @@
 User.create!(
   [
     {
-      name: 'Murashige Ryo',
+      name: 'Murapyon',
       email: 'a@a.com',
       password: '111111',
       profile_image_id: 'e2bc01079a674c1f4ae6125e7a9b3aca627a1e9b685dc3de2872854e0d48',
