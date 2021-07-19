@@ -4,11 +4,11 @@ class SearchesController < ApplicationController
   def search
     @range = params[:range]
     if @range == "User"
-      @users = User.looks(params[:search], params[:word])
+      @users = User.looks(params[:search], params[:word]).page(params[:page])
     elsif @range == "Event"
-      @events = Event.looks(params[:search], params[:word])
+      @events = Event.looks(params[:search], params[:word]).page(params[:page])
     else
-      @tasks = Task.looks(params[:search], params[:word])
+      @tasks = Task.looks(params[:search], params[:word]).page(params[:page])
     end
   end
 end
