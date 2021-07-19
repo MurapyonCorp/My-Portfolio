@@ -7,12 +7,12 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-4 mt-5">
+  <div class="col-md-4 mt-3">
     <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "400x400" %>
   </div>
   <div class="col-md-7 offset-md-1">
     <!--ユーザー情報を表示させる-->
-    <div class="row offset-md-1 my-5 px-3">
+    <div class="row offset-md-1 mt-3 px-3">
       <div class="col-md-3">
         <%= link_to user_followings_path(user) do %>
           <p style="font-size: 20px;">フォロー&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= user.followings.count %></p>
@@ -24,7 +24,7 @@
         <% end %>
       </div>
     </div>
-    <div class="row my-5 py-4 px-3">
+    <div class="row px-3">
       <div class="col-md-6">
         <p style="font-size: 20px;">ユーザー名</p>
       </div>
@@ -32,7 +32,7 @@
         <p style="font-size: 20px;"><%= user.name %></p>
       </div>
     </div>
-    <div class="row my-5 py-4 px-3">
+    <div class="row px-3">
       <div class="col-md-6">
         <p style="font-size: 20px;">メールアドレス</p>
       </div>
@@ -40,7 +40,7 @@
         <p style="font-size: 20px;"><%= user.email %></p>
       </div>
     </div>
-    <div class="row my-5 py-4 px-3">
+    <div class="row px-3">
       <div class="col-md-6">
         <p style="font-size: 20px;">イントロダクション</p>
       </div>
@@ -48,5 +48,55 @@
         <p class="text-break" style="font-size: 20px;"><%= user.introduction %></p>
       </div>
     </div>
+    <h4 class="text-center">イベント</h4>
+    <table class="table table-hover table-inverse text-center">
+      <thead>
+        <tr class="table-info">
+          <th>タイトル</th>
+          <th>概要</th>
+          <th>場所</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% events.each do |event| %>
+          <tr>
+            <td>
+              <%= link_to event.title, event_path(event) %>
+            </td>
+            <td><%= event.body %></td>
+            <td><%= event.location %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate events %>
+    <h4 class="text-center">タスク</h4>
+    <table class="table table-hover table-inverse text-center">
+      <thead>
+        <tr class="table-success">
+          <th>タスク</th>
+          <th>詳細</th>
+          <th>実施状況</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% tasks.each do |task| %>
+          <tr>
+            <td>
+              <%= link_to task.title, task_path(task) %>
+            </td>
+            <td><%= task.body %></td>
+            <td>
+              <% if task.pratical == "実施済" %>
+                <%= task.pratical %>
+              <% else %>
+                <p style="color: red;"><%= task.pratical %></p>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate tasks %>
   </div>
 </div>
