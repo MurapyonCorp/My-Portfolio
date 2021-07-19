@@ -1,14 +1,16 @@
 <div class="row">
-  <div class="col-md-2 offset-md-5">
-    <h1 class="text-center">My Page</h1>
+  <div class="col-md-2">
+    <h1>My Page</h1>
   </div>
-  <div class="col-md-2 offset-md-3">
-    <%= link_to "編集する", edit_user_path(user), class:"btn btn-outline-success btn-lg my-1" %>
+  <div class="col-md-1 offset-md-9">
+    <%= link_to edit_user_path(user), class:"fs-3" do %>
+      <i class="fas fa-user-edit" style="color: black;"></i>
+    <% end %>
   </div>
 </div>
 <div class="row">
   <div class="col-md-4 mt-3">
-    <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "400x400" %>
+    <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "200x200" %>
   </div>
   <div class="col-md-7 offset-md-1">
     <!--ユーザー情報を表示させる-->
@@ -48,10 +50,14 @@
         <p class="text-break" style="font-size: 20px;"><%= user.introduction %></p>
       </div>
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
     <h4 class="text-center">イベント</h4>
     <table class="table table-hover table-inverse text-center">
       <thead>
-        <tr class="table-info">
+        <tr class="bg-info">
           <th>タイトル</th>
           <th>概要</th>
           <th>場所</th>
@@ -70,10 +76,12 @@
       </tbody>
     </table>
     <%= paginate events %>
+  </div>
+  <div class="col-6">
     <h4 class="text-center">タスク</h4>
     <table class="table table-hover table-inverse text-center">
       <thead>
-        <tr class="table-success">
+        <tr class="bg-success" style="color: #fff;">
           <th>タスク</th>
           <th>詳細</th>
           <th>実施状況</th>

@@ -5,8 +5,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @events = @user.events.page(params[:page]).per(2)
-    @tasks = @user.tasks.page(params[:page]).per(2)
+    @events = @user.events.page(params[:page]).per(7)
+    @tasks = @user.tasks.page(params[:page]).per(7)
   end
 
   def edit
