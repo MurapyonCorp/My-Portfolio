@@ -6,7 +6,7 @@
           <tr>
             <th>User</th>
             <th>タスク</th>
-            <th>詳細&nbsp;&nbsp;【投稿者は詳細リンクをクリックすると編集できます】</th>
+            <th>詳細</th>
             <th>実施状況</th>
             <th></th>
             <th>開始</th>
@@ -24,7 +24,10 @@
             <td>
               <!--投稿者にだけタスクの編集権限を付与-->
               <% if @user == current_user %>
-                <%= link_to @task.body, edit_task_path(@task) %>
+                <%= @task.body %>
+                <%= link_to edit_task_path(@task) do %>
+                  <i class="fas fa-edit"></i>
+                <% end %>
               <% else %>
                 <%= @task.body %>
               <% end %>
