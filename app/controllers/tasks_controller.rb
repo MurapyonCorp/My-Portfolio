@@ -21,6 +21,10 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @user = @task.user
     @task_comments = TaskComment.includes(:user).where(task_id: @task.id)
+    if params[:checked].present?
+      notification = @task.notifications.find_by!(visited_id: current_user.id)
+      notification.update!(checked: true)
+    end
     # 記入されたコメントを受ける空の箱を用意する。
     @task_comment = TaskComment.new
   end

@@ -21,6 +21,11 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @user = @event.user
     @event_comments = EventComment.includes(:user).where(event_id: @event.id)
+    # 通知から遷移したときの専用viewの表示
+    if params[:checked].present?
+      notification = @event.notifications.find_by!(visited_id: current_user.id)
+      notification.update!(checked: true)
+    end
     # コメント投稿するための空のメソッドを呼び出す
     @event_comment = EventComment.new
   end
