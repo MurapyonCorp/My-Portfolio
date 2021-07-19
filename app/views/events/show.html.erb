@@ -7,7 +7,7 @@
             <th>User</th>
             <th>タイトル</th>
             <th class="text-break">概要</th>
-            <th>場所&nbsp;&nbsp;【リンクで地図を表示】</th>
+            <th>場所</th>
             <th></th>
             <th>開始</th>
             <th>終了</th>
@@ -32,7 +32,12 @@
                 <%= @event.body %>
               <% end %>
             </td>
-            <td><%= link_to @event.location, event_maps_path(event_id: @event.id)%></td>
+            <td>
+              <%= @event.location %>
+              <%= link_to event_maps_path(event_id: @event.id) do %>
+                <i class="fas fa-map-marker-alt"></i>
+              <% end %>
+            </td>
             <!--自分の投稿か否かをここから判断-->
             <% if current_user.own?(@event) %>
               <td>
