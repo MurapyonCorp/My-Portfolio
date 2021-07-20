@@ -2,7 +2,7 @@ class Event < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
 
-  validates :title, presence: true, length: { maximum: 20 }
+  validates :title, presence: true, length: { maximum: 100 }
   validates :body, presence: true
   validates :location, presence: true
   validates :start_date, presence: true
