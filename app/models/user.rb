@@ -7,6 +7,9 @@ class User < ApplicationRecord
   # 画像をrefileで使えるようにする
   attachment :profile_image
 
+  validates :name, presence: true, uniqueness: true, length: { maximum: 10 }
+  validates :introduction, length: { maximum: 50 }
+
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :follower
   # 被フォロー関係を通じて参照→followed_idをフォローしている人

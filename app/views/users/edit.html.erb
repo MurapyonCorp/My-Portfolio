@@ -28,6 +28,9 @@
               </div>
               <div class="col-md-4">
                 <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"Taroken", class: "form-control"%>
+                <% if @user.errors.include?(:name) %>
+                  <strong style="color: red;"><%= @user.errors.full_messages_for(:name).first %></strong>
+                <% end %>
               </div>
             </div>
           </div>
@@ -38,6 +41,9 @@
               </div>
               <div class="col-md-6">
                 <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class:"form-control" %>
+                <% if @user.errors.include?(:email) %>
+                  <strong style="color: red;"><%= @user.errors.full_messages_for(:email).first %></strong>
+                <% end %>
               </div>
             </div>
           </div>
