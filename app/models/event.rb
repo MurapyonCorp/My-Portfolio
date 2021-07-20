@@ -2,6 +2,12 @@ class Event < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
 
+  validates :title, presence: true, length: { maximum: 20 }
+  validates :body, presence: true
+  validates :location, presence: true
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
