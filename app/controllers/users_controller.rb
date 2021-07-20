@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @tasks = @user.tasks.page(params[:page]).per(7)
     if params[:checked].present?
       # binding.pry
-      notification = @user.notifications.find_by!(visited_id: current_user.id)
+      notification = Notification.find_by!(visited_id: current_user.id, visiter_id: @user.id, action: "follow") #ここでNotificationモデルから左記の3つの情報を元に誰からの通知なのかを特定する。
       notification.update!(checked: true)
     end
   end
