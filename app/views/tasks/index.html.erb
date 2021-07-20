@@ -11,12 +11,24 @@
       <%= form_with model: @task, local:true do |f| %>
         <div class="modal-body">
           <%= f.label "タスク" %>
+          <% if @task.errors.include?(:title) %>
+            <strong style="color: red;"><%= @task.errors.full_messages_for(:title).first %></strong>
+          <% end %>
           <%= f.text_field :title, class:"form-control" %>
           <%= f.label "詳細" %>
+          <% if @task.errors.include?(:body) %>
+            <strong style="color: red;"><%= @task.errors.full_messages_for(:body).first %></strong>
+          <% end %>
           <%= f.text_area :body, class:"form-control" %>
           <%= f.label "開始" %>
+          <% if @task.errors.include?(:start_date) %>
+            <strong style="color: red;"><%= @task.errors.full_messages_for(:start_date).first %></strong>
+          <% end %>
           <%= f.datetime_field :start_date, class:"form-select" %>
           <%= f.label "終了" %>
+          <% if @task.errors.include?(:end_date) %>
+            <strong style="color: red;"><%= @task.errors.full_messages_for(:end_date).first %></strong>
+          <% end %>
           <%= f.datetime_field :end_date, class:"form-select" %>
         </div>
         <div class="modal-footer">
