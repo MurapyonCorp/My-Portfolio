@@ -42,36 +42,22 @@
                   </div>
                 </div>
               </li>
-              <li class="btn-group me-3" role="group" aria-label="Third group">
-                <%= link_to "Users", users_path, class:"btn btn-secondary d-flex align-items-center" %>
-              </li>
-              <li class="btn-group me-3" role="group" aria-label="Fourth group">
-                <%= link_to "Event Calendar", events_path, class:"btn btn-success d-flex align-items-center" %>
-              </li>
-              <li class="btn-group me-3" role="group" aria-label="Fifth group">
-                <%= link_to "Task Calendar", tasks_path, class:"btn btn-primary d-flex align-items-center" %>
-              </li>
-              <li class="btn-group me-3" role="group" aria-label="Sixth group">
-                <%= link_to "My Page", user_path(current_user), class:"btn btn-warning d-flex align-items-center" %>
-              </li>
-              <li class="btn-group me-3" role="group" aria-label="Seventh group">
-                <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-danger d-flex align-items-center" %>
-              </li>
-              <li class="btn-group me-3" role="group" aria-label="eighth group">
+              <li class="btn-group" role="group" aria-label="Third group">
                 <% if unchecked_notifications.any? %>
-                    <i class="fa fa-circle" style="color: #00fa9a;"></i>
+                  <i class="fa fa-circle" style="color: #00fa9a; position: absolute; z-index: 1;"></i>
                 <% end %>
-                <li>
+                <li class="me-3">
                   <div class="dropdown">
                     <a class="fs-3" href="notifications" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
                       <i class="fas fa-bell" style="color: black;"></i>
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 450px">
                       <h5 class="text-center">通知</h5>
                       <%= link_to notifications_destroy_all_path, method: :delete do %>
                         <i class="fas fa-trash" style="color: black;"></i>
                         <h7 style="color: black;">全削除</h7>
                       <% end %>
+                      <%#= paginate @notifications %>
                       <hr>
                       <% if @notifications.exists? %>
                         <li class="users-index">
@@ -83,6 +69,21 @@
                     </ul>
                   </div>
                 </li>
+              </li>
+              <li class="btn-group me-3" role="group" aria-label="Fourth group">
+                <%= link_to "Users", users_path, class:"btn btn-secondary d-flex align-items-center" %>
+              </li>
+              <li class="btn-group me-3" role="group" aria-label="Fifth group">
+                <%= link_to "Event Calendar", events_path, class:"btn btn-success d-flex align-items-center" %>
+              </li>
+              <li class="btn-group me-3" role="group" aria-label="Sixth group">
+                <%= link_to "Task Calendar", tasks_path, class:"btn btn-primary d-flex align-items-center" %>
+              </li>
+              <li class="btn-group me-3" role="group" aria-label="Seventh group">
+                <%= link_to "My Page", user_path(current_user), class:"btn btn-warning d-flex align-items-center" %>
+              </li>
+              <li class="btn-group me-3" role="group" aria-label="Eighth group">
+                <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-danger d-flex align-items-center" %>
               </li>
             </ul>
           <% else %>

@@ -7,6 +7,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @events = @user.events.page(params[:page]).per(7)
     @tasks = @user.tasks.page(params[:page]).per(7)
+    if params[:checked].present?
+      # binding.pry
+      notification = @user.notifications.find_by!(visited_id: current_user.id)
+      notification.update!(checked: true)
+    end
   end
 
   def edit
