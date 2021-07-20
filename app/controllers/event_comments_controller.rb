@@ -6,7 +6,7 @@ class EventCommentsController < ApplicationController
     comment.save
     @event = comment.event
     @event_comments = EventComment.includes(:event, :user).where(event_id: params[:event_id])
-    #通知の作成
+    # 通知の作成
     @event.create_notification_event_comment!(current_user, comment.id)
   end
 

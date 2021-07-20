@@ -1,6 +1,6 @@
 class Notification < ApplicationRecord
-  #スコープ(新着順)
-  default_scope->{order(created_at: :desc)}
+  # スコープ(新着順)
+  default_scope -> { order(created_at: :desc) }
 
   belongs_to :event, optional: true
   belongs_to :task, optional: true

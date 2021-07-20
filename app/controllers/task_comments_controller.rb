@@ -6,7 +6,7 @@ class TaskCommentsController < ApplicationController
     comment.save
     @task = comment.task
     @task_comments = TaskComment.includes(:task, :user).where(task_id: params[:task_id])
-    #通知の作成
+    # 通知の作成
     @task.create_notification_task_comment!(current_user, comment.id)
   end
 
@@ -15,7 +15,6 @@ class TaskCommentsController < ApplicationController
     task_comment.destroy
     @task = task_comment.task
     @task_comments = TaskComment.includes(:task, :user).where(task_id: params[:task_id])
-
   end
 
   private

@@ -7,20 +7,20 @@ module NotificationsHelper
     else
       @visiter_comment = notification.task_comment_id
     end
-    #notification.actionがfollowかlikeかcommentか
+    # notification.actionがfollowかlikeかcommentか
     case notification.action
-      when "follow" then
-        tag.a(notification.visiter.name, href:user_path(@visiter, checked: true), style:"font-weight: bold;")+"があなたをフォローしました"
-      when "favorite" then
-        tag.a(notification.visiter.name, href:user_path(@visiter), style:"font-weight: bold;")+"が"+tag.a('あなたの投稿', href:event_path(notification.event_id, checked: true), style:"font-weight: bold;")+"にいいねしました"
-      when "like" then
-        tag.a(notification.visiter.name, href:user_path(@visiter), style:"font-weight: bold;")+"が"+tag.a('あなたの投稿', href:task_path(notification.task_id, checked: true), style:"font-weight: bold;")+"にいいねしました"
-      when "event_comment" then
-        @event_comment = EventComment.find_by(id: @visiter_comment)
-        tag.a(@visiter.name, href:user_path(@visiter), style:"font-weight: bold;")+"が"+tag.a('あなたの投稿', href:event_path(notification.event_id, checked: true), style:"font-weight: bold;")+"にコメントしました"
-      when "task_comment" then
-        @task_comment = TaskComment.find_by(id: @visiter_comment)
-        tag.a(@visiter.name, href:user_path(@visiter), style:"font-weight: bold;")+"が"+tag.a('あなたの投稿', href:task_path(notification.task_id, checked: true), style:"font-weight: bold;")+"にコメントしました"
+    when "follow"
+      tag.a(notification.visiter.name, href: user_path(@visiter, checked: true), style: "font-weight: bold;") + "があなたをフォローしました"
+    when "favorite"
+      tag.a(notification.visiter.name, href: user_path(@visiter), style: "font-weight: bold;") + "が" + tag.a('あなたの投稿', href: event_path(notification.event_id, checked: true), style: "font-weight: bold;") + "にいいねしました"
+    when "like"
+      tag.a(notification.visiter.name, href: user_path(@visiter), style: "font-weight: bold;") + "が" + tag.a('あなたの投稿', href: task_path(notification.task_id, checked: true), style: "font-weight: bold;") + "にいいねしました"
+    when "event_comment" then
+      @event_comment = EventComment.find_by(id: @visiter_comment)
+      tag.a(@visiter.name, href: user_path(@visiter), style: "font-weight: bold;") + "が" + tag.a('あなたの投稿', href: event_path(notification.event_id, checked: true), style: "font-weight: bold;") + "にコメントしました"
+    when "task_comment" then
+      @task_comment = TaskComment.find_by(id: @visiter_comment)
+      tag.a(@visiter.name, href: user_path(@visiter), style: "font-weight: bold;") + "が" + tag.a('あなたの投稿', href: task_path(notification.task_id, checked: true), style: "font-weight: bold;") + "にコメントしました"
     end
   end
 

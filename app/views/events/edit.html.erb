@@ -9,6 +9,9 @@
       </div>
       <div class="col-md-3 offset-md-1">
         <%= f.text_field :title, class:"form-control" %>
+        <% if @event.errors.include?(:title) %>
+          <strong style="color: red;"><%= @event.errors.full_messages_for(:title).first %></strong>
+        <% end %>
       </div>
     </div>
     <div class="row mb-5">
@@ -17,6 +20,9 @@
       </div>
       <div class="col-md-5 offset-md-1">
         <%= f.text_area :body, class:"form-control" %>
+        <% if @event.errors.include?(:body) %>
+          <strong style="color: red;"><%= @event.errors.full_messages_for(:body).first %></strong>
+        <% end %>
       </div>
     </div>
     <div class="row mb-5">
@@ -24,7 +30,9 @@
         <%= f.label "場所" %>
       </div>
       <div class="col-md-3 offset-md-1">
-        <%= f.text_field :location, class:"form-control" %>
+        <%= f.text_field :location, class:"form-control" %><% if @event.errors.include?(:location) %>
+          <strong style="color: red;"><%= @event.errors.full_messages_for(:location).first %></strong>
+        <% end %>
       </div>
     </div>
     <div class="row mb-5">
@@ -33,6 +41,9 @@
       </div>
       <div class="col-md-3 offset-md-1">
         <%= f.datetime_field :start_date, class:"form-select" %>
+        <% if @event.errors.include?(:start_date) %>
+          <strong style="color: red;"><%= @event.errors.full_messages_for(:start_date).first %></strong>
+        <% end %>
       </div>
     </div>
     <div class="row mb-5">
@@ -41,6 +52,9 @@
       </div>
       <div class="col-md-3 offset-md-1">
         <%= f.datetime_field :end_date, class:"form-select" %>
+        <% if @event.errors.include?(:end_date) %>
+          <strong style="color: red;"><%= @event.errors.full_messages_for(:end_date).first %></strong>
+        <% end %>
       </div>
     </div>
     <div class="row">

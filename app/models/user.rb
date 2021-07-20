@@ -52,15 +52,15 @@ class User < ApplicationRecord
 
   # 検索方法分岐を分岐させる
   def self.looks(search, word)
-    @user = User.where("name LIKE?","%#{word}%")
+    @user = User.where("name LIKE?", "%#{word}%")
   end
 
   # 通知モデルのとアソシエーション関係(自分が送った通知と自分宛の通知で分ける。)
   has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
-  #フォロー時の通知
-  def create_notification_follow!(current_user,visited_id)
-    temp = Notification.where(["visiter_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+  # フォロー時の通知
+  def create_notification_follow!(current_user, visited_id)
+    temp = Notification.where(["visiter_id = ? and visited_id = ? and action = ? ", current_user.id, id, 'follow'])
     if temp.blank?
       notification = current_user.active_notifications.new(
         visited_id: visited_id,

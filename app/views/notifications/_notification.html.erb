@@ -5,6 +5,9 @@
     <%= attachment_image_tag visiter, :profile_image, :fill,100,100, format: "jpeg", fallback: "no_image.jpg", size: "40x40", class:"rounded-circle" %>
   <% end %>
   <%= notification_form(notification) %><span class="moderate-font"><%= "(#{time_ago_in_words(notification.created_at)} 前)" %></span>
+  <%= link_to notification_path(notification), method: :delete do %>
+    <i class="fas fa-trash"></i>
+  <% end %>
   <br>
   <% if !@comment.nil? %>
     <p class="moderate-font text-center" style="color: #C0C0C0;"><%= @comment %></p>
