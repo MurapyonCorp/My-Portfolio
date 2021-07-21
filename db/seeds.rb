@@ -30,7 +30,7 @@ User.create!(
   User.create!(
     [
       {
-        name: "a",
+        name: "a#{n + 1}",
         email: "a@#{n + 1}.com",
         password: "333333",
         introduction: "Hello"
