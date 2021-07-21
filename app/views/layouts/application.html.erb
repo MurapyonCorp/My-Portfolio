@@ -50,9 +50,9 @@
                   <% end %>
                   <li class="me-5">
                     <div class="dropdown">
-                      <a class="fs-2" href="notifications" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
+                      <%= link_to 'notifications', class:"fs-2", 'role': :button, 'id': :dropdownMenuLink, 'data-bs-toggle': :dropdown, 'aria-expanded': :false, :style => "color: black;" do %>
                         <i class="fas fa-bell" style="color: black;"></i>
-                      </a>
+                      <% end %>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 500px">
                         <h5 class="text-center">通知</h5>
                         <%= link_to notifications_destroy_all_path, method: :delete do %>
@@ -114,7 +114,9 @@
       </nav>
     </header>
     <main>
-      <%= yield %>
+      <div class="container" style="background-color: aquamarine;">
+        <%= yield %>
+      </div>
     </main>
     <footer class="sticky-bottom" style="background-color: #ff9933;">
       <div class="container">
