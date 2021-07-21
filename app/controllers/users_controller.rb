@@ -5,8 +5,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @events = @user.events.page(params[:page]).per(7)
-    @tasks = @user.tasks.page(params[:page]).per(7)
+    @events = @user.events.page(params[:page]).per(6)
+    @tasks = @user.tasks.page(params[:page]).per(6)
     if params[:checked].present?
       # binding.pry
       notification = Notification.find_by!(visited_id: current_user.id, visiter_id: @user.id, action: "follow") #ここでNotificationモデルから左記の3つの情報を元に誰からの通知なのかを特定する。
