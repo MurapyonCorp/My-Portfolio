@@ -35,5 +35,13 @@
   height: 100vh;
 }
 
+input#word {
+ background-color: #66ff33;
+}
+
+select {
+ background-color: #ff0a84;
+}
+
 @import 'events';
 @import 'tasks';
