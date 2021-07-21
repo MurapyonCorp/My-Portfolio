@@ -167,3 +167,7 @@ function google_cal_load(){
       zoom: 15, //15がおすすめかもしれない  ///数字で地図の拡大範囲を表す
     });
   }
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
