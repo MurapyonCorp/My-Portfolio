@@ -39,6 +39,45 @@ RSpec.describe 'Userモデルのテスト', type: :model do
     end
   end
   describe 'アソシエーションのテスト' do
-    context ''
+    context 'Eventモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(User.reflect_on_association(:event).macro).to eq :has_many
+      end
+    end
+    context 'Taskモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(User.reflect_on_association(:task).macro).to eq :has_many
+      end
+    end
+    context 'Relationshipモデルとの関係: follower_id' do
+      it '1:Nとなっている' do
+        expect(User.reflect_on_association(:relationship).macro).to eq :has_many
+      end
+    end
+    context 'Relationshipモデルとの関係 followed_id' do
+      it '1:Nとなっている' do
+        expect(User.reflect_on_association(:reverse_of_relationship).macro).to eq :has_many
+      end
+    end
+    context 'イベントコメントモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(User.reflect_on_association(:event_comment).macro).to eq :has_many
+      end
+    end
+    context 'タスクコメントモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(User.reflect_on_association(:task_comment).macro).to eq :has_many
+      end
+    end
+    context 'Favoriteモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(User.reflect_on_association(:favorite).macro).to eq :has_many
+      end
+    end
+    context 'likeモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(User.reflect_on_association(:like).macro).to eq :has_many
+      end
+    end
   end
 end
