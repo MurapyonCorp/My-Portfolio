@@ -59,12 +59,12 @@ RSpec.describe 'Userモデルのテスト', type: :model do
         expect(User.reflect_on_association(:reverse_of_relationship).macro).to eq :has_many
       end
     end
-    context 'イベントコメントモデルとの関係' do
+    context 'EventCommentモデルとの関係' do
       it '1:Nとなっている' do
         expect(User.reflect_on_association(:event_comment).macro).to eq :has_many
       end
     end
-    context 'タスクコメントモデルとの関係' do
+    context 'TaskCommentモデルとの関係' do
       it '1:Nとなっている' do
         expect(User.reflect_on_association(:task_comment).macro).to eq :has_many
       end
@@ -74,7 +74,7 @@ RSpec.describe 'Userモデルのテスト', type: :model do
         expect(User.reflect_on_association(:favorite).macro).to eq :has_many
       end
     end
-    context 'likeモデルとの関係' do
+    context 'Likeモデルとの関係' do
       it '1:Nとなっている' do
         expect(User.reflect_on_association(:like).macro).to eq :has_many
       end
