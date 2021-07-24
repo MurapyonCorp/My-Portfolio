@@ -56,8 +56,8 @@
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 500px">
                         <h5 class="text-center">通知</h5>
                         <%= link_to notifications_destroy_all_path, method: :delete do %>
-                          <i class="fas fa-trash" style="color: black;"></i>
-                          <h7 style="color: black;">全削除</h7>
+                          <i class="fas fa-trash" style="color: red;"></i>
+                          <h7 style="color: red;"><strong>全削除</strong></h7>
                         <% end %>
                         <%#= paginate @notifications %>
                         <hr>
@@ -114,7 +114,7 @@
       </nav>
     </header>
     <main>
-      <div class="container" style="background-color: aquamarine;">
+      <div class="container" style="background-color: #7fffd429;">
         <%= yield %>
       </div>
     </main>
