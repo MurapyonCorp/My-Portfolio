@@ -3,8 +3,10 @@ require 'rails_helper'
 describe '[STEP2] ユーザログイン後のテスト' do
   let(:user) { create(:user) }
   let!(:other_user) { create(:user) }
-  let!(:book) { create(:book, user: user) }
-  let!(:other_book) { create(:book, user: other_user) }
+  let!(:event) { create(:event, user: user) }
+  let!(:other_event) { create(:event, user: other_user) }
+  let!(:task) { create(:task, user: user) }
+  let!(:other_task) { create(:task, user: other_user) }
 
   before do
     visit new_user_session_path
@@ -17,23 +19,41 @@ describe '[STEP2] ユーザログイン後のテスト' do
     context 'リンクの内容を確認: ※logoutは『ユーザログアウトのテスト』でテスト済みになります。' do
       subject { current_path }
 
-      it 'Homeを押すと、自分のユーザ詳細画面に遷移する' do
-        home_link = find_all('a')[1].native.inner_text
-        home_link = home_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
-        click_link home_link
-        is_expected.to eq '/users/' + user.id.to_s
+      it 'search buttonを押すと、検索結果画面に遷移する' do
+        search_button = find_all('button')[2].native
+        search_button = search_button.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_button search_button
+        is_expected.to eq '/search'
+      end
+      it 'Bellアイコンを押すと、通知一覧画面を表示する' do
+        bells_link = find_all('a')[3].native.inner_text
+        bells_link = bells_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link bells_link
+        is_expected.to eq 'notifications'
       end
       it 'Usersを押すと、ユーザ一覧画面に遷移する' do
-        users_link = find_all('a')[2].native.inner_text
+        users_link = find_all('a')[4].native.inner_text
         users_link = users_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
         click_link users_link
         is_expected.to eq '/users'
       end
-      it 'Booksを押すと、投稿一覧画面に遷移する' do
-        books_link = find_all('a')[3].native.inner_text
-        books_link = books_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
-        click_link books_link
-        is_expected.to eq '/books'
+      it 'EventCalendarを押すと、イベント一覧画面に遷移する' do
+        event_calendar_link = find_all('a')[5].native.inner_text
+        event_calendar_link = event_calendar_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link event_calendar_link
+        is_expected.to eq '/events'
+      end
+      it 'TaskCalendarを押すと、タスク一覧画面に遷移する' do
+        task_calendar_link = find_all('a')[6].native.inner_text
+        task_calendar_link = task_calendar_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link task_calendar_link
+        is_expected.to eq '/tasks'
+      end
+      it 'MyPageを押すと、マイページ画面に遷移する' do
+        mypage_link = find_all('a')[7].native.inner_text
+        mypage_link = mypage_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link mypage_link
+        is_expected.to eq '/users'
       end
     end
   end
