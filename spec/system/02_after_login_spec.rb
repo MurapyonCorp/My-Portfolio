@@ -53,61 +53,69 @@ describe '[STEP2] ユーザログイン後のテスト' do
         mypage_link = find_all('a')[7].native.inner_text
         mypage_link = mypage_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
         click_link mypage_link
-        is_expected.to eq '/users'
+        is_expected.to eq '/users/i'
       end
     end
   end
 
-  describe '投稿一覧画面のテスト' do
+  describe 'イベント一覧画面のテスト' do
     before do
-      visit books_path
+      visit events_path
     end
 
     context '表示内容の確認' do
       it 'URLが正しい' do
-        expect(current_path).to eq '/books'
+        expect(current_path).to eq '/events'
       end
-      it '自分と他人の画像のリンク先が正しい' do
-        expect(page).to have_link '', href: user_path(book.user)
-        expect(page).to have_link '', href: user_path(other_book.user)
+      it 'イベントの日付とカレンダーの日付がそれぞれ正しい' do
+        expect(start_date_datetime).to match(datetime)
+        expect(end_date_datetime).to match(datetime)
       end
       it '自分の投稿と他人の投稿のタイトルのリンク先がそれぞれ正しい' do
-        expect(page).to have_link book.title, href: book_path(book)
-        expect(page).to have_link other_book.title, href: book_path(other_book)
+        expect(page).to have_link event.title, href: event_path(event)
+        expect(page).to have_link other_event.title, href: event_path(other_event)
       end
-      it '自分の投稿と他人の投稿のオピニオンが表示される' do
-        expect(page).to have_content book.body
-        expect(page).to have_content other_book.body
+    end
+    
+    context "投稿フォームの確認" do
+      it "「新規作成」と表示される" do
+        expect(page).to have_content '新規作成'
+      end
+      it 'titleフォームが表示される' do
+        expect(page).to have_field 'event[title]'
+      end
+      it 'titleフォームに値が入っていない' do
+        expect(find_field('event[title]').text).to be_blank
+      end
+      it '概要フォームが表示される' do
+        expect(page).to have_field 'event[body]'
+      end
+      it '概要フォームに値が入っていない' do
+        expect(find_field('event[body]').text).to be_blank
+      end
+      it '作成！ボタンが表示される' do
+        expect(page).to have_button '作成！'
       end
     end
 
-    context 'サイドバーの確認' do
-      it '自分の名前と紹介文が表示される' do
-        expect(page).to have_content user.name
-        expect(page).to have_content user.introduction
-      end
-      it '自分のユーザ編集画面へのリンクが存在する' do
-        expect(page).to have_link '', href: edit_user_path(user)
-      end
-      it '「New book」と表示される' do
-        expect(page).to have_content 'New book'
-      end
-      it 'titleフォームが表示される' do
-        expect(page).to have_field 'book[title]'
-      end
-      it 'titleフォームに値が入っていない' do
-        expect(find_field('book[title]').text).to be_blank
-      end
-      it 'opinionフォームが表示される' do
-        expect(page).to have_field 'book[body]'
-      end
-      it 'opinionフォームに値が入っていない' do
-        expect(find_field('book[body]').text).to be_blank
-      end
-      it 'Create Bookボタンが表示される' do
-        expect(page).to have_button 'Create Book'
-      end
-    end
+    # describe 'タスク一覧画面のテスト' do
+    # before do
+    #   visit tasks_path
+    # end
+
+    # context '表示内容の確認' do
+    #   it 'URLが正しい' do
+    #     expect(current_path).to eq '/tasks'
+    #   end
+    #   it 'タスクの日付とカレンダーの日付がそれぞれ正しい' do
+    #     expect(start_date_datetime).to match(datetime)
+    #     expect(end_date_datetime).to match(datetime)
+    #   end
+    #   it '自分の投稿と他人の投稿のタイトルのリンク先がそれぞれ正しい' do
+    #     expect(page).to have_link task.title, href: task_path(task)
+    #     expect(page).to have_link other_task.title, href: task_path(other_task)
+    #   end
+    # end
 
     context '投稿成功のテスト' do
       before do
@@ -116,114 +124,89 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
 
       it '自分の新しい投稿が正しく保存される' do
-        expect { click_button 'Create Book' }.to change(user.books, :count).by(1)
+        expect { click_button '作成！' }.to change(user.events, :count).by(1)
       end
-      it 'リダイレクト先が、保存できた投稿の詳細画面になっている' do
-        click_button 'Create Book'
-        expect(current_path).to eq '/books/' + Book.last.id.to_s
+      it 'リダイレクト先が、イベント一覧画面になっている' do
+        click_button '作成！'
+        expect(current_path).to eq '/events/'
       end
     end
   end
 
   describe '自分の投稿詳細画面のテスト' do
     before do
-      visit book_path(book)
+      visit event_path(event)
     end
 
     context '表示内容の確認' do
       it 'URLが正しい' do
-        expect(current_path).to eq '/books/' + book.id.to_s
+        expect(current_path).to eq '/events/' + event.id.to_s
       end
-      it '「Book detail」と表示される' do
-        expect(page).to have_content 'Book detail'
-      end
-      it 'ユーザ画像・名前のリンク先が正しい' do
-        expect(page).to have_link book.user.name, href: user_path(book.user)
+      it 'ユーザ画像のリンク先が正しい' do
+        expect(page).to have_link event.user.profile_image_id, href: user_path(event.user)
       end
       it '投稿のtitleが表示される' do
-        expect(page).to have_content book.title
+        expect(page).to have_content event.title
       end
-      it '投稿のopinionが表示される' do
-        expect(page).to have_content book.body
+      it '投稿の概要が表示される' do
+        expect(page).to have_content event.body
       end
       it '投稿の編集リンクが表示される' do
-        expect(page).to have_link 'Edit', href: edit_book_path(book)
+        expect(page).to have_link 'icon', href: edit_event_path(event)
       end
-      it '投稿の削除リンクが表示される' do
-        expect(page).to have_link 'Destroy', href: book_path(book)
+      it '投稿のマップリンクが表示される' do
+        expect(page).to have_link 'icon', href: event_maps_path(event_id: event.id)
       end
-    end
-
-    context 'サイドバーの確認' do
-      it '自分の名前と紹介文が表示される' do
-        expect(page).to have_content user.name
-        expect(page).to have_content user.introduction
+      it 'いいねが表示される: 自身の投稿の場合ボタンではない' do
+        if event.user == current_user
+          expect(page).to should_not have_button event.favorites.count
+        else
+          expect(page).to have_button event.favorites.count
+        end
       end
-      it '自分のユーザ編集画面へのリンクが存在する' do
-        expect(page).to have_link '', href: edit_user_path(user)
+      it 'コメント件数が表示される' do
+        expect(page).to have_content event_comments.count
       end
-      it '「New book」と表示される' do
-        expect(page).to have_content 'New book'
+      it '開始時刻が表示される' do
+        expect(page).to have_content event.start_date
       end
-      it 'titleフォームが表示される' do
-        expect(page).to have_field 'book[title]'
+      it '投稿の概要が表示される' do
+        expect(page).to have_content event.end_date
       end
-      it 'titleフォームに値が入っていない' do
-        expect(find_field('book[title]').text).to be_blank
+      it 'コメント一覧が表示される: コメントしたユーザー名が表示される' do
+        expect(page).to have_content event_comment.user.name
       end
-      it 'opinionフォームが表示される' do
-        expect(page).to have_field 'book[body]'
+      it 'コメント一覧が表示される: コメントした内容が表示される' do
+        expect(page).to have_content event_comment.comment
       end
-      it 'opinionフォームに値が入っていない' do
-        expect(find_field('book[body]').text).to be_blank
+      it 'コメント一覧が表示される: コメントした日時が表示される' do
+        expect(page).to have_content event_comment.created_at.strftime("%m/%d %H:%M")
       end
-      it 'Create Bookボタンが表示される' do
-        expect(page).to have_button 'Create Book'
-      end
-    end
-
-    context '投稿成功のテスト' do
-      before do
-        fill_in 'book[title]', with: Faker::Lorem.characters(number: 5)
-        fill_in 'book[body]', with: Faker::Lorem.characters(number: 20)
-      end
-
-      it '自分の新しい投稿が正しく保存される' do
-        expect { click_button 'Create Book' }.to change(user.books, :count).by(1)
+      it 'コメント一覧が表示される: コメント削除ボタンが表示される' do
+        if event_comment.user == current_user
+          expect(page).to have_link 'icon', href: event_event_comment_path(event.id, event_comment)
+        end
       end
     end
 
     context '編集リンクのテスト' do
       it '編集画面に遷移する' do
-        click_link 'Edit'
-        expect(current_path).to eq '/books/' + book.id.to_s + '/edit'
-      end
-    end
-
-    context '削除リンクのテスト' do
-      before do
-        click_link 'Destroy'
-      end
-
-      it '正しく削除される' do
-        expect(Book.where(id: book.id).count).to eq 0
-      end
-      it 'リダイレクト先が、投稿一覧画面になっている' do
-        expect(current_path).to eq '/books'
+        click_link 'fas fa-edit'
+        expect(current_path).to eq '/events/' + event.id.to_s + '/edit'
       end
     end
   end
 
   describe '自分の投稿編集画面のテスト' do
     before do
-      visit edit_book_path(book)
+      visit edit_event_path(event)
     end
 
     context '表示の確認' do
       it 'URLが正しい' do
-        expect(current_path).to eq '/books/' + book.id.to_s + '/edit'
+        expect(current_path).to eq '/events/' + event.id.to_s + '/edit'
       end
-      it '「Editing Book」と表示される' do
+      it '「event edit」と表示される' do                                                                                              #ここから！
         expect(page).to have_content 'Editing Book'
       end
       it 'title編集フォームが表示される' do
@@ -261,6 +244,18 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it 'リダイレクト先が、更新した投稿の詳細画面になっている' do
         expect(current_path).to eq '/books/' + book.id.to_s
         expect(page).to have_content 'Book detail'
+      end
+    end
+    context '削除リンクのテスト' do
+      before do
+        click_link 'Destroy'
+      end
+
+      it '正しく削除される' do
+        expect(Book.where(id: book.id).count).to eq 0
+      end
+      it 'リダイレクト先が、投稿一覧画面になっている' do
+        expect(current_path).to eq '/books'
       end
     end
   end
