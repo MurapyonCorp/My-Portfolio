@@ -67,13 +67,6 @@ describe '[STEP1] ユーザログイン前のテスト' do
     context 'リンクの内容を確認' do
       subject { current_path }
 
-      it 'Homeを押すと、トップ画面に遷移する' do
-        home_link = find_all('a')[1].native.inner_text
-        home_link = home_link.delete(' ')
-        home_link.gsub!(/\n/, '')
-        click_link home_link
-        is_expected.to eq '/'
-      end
       it 'Aboutを押すと、アバウト画面に遷移する' do
         about_link = find_all('a')[2].native.inner_text
         about_link = about_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
@@ -126,7 +119,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
 
     context '新規登録成功のテスト' do
       before do
-        fill_in 'user[name]', with: Faker::Lorem.characters(number: 10)
+        fill_in 'user[name]', with: Faker::Name.last_name(number: 10)
         fill_in 'user[email]', with: Faker::Internet.email
         fill_in 'user[password]', with: 'password'
         fill_in 'user[password_confirmation]', with: 'password'
