@@ -200,22 +200,34 @@ describe '[STEP1] ユーザログイン前のテスト' do
 
     context 'ヘッダーの表示を確認' do
       it 'タイトルが表示される' do
-        expect(page).to have_content 'Bookers'
+        expect(page).to have_content 'Eventas'
       end
-      it 'Homeリンクが表示される: 左上から1番目のリンクが「Home」である' do
-        home_link = find_all('a')[1].native.inner_text
-        expect(home_link).to match(/home/i)
+      it '検索ボックスが表示される: 左上から2番目のボタンが「Search」である' do
+        search_button = find_all('button')[2].native
+        expect(search_button).to match(/search/i)
       end
-      it 'Usersリンクが表示される: 左上から2番目のリンクが「Users」である' do
-        users_link = find_all('a')[2].native.inner_text
+      it 'Notificationsリンクが表示される: 左上から3番目のリンクが「Notifications」である' do
+        notifications_link = find_all('a')[3].native.inner_text
+        expect(notifications_link).to match(/notifications/i)
+      end
+      it 'Usersリンクが表示される: 左上から4番目のリンクが「Users」である' do
+        users_link = find_all('a')[4].native.inner_text
         expect(users_link).to match(/users/i)
       end
-      it 'Booksリンクが表示される: 左上から3番目のリンクが「Books」である' do
-        books_link = find_all('a')[3].native.inner_text
-        expect(books_link).to match(/books/i)
+      it "Event Calendarリンクが表示される: 左上から5番目のリンクが「Event Calendar」である" do
+        eventcalendar_link = find_all('a')[5].native.inner_text
+        expect(event_calendar_link).to match(/events/i)
       end
-      it 'log outリンクが表示される: 左上から4番目のリンクが「logout」である' do
-        logout_link = find_all('a')[4].native.inner_text
+      it 'Task Calendarリンクが表示される: 左上から6番目のリンクが「Task Calendar」である' do
+        taskcalendar_link = find_all('a')[6].native.inner_text
+        expect(task_calendar_link).to match(/tasks/i)
+      end
+      it 'My Pageリンクが表示される: 左上から7番目のリンクが「My Page」である' do
+        mypage_link = find_all('a')[7].native.inner_text
+        expect(my_page_link).to match(/users/i)
+      end
+      it 'Log outリンクが表示される: 左上から8番目のリンクが「Log out」である' do
+        logout_link = find_all('a')[8].native.inner_text
         expect(logout_link).to match(/logout/i)
       end
     end
@@ -229,7 +241,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       fill_in 'user[name]', with: user.name
       fill_in 'user[password]', with: user.password
       click_button 'Log in'
-      logout_link = find_all('a')[4].native.inner_text
+      logout_link = find_all('a')[8].native.inner_text
       logout_link = logout_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
       click_link logout_link
     end
