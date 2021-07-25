@@ -48,11 +48,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
 
     context '表示内容の確認' do
       it 'タイトルが表示される' do
-        expect(page).to have_content 'Bookers'
-      end
-      it 'Homeリンクが表示される: 左上から1番目のリンクが「Home」である' do
-        home_link = find_all('a')[1].native.inner_text
-        expect(home_link).to match(/home/i)
+        expect(page).to have_content 'Eventas'
       end
       it 'Aboutリンクが表示される: 左上から2番目のリンクが「About」である' do
         about_link = find_all('a')[2].native.inner_text
