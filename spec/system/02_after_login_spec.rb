@@ -206,8 +206,8 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it 'URLが正しい' do
         expect(current_path).to eq '/events/' + event.id.to_s + '/edit'
       end
-      it '「event edit」と表示される' do                                                                                              #ここから！
-        expect(page).to have_content 'Editing Book'
+      it '「event edit」と表示される' do
+        expect(page).to have_content 'event edit'
       end
       it 'title編集フォームが表示される' do
         expect(page).to have_field 'book[title]', with: book.title
