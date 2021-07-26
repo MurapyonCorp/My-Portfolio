@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-Rspec.describe 'TaskCommentモデルのテスト', type: :model do
+RSpec.describe 'TaskCommentモデルのテスト', type: :model do
   describe 'バリデーションのテスト' do
     subject { task_comment.valid? }
 

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-Rspec.describe 'Eventモデルのテスト', type: :model do
+RSpec.describe 'Eventモデルのテスト', type: :model do
   describe 'バリデーションのテスト' do
     subject { event.valid? }
 
