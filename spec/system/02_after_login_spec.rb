@@ -76,7 +76,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_link other_event.title, href: event_path(other_event)
       end
     end
-    
+
     context "投稿フォームの確認" do
       it "「新規作成」と表示される" do
         expect(page).to have_content '新規作成'
@@ -118,8 +118,11 @@ describe '[STEP2] ユーザログイン後のテスト' do
 
     context '投稿成功のテスト' do
       before do
-        fill_in 'book[title]', with: Faker::Lorem.characters(number: 5)
-        fill_in 'book[body]', with: Faker::Lorem.characters(number: 20)
+        fill_in 'event[title]', with: Faker::Lorem.characters(number: 5)
+        fill_in 'event[body]', with: Faker::Lorem.characters(number: 20)
+        fill_in 'event[location]', with: Faker::Nation.capital_city
+        fill_in 'event[start_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+        fill_in 'event[end_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
       end
 
       it '自分の新しい投稿が正しく保存される' do
@@ -235,8 +238,14 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         @event_old_title = event.title
         @event_old_body = event.body
+        @event_old_location = event.location
+        @event_old_start_date = event.start_date
+        @event_old_end_date = event.end_date
         fill_in 'event[title]', with: Faker::Lorem.characters(number: 4)
         fill_in 'event[body]', with: Faker::Lorem.characters(number: 19)
+        fill_in 'event[location]', with: Faker::Nation.capital_city
+        fill_in 'event[start_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+        fill_in 'event[end_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
         click_button '更新'
       end
 
@@ -272,7 +281,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
     end
   end
-  
+
   describe 'タスク一覧画面のテスト' do
     before do
       visit tasks_path
@@ -291,7 +300,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_link other_task.title, href: task_path(other_task)
       end
     end
-    
+
     context "投稿フォームの確認" do
       it "「新規タスク」と表示される" do
         expect(page).to have_content '新規タスク'
@@ -329,6 +338,8 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         fill_in 'task[title]', with: Faker::Lorem.characters(number: 5)
         fill_in 'task[body]', with: Faker::Lorem.characters(number: 20)
+        fill_in 'task[start_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+        fill_in 'task[end_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
       end
 
       it '自分の新しい投稿が正しく保存される' do
@@ -444,8 +455,12 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         @task_old_title = task.title
         @task_old_body = task.body
+        @task_old_start_date = task.start_date
+        @task_old_end_date = task.end_date
         fill_in 'task[title]', with: Faker::Lorem.characters(number: 4)
         fill_in 'task[body]', with: Faker::Lorem.characters(number: 19)
+        fill_in 'task[start_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+        fill_in 'task[end_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
         click_button '更新'
       end
 
@@ -603,6 +618,125 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
       it 'リダイレクト先が、自分のユーザ詳細画面になっている' do
         expect(current_path).to eq '/users/' + user.id.to_s
+      end
+    end
+  end
+  describe 'マップ一覧画面のテスト' do
+    before do
+      visit event_maps_path(event_id: event.id)
+    end
+
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/events/' + event.id.to_s + '/maps'
+      end
+      it '「gmap」と表示される' do
+        expect(page).to have_content 'gmap'
+      end
+      it '地名編集フォームに登録した地名が表示される' do
+        expect(page).to have_field 'event[location]', with: event.location
+      end
+      it '地図表示ボタンが表示される' do
+        expect(page).to have_button '地図表示'
+      end
+    end
+
+    context '更新成功のテスト' do
+      before do
+        @event_old_location = event.location
+        fill_in 'event[location]', with: Faker::Nation.capital_city
+        click_button '地図表示'
+      end
+
+      it 'locationが正しく更新される' do
+        expect(event.reload.location).not_to eq @event_old_location
+      end
+    end
+  end
+  describe 'ユーザ検索結果一覧画面のテスト' do
+    before do
+      visit search_path
+    end
+
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq "/search/?utf8=✓&word=#{params[:word]}&range=User&button="
+      end
+      it '自分と他人の画像が表示される' do
+        expect(all('img').size).to eq(2)
+      end
+      it '自分と他人の名前がそれぞれ表示される' do
+        expect(page).to have_content user.name
+        expect(page).to have_content other_user.name
+      end
+      it '自分と他人の自己紹介がそれぞれ表示される' do
+        expect(page).to have_content user.introduction
+        expect(page).to have_content other_user.introduction
+      end
+      it '自分と他人の名前リンクがそれぞれ表示される' do
+        expect(page).to have_link user.name, href: user_path(user)
+        expect(page).to have_link other_user.name, href: user_path(other_user)
+      end
+    end
+  end
+  describe 'イベント検索結果一覧画面のテスト' do
+    before do
+      visit search_path
+    end
+
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq "/search/?utf8=✓&word=#{params[:word]}&range=Event&button="
+      end
+      it '自分と他人の画像が表示される' do
+        expect(all('img').size).to eq(2)
+      end
+      it 'タイトルが表示される' do
+        expect(page).to have_content event.title
+      end
+      it '概要が表示される' do
+        expect(page).to have_content event.body
+      end
+      it '場所が表示される' do
+        expect(page).to have_content event.location
+      end
+      it '開始時刻がそれぞれ表示される' do
+        expect(page).to have_content event.start_date
+      end
+      it '終了時刻がそれぞれ表示される' do
+        expect(page).to have_content event.end_date
+      end
+      it 'タイトルのリンクが表示される' do
+        expect(page).to have_link event.title, href: event_path(event)
+      end
+    end
+  end
+  describe 'タスク検索結果一覧画面のテスト' do
+    before do
+      visit search_path
+    end
+
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq "/search/?utf8=✓&word=#{params[:word]}&range=Task&button="
+      end
+      it '自分と他人の画像が表示される' do
+        expect(all('img').size).to eq(2)
+      end
+      it 'タイトルが表示される' do
+        expect(page).to have_content task.title
+      end
+      it '概要が表示される' do
+        expect(page).to have_content task.body
+      end
+      it '開始時刻がそれぞれ表示される' do
+        expect(page).to have_content task.start_date
+      end
+      it '終了時刻がそれぞれ表示される' do
+        expect(page).to have_content task.end_date
+      end
+      it 'タイトルのリンクが表示される' do
+        expect(page).to have_link task.title, href: task_path(task)
       end
     end
   end
