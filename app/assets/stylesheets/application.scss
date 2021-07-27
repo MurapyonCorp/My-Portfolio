@@ -25,6 +25,10 @@
   display: flex;
  }
 
+ footer {
+  height: 65px;
+ }
+
  label {
   font-size: 20px;
  }
@@ -35,13 +39,21 @@
   height: 100vh;
 }
 
-input#word {
- background-color: #66ff33;
+.white {
+ background-color: white;
 }
 
-select {
- background-color: #ff0a84;
+.col-2.offset-md-5.text-center {
+ height: 65px;
 }
+
+// input#word {
+//  background-color: #66ff33;
+// }
+
+// select {
+//  background-color: #ff0a84;
+// }
 
 @import 'events';
 @import 'tasks';
