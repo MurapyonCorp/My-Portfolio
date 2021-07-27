@@ -7,7 +7,8 @@ RSpec.describe 'Userモデルのテスト', type: :model do
     subject { user.valid? }
 
     let!(:other_user) { create(:user) }
-    let(:user) { build(:user) }
+    let!(:user) { create(:user) }
+    let!(:task) { create(:task) }
 
     context 'nameカラム' do
       it '空欄でないこと' do
@@ -15,11 +16,11 @@ RSpec.describe 'Userモデルのテスト', type: :model do
         is_expected.to eq false
       end
       it '10文字以下であること: 10文字はOK' do
-        user.name = Faker::Name.last_name(number: 10)
+        user.name = 'abcdefghij'
         is_expected.to eq true
       end
       it '10文字以下であること: 11文字はNG' do
-        user.name = Faker::Name.last_name(number: 11)
+        user.name = 'abcdefghijk'
         is_expected.to eq false
       end
       it '一意性があること' do
@@ -41,42 +42,42 @@ RSpec.describe 'Userモデルのテスト', type: :model do
   describe 'アソシエーションのテスト' do
     context 'Eventモデルとの関係' do
       it '1:Nとなっている' do
-        expect(User.reflect_on_association(:event).macro).to eq :has_many
+        expect(User.reflect_on_association(:events).macro).to eq :has_many
       end
     end
     context 'Taskモデルとの関係' do
       it '1:Nとなっている' do
-        expect(User.reflect_on_association(:task).macro).to eq :has_many
+        expect(User.reflect_on_association(:tasks).macro).to eq :has_many
       end
     end
     context 'Relationshipモデルとの関係: follower_id' do
       it '1:Nとなっている' do
-        expect(User.reflect_on_association(:relationship).macro).to eq :has_many
+        expect(User.reflect_on_association(:relationships).macro).to eq :has_many
       end
     end
     context 'Relationshipモデルとの関係 followed_id' do
       it '1:Nとなっている' do
-        expect(User.reflect_on_association(:reverse_of_relationship).macro).to eq :has_many
+        expect(User.reflect_on_association(:reverse_of_relationships).macro).to eq :has_many
       end
     end
     context 'EventCommentモデルとの関係' do
       it '1:Nとなっている' do
-        expect(User.reflect_on_association(:event_comment).macro).to eq :has_many
+        expect(User.reflect_on_association(:event_comments).macro).to eq :has_many
       end
     end
     context 'TaskCommentモデルとの関係' do
       it '1:Nとなっている' do
-        expect(User.reflect_on_association(:task_comment).macro).to eq :has_many
+        expect(User.reflect_on_association(:task_comments).macro).to eq :has_many
       end
     end
     context 'Favoriteモデルとの関係' do
       it '1:Nとなっている' do
-        expect(User.reflect_on_association(:favorite).macro).to eq :has_many
+        expect(User.reflect_on_association(:favorites).macro).to eq :has_many
       end
     end
     context 'Likeモデルとの関係' do
       it '1:Nとなっている' do
-        expect(User.reflect_on_association(:like).macro).to eq :has_many
+        expect(User.reflect_on_association(:likes).macro).to eq :has_many
       end
     end
   end
