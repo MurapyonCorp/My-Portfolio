@@ -19,7 +19,7 @@
 
   <body data-turbolinks="false">
     <header class="sticky-top">
-      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #efe0ff;">
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #76b6ff;">
         <div class="container">
           <div class="ms-5">
             <%= link_to root_path, class:"logo" do %>
@@ -84,12 +84,12 @@
                 </li>
                 <li class="btn-group me-5" role="group" aria-label="Sixth group">
                   <%= link_to tasks_path, class:"fs-2", 'data-toggle': :tooltip, 'title': :"Task Calendar" do %>
-                    <i class="fas fa-calendar-check" style="color: dodgerblue;"></i>
+                    <i class="fas fa-calendar-check" style="color: #001fff;"></i>
                   <% end %>
                 </li>
                 <li class="btn-group me-5" role="group" aria-label="Seventh group">
                   <%= link_to user_path(current_user), class:"fs-2", 'data-toggle': :tooltip, 'title': :"My Page" do %>
-                    <i class="fas fa-house-user" style="color: gold;"></i>
+                    <i class="fas fa-house-user" style="color: #f9ff95;"></i>
                   <% end %>
                 </li>
                 <li class="btn-group me-5 d-flex align-items-center" role="group" aria-label="Eighth group">
@@ -99,13 +99,13 @@
             <% else %>
               <ul class="navbar-nav ms-auto">
                 <li class="btn-group me-3" role="group" aria-label="First group">
-                  <%= link_to "About", home_about_path, class:"btn btn-outline-dark" %>
+                  <%= link_to "About", home_about_path, class:"btn btn-dark" %>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Second group">
-                  <%= link_to "Sign up", new_user_registration_path, class:"btn btn-outline-info" %>
+                  <%= link_to "Sign up", new_user_registration_path, class:"btn btn-warning" %>
                 </li>
                 <li class="btn-group me-3" role="group" aria-label="Third group">
-                  <%= link_to "Log in", new_user_session_path, class:"btn btn-outline-success" %>
+                  <%= link_to "Log in", new_user_session_path, class:"btn btn-success" %>
                 </li>
               </ul>
             <% end %>
@@ -121,7 +121,7 @@
     <footer class="sticky-bottom" style="background-color: #ff9933;">
       <div class="container">
         <div class="row">
-          <div class="col-2 offset-md-5 text-center">
+          <div class="col-2 offset-md-5 text-center d-flex align-items-center">
             <p class="mb-0">©2021 Eventas Inc.</p>
           </div>
         </div>
