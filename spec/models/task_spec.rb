@@ -6,7 +6,7 @@ RSpec.describe 'Taskモデルのテスト', type: :model do
   describe 'バリデーションのテスト' do
     subject { task.valid? }
 
-    let(:user) { create(:user) }
+    let!(:user) { create(:user) }
     let!(:task) { build(:task, user_id: user.id) }
 
     context 'titleカラム' do
@@ -50,17 +50,17 @@ RSpec.describe 'Taskモデルのテスト', type: :model do
     end
     context 'TaskCommentモデルとの関係' do
       it '1:Nの関係になっている' do
-        expect(Task.reflect_on_association(:task_comment).macro).to eq :has_many
+        expect(Task.reflect_on_association(:task_comments).macro).to eq :has_many
       end
     end
     context 'Notificationモデルとの関係' do
       it '1:Nの関係になっている' do
-        expect(Task.reflect_on_association(:notification).macro).to eq :has_many
+        expect(Task.reflect_on_association(:notifications).macro).to eq :has_many
       end
     end
     context 'Likeモデルとの関係' do
       it '1:Nの関係になっている' do
-        expect(Task.reflect_on_association(:like).macro).to eq :has_many
+        expect(Task.reflect_on_association(:likes).macro).to eq :has_many
       end
     end
   end

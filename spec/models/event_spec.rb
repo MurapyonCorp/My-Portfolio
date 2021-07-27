@@ -50,23 +50,23 @@ RSpec.describe 'Eventモデルのテスト', type: :model do
   end
   describe 'アソシエーションのテスト' do
     context 'Userモデルとの関係' do
-      it '1:Nの関係になっている' do
+      it 'N:1の関係になっている' do
         expect(Event.reflect_on_association(:user).macro).to eq :belongs_to
       end
     end
     context 'EventCommentモデルとの関係' do
       it '1:Nの関係になっている' do
-        expect(Event.reflect_on_association(:event_comment).macro).to eq :has_many
+        expect(Event.reflect_on_association(:event_comments).macro).to eq :has_many
       end
     end
     context 'Notificationモデルとの関係' do
       it '1:Nの関係になっている' do
-        expect(Event.reflect_on_association(:notification).macro).to eq :has_many
+        expect(Event.reflect_on_association(:notifications).macro).to eq :has_many
       end
     end
     context 'Favoriteモデルとの関係' do
       it '1:Nの関係になっている' do
-        expect(Event.reflect_on_association(:favorite).macro).to eq :has_many
+        expect(Event.reflect_on_association(:favorites).macro).to eq :has_many
       end
     end
   end

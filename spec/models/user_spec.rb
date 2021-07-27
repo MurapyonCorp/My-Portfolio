@@ -33,7 +33,7 @@ RSpec.describe 'Userモデルのテスト', type: :model do
         user.introduction = Faker::Lorem.characters(number: 50)
         is_expected.to eq true
       end
-      it '50文字以下であること: 510文字はNG' do
+      it '50文字以下であること: 51文字はNG' do
         user.introduction = Faker::Lorem.characters(number: 51)
         is_expected.to eq false
       end
@@ -55,7 +55,7 @@ RSpec.describe 'Userモデルのテスト', type: :model do
         expect(User.reflect_on_association(:relationships).macro).to eq :has_many
       end
     end
-    context 'Relationshipモデルとの関係 followed_id' do
+    context 'Relationshipモデルとの関係: followed_id' do
       it '1:Nとなっている' do
         expect(User.reflect_on_association(:reverse_of_relationships).macro).to eq :has_many
       end
