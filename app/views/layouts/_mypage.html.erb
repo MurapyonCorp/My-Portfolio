@@ -65,7 +65,7 @@
       </thead>
       <tbody>
         <% events.each do |event| %>
-          <tr>
+          <tr class="white">
             <td>
               <%= link_to event.title, event_path(event) %>
             </td>
@@ -89,7 +89,7 @@
       </thead>
       <tbody>
         <% tasks.each do |task| %>
-          <tr>
+          <tr class="white">
             <td>
               <%= link_to task.title, task_path(task) %>
             </td>
