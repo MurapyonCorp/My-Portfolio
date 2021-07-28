@@ -12,14 +12,12 @@ User.create!(
       name: 'むらぴょん',
       email: 'a@a.com',
       password: '111111',
-      profile_image_id: '1ff1d2882b50dd803a6cb41e263580426ea713006bda4a88acc0b744ab2d',
       introduction: 'よろしくおねしゃす'
     },
     {
       name: 'ryo',
       email: 'a@c.com',
       password: '222222',
-      profile_image_id: '6fdd5f1e32240911a7ae46658c07fb7970f927f441f668d5fe7a13abdf2e',
       introduction: '今日も1日頑張るぞ～'
     }
   ]
