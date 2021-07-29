@@ -470,7 +470,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(current_path).to eq '/users'
       end
       it '自分と他人の画像が表示される' do
-        expect(all('img').size).to eq(2)
+        expect(all('img').size).to eq(3)
       end
       it '自分と他人の名前がそれぞれ表示される' do
         expect(page).to have_content user.name
