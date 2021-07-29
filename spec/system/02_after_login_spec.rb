@@ -599,25 +599,14 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it '「gmap」と表示される' do
         expect(page).to have_content 'gmap'
       end
-      it '地名編集フォームに登録した地名が表示される' do
-        expect(page).to have_field 'event[location]', with: event.location
+      it '地名検索フォームに登録した地名が表示される' do
+        expect(page).to have_field 'location', with: event.location
       end
       it '地図表示ボタンが表示される' do
         expect(page).to have_button '地図表示'
       end
     end
 
-    context '更新成功のテスト' do
-      before do
-        @event_old_location = event.location
-        fill_in 'event[location]', with: Faker::Nation.capital_city
-        click_button '地図表示'
-      end
-
-      it 'locationが正しく更新される' do
-        expect(event.reload.location).not_to eq @event_old_location
-      end
-    end
   end
   describe 'ユーザ検索結果一覧画面のテスト' do
     before do
