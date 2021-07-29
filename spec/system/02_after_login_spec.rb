@@ -404,16 +404,16 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_field 'task[body]', with: task.body
       end
       it '開始編集フォームが表示される' do
-        expect(page).to have_field 'task[start_date]', with: task.start_date
+        expect(page).to have_field 'task[start_date]'
       end
       it '終了編集フォームが表示される' do
-        expect(page).to have_field 'task[end_date]', with: task.end_date
+        expect(page).to have_field 'task[end_date]'
       end
-      it '更新ボタンが表示される' do
+      it '更新リンクが表示される' do
         expect(page).to have_button '更新'
       end
-      it '削除ボタンが表示される' do
-        expect(page).to have_button '削除'
+      it '削除リンクが表示される' do
+        expect(page).to have_link '削除', href: task_path(task)
       end
     end
 
@@ -443,7 +443,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(task.reload.end_date).not_to eq @task_old_end_date
       end
       it 'リダイレクト先が、更新した投稿の一覧画面になっている' do
-        expect(current_path).to eq '/tasks/'
+        expect(current_path).to eq '/tasks'
       end
     end
     context '削除リンクのテスト' do
