@@ -150,10 +150,10 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_content 'コメント件数'
       end
       it '開始時刻が表示される' do
-        expect(page).to have_content event.start_date
+        expect(page).to have_content event.start_date.strftime("%Y/%m/%d %H:%M")
       end
       it '終了時刻が表示される' do
-        expect(page).to have_content event.end_date
+        expect(page).to have_content event.end_date.strftime("%Y/%m/%d %H:%M")
       end
       it 'コメント一覧が表示される: コメントしたユーザー名が表示される' do
         expect(page).to have_content event_comment.user.name
@@ -165,15 +165,13 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_content event_comment.created_at.strftime("%m/%d %H:%M")
       end
       it 'コメント一覧が表示される: コメント削除ボタンが表示される' do
-        if event_comment.user == current_user
-          expect(page).to have_link 'icon', href: event_event_comment_path(event.id, event_comment)
-        end
+          expect(page).to have_link, href: event_event_comment_path(event.id, event_comment)
       end
     end
 
     context '編集リンクのテスト' do
       it '編集画面に遷移する' do
-        click_link 'fas fa-edit'
+        click_link href: edit_event_path(event)
         expect(current_path).to eq '/events/' + event.id.to_s + '/edit'
       end
     end
