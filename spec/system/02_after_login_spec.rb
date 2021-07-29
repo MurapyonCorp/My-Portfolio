@@ -571,7 +571,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         @user_old_name = user.name
         @user_old_introduction = user.introduction
-        fill_in 'user[name]', with: Faker::Name.last_name(number: 9)
+        fill_in 'user[name]', with: Faker::Name.initials(number: 9)
         fill_in 'user[introduction]', with: Faker::Lorem.characters(number: 19)
         click_button '保存'
       end
