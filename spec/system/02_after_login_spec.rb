@@ -144,9 +144,6 @@ describe '[STEP2] ユーザログイン後のテスト' do
           expect(page).not_to have_link event.favorites.count
       end
       it 'コメント件数が表示される' do
-        p "---------"
-        p event
-        p "---------"
         expect(page).to have_content 'コメント件数'
       end
       it '開始時刻が表示される' do
@@ -199,16 +196,16 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_field 'event[location]', with: event.location
       end
       it '開始編集フォームが表示される' do
-        expect(page).to have_field 'event[start_date]', with: event.start_date
+        expect(page).to have_field 'event[start_date]'
       end
       it '終了編集フォームが表示される' do
-        expect(page).to have_field 'event[end_date]', with: event.end_date
+        expect(page).to have_field 'event[end_date]'
       end
       it '更新ボタンが表示される' do
         expect(page).to have_button '更新'
       end
-      it '削除ボタンが表示される' do
-        expect(page).to have_button '削除'
+      it '削除リンクが表示される' do
+        expect(page).to have_link '削除', href: event_path(event)
       end
     end
 
@@ -243,7 +240,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(event.reload.end_date).not_to eq @event_old_end_date
       end
       it 'リダイレクト先が、更新した投稿の一覧画面になっている' do
-        expect(current_path).to eq '/events/'
+        expect(current_path).to eq '/events'
       end
     end
     context '削除リンクのテスト' do
