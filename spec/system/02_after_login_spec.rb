@@ -497,7 +497,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(current_path).to eq '/users/' + user.id.to_s
       end
       it 'ユーザ画像の表示が正しい' do
-        expect(all('img').size).to eq(1)
+        expect(all('img').size).to eq(2)
       end
       it 'ユーザー名が表示される' do
         expect(page).to have_content user.name
@@ -529,14 +529,14 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).not_to have_content other_event.body
         expect(page).not_to have_content other_task.body
         expect(page).not_to have_content other_event.location
-        expect(page).not_to have_content other_task.pratical
+        expect(page).not_to have_selector other_task.pratical, text: '未実施'
       end
       it "フォロー、フォロワーのリンクが表示され、リンクが正しい" do
-        expect(page).to have_link "フォロー#{user.followings.count}", href: user_followings_path(user)
-        expect(page).to have_link "フォロワー#{user.followers.count}", href: user_followers_path(user)
+        expect(page).to have_link, href: user_followings_path(user)
+        expect(page).to have_link, href: user_followers_path(user)
       end
       it 'ユーザーの編集リンクが表示される' do
-        expect(page).to have_link 'icon', href: edit_user_path(user)
+        expect(page).to have_link, href: edit_user_path(user)
       end
     end
   end
