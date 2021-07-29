@@ -641,7 +641,9 @@ describe '[STEP2] ユーザログイン後のテスト' do
   end
   describe 'イベント検索結果一覧画面のテスト' do
     before do
-      visit search_path
+      fill_in 'word', with: ''
+      select 'Event', from: :range
+      click_button 'button'
     end
 
     context '表示の確認' do
@@ -649,7 +651,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(current_path).to eq "/search"
       end
       it '自分と他人の画像が表示される' do
-        expect(all('img').size).to eq(2)
+        expect(all('img').size).to eq(3)
       end
       it 'タイトルが表示される' do
         expect(page).to have_content event.title
@@ -661,10 +663,10 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_content event.location
       end
       it '開始時刻がそれぞれ表示される' do
-        expect(page).to have_content event.start_date
+        expect(page).to have_content event.start_date.strftime("%Y,%m/%d %H:%M")
       end
       it '終了時刻がそれぞれ表示される' do
-        expect(page).to have_content event.end_date
+        expect(page).to have_content event.end_date.strftime("%Y,%m/%d %H:%M")
       end
       it 'タイトルのリンクが表示される' do
         expect(page).to have_link event.title, href: event_path(event)
