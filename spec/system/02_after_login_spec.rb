@@ -610,17 +610,22 @@ describe '[STEP2] ユーザログイン後のテスト' do
   end
   describe 'ユーザ検索結果一覧画面のテスト' do
     before do
-      visit search_path
+      fill_in 'word', with: ''
+      select 'User', from: :range
+      click_button 'button'
     end
 
     context '表示の確認' do
       it 'URLが正しい' do
-        expect(current_path).to eq "/search/?utf8=✓&word=#{params[:word]}&range=User&button="
+        expect(current_path).to eq "/search"
       end
       it '自分と他人の画像が表示される' do
-        expect(all('img').size).to eq(2)
+        expect(all('img').size).to eq(3)
       end
-      it '自分と他人の名前がそれぞれ表示される' do
+      it 'ユーザーの名前がそれぞれ表示される' do
+        p "---------"
+        p
+        p "---------"
         expect(page).to have_content user.name
         expect(page).to have_content other_user.name
       end
@@ -641,7 +646,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
 
     context '表示の確認' do
       it 'URLが正しい' do
-        expect(current_path).to eq "/search/?utf8=✓&word=#{params[:word]}&range=Event&button="
+        expect(current_path).to eq "/search"
       end
       it '自分と他人の画像が表示される' do
         expect(all('img').size).to eq(2)
@@ -673,7 +678,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
 
     context '表示の確認' do
       it 'URLが正しい' do
-        expect(current_path).to eq "/search/?utf8=✓&word=#{params[:word]}&range=Task&button="
+        expect(current_path).to eq "/search"
       end
       it '自分と他人の画像が表示される' do
         expect(all('img').size).to eq(2)
