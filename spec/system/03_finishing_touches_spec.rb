@@ -233,8 +233,8 @@ describe '[STEP3] 仕上げのテスト' do
         it 'URLが正しい' do
           expect(current_path).to eq '/events/' + other_event.id.to_s
         end
-        it 'ユーザ画像・名前のリンク先が正しい' do
-          expect(page).to have_link other_event.user.name, href: user_path(other_event.user)
+        it 'ユーザ画像のリンク先が正しい' do
+          expect(page).to have_link other_event.user.profile_image, href: user_path(other_event.user)
         end
         it '投稿のtitleが表示される' do
           expect(page).to have_content other_event.title
@@ -256,8 +256,8 @@ describe '[STEP3] 仕上げのテスト' do
         it 'URLが正しい' do
           expect(current_path).to eq '/tasks/' + other_task.id.to_s
         end
-        it 'ユーザ画像・名前のリンク先が正しい' do
-          expect(page).to have_link other_task.user.name, href: user_path(other_task.user)
+        it 'ユーザ画像のリンク先が正しい' do
+          expect(page).to have_link other_task.user.profile_image, href: user_path(other_task.user)
         end
         it '投稿のtitleが表示される' do
           expect(page).to have_content other_task.title
@@ -274,9 +274,9 @@ describe '[STEP3] 仕上げのテスト' do
     context '他人の投稿編集画面' do
       it '遷移できず、投稿一覧画面にリダイレクトされる' do
         visit edit_event_path(other_event)
-        expect(current_path).to eq '/events'
+        expect(current_path).to eq '/events/' + other_event.id.to_s
         visit edit_task_path(other_task)
-        expect(current_path).to eq '/tasks'
+        expect(current_path).to eq '/tasks/' + other_task.id.to_s
       end
     end
 
@@ -288,9 +288,6 @@ describe '[STEP3] 仕上げのテスト' do
       context '表示の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/users/' + other_user.id.to_s
-        end
-        it '投稿一覧のユーザ画像のリンク先が正しい' do
-          expect(page).to have_link '', href: user_path(other_user)
         end
         it '投稿一覧に他人の投稿のtitleが表示され、リンクが正しい' do
           expect(page).to have_link other_event.title, href: event_path(other_event)
