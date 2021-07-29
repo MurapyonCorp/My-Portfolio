@@ -8,6 +8,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
   let!(:task) { create(:task, user: user) }
   let!(:other_task) { create(:task, user: other_user) }
   let!(:event_comment) { create(:event_comment, user: user, event: event) }
+  let!(:task_comment) { create(:task_comment, user: user, task: task) }
 
   before do
     visit new_user_session_path
@@ -266,13 +267,9 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it 'URLが正しい' do
         expect(current_path).to eq '/tasks'
       end
-      it 'タスクの日付とカレンダーの日付がそれぞれ正しい' do
-        expect(start_date_datetime).to match(datetime)
-        expect(end_date_datetime).to match(datetime)
-      end
       it '自分の投稿と他人の投稿のタイトルのリンク先がそれぞれ正しい' do
-        expect(page).to have_link task.title, href: task_path(task)
-        expect(page).to have_link other_task.title, href: task_path(other_task)
+        expect(page).to have_link task.title, href: task_url(task, format: :html)
+        expect(page).to have_link other_task.title, href: task_url(other_task, format: :html)
       end
     end
 
@@ -322,19 +319,19 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
       it 'リダイレクト先が、タスク一覧画面になっている' do
         click_button '登録！'
-        expect(current_path).to eq '/tasks/'
+        expect(current_path).to eq '/tasks'
       end
     end
   end
 
   describe '自分の投稿詳細画面のテスト' do
     before do
-      visit task_path(task)
+      visit task_url(task, format: :html)
     end
 
     context '表示内容の確認' do
       it 'URLが正しい' do
-        expect(current_path).to eq '/tasks/' + task.id.to_s
+        expect(current_path).to eq '/tasks/' + task.id.to_s + '.html'
       end
       it 'ユーザ画像のリンク先が正しい' do
         expect(page).to have_link task.user.profile_image_id, href: user_path(task.user)
@@ -346,29 +343,25 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_content task.body
       end
       it '投稿の編集リンクが表示される' do
-        expect(page).to have_link 'icon', href: edit_task_path(task)
+        expect(page).to have_link, href: edit_task_path(task)
       end
       it '実施状況のチェックボックスが表示される' do
-        expect(page).to have_field 'task[pratical]'
+        expect(page).to have_field('pratical_{}')
       end
       it 'チェックボックスに値が入っていない' do
-        expect(find_field('task[pratical]').text).to be_blank
+        expect(page).to have_unchecked_field('pratical_{}')
       end
-      it 'いいねが表示される: 自身の投稿の場合ボタンではない' do
-        if event.user == current_user
-          expect(page).to should_not have_button task.favorites.count
-        else
-          expect(page).to have_button task.favorites.count
-        end
+      it 'いいねが表示される' do
+          expect(page).not_to have_link task.likes.count
       end
       it 'コメント件数が表示される' do
-        expect(page).to have_content task_comments.count
+        expect(page).to have_content 'コメント件数'
       end
       it '開始時刻が表示される' do
-        expect(page).to have_content task.start_date
+        expect(page).to have_content task.start_date.strftime("%Y,%m/%d %H:%M")
       end
       it '終了時刻が表示される' do
-        expect(page).to have_content task.end_date
+        expect(page).to have_content task.end_date.strftime("%Y,%m/%d %H:%M")
       end
       it 'コメント一覧が表示される: コメントしたユーザー名が表示される' do
         expect(page).to have_content task_comment.user.name
@@ -380,15 +373,13 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_content task_comment.created_at.strftime("%m/%d %H:%M")
       end
       it 'コメント一覧が表示される: コメント削除ボタンが表示される' do
-        if event_comment.user == current_user
-          expect(page).to have_link 'icon', href: task_task_comment_path(task.id, task_comment)
-        end
+          expect(page).to have_link, href: task_task_comment_path(task.id, task_comment)
       end
     end
 
     context '編集リンクのテスト' do
       it '編集画面に遷移する' do
-        click_link 'fas fa-edit'
+        click_link href: edit_task_path(task)
         expect(current_path).to eq '/tasks/' + task.id.to_s + '/edit'
       end
     end
