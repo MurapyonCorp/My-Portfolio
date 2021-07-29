@@ -623,9 +623,6 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(all('img').size).to eq(3)
       end
       it 'ユーザーの名前がそれぞれ表示される' do
-        p "---------"
-        p
-        p "---------"
         expect(page).to have_content user.name
         expect(page).to have_content other_user.name
       end
