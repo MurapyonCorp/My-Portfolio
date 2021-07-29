@@ -1,3 +1,15 @@
+<% if @task.errors.any? %>
+  <div id="error_explanation">
+    <h3><%= pluralize(@task.errors.count, "error") %> prohibited this obj from being saved:</h3>
+    <ul>
+        <% @task.errors.full_messages.each do |message| %>
+      <li>
+        <%= message %>
+      </li>
+        <% end %>
+    </ul>
+  </div>
+<% end %>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   タスクを作成
 </button>

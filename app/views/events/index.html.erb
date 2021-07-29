@@ -3,6 +3,18 @@
 <!--script type="text/javascript" src="https://raw.githubusercontent.com/fullcalendar/fullcalendar/v3.7.0/dist/gcal.js"></script-->
 
 <!--新規投稿フォーム作成-->
+<% if @event.errors.any? %>
+  <div id="error_explanation">
+    <h3><%= pluralize(@event.errors.count, "error") %> prohibited this obj from being saved:</h3>
+    <ul>
+        <% @event.errors.full_messages.each do |message| %>
+      <li>
+        <%= message %>
+      </li>
+        <% end %>
+    </ul>
+  </div>
+<% end %>
 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   イベントを作成する
 </button>
