@@ -54,8 +54,8 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(current_path).to eq '/events'
       end
       it '自分の投稿と他人の投稿のタイトルのリンク先がそれぞれ正しい' do
-        expect(page).to have_link event.title, href: event_url(event, format: :html)
-        expect(page).to have_link other_event.title, href: event_url(other_event, format: :html)
+        expect(page).to have_link, href: event_url(event, format: :html)
+        expect(page).to have_link, href: event_url(other_event, format: :html)
       end
     end
 
@@ -268,8 +268,8 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(current_path).to eq '/tasks'
       end
       it '自分の投稿と他人の投稿のタイトルのリンク先がそれぞれ正しい' do
-        expect(page).to have_link task.title, href: task_url(task, format: :html)
-        expect(page).to have_link other_task.title, href: task_url(other_task, format: :html)
+        expect(page).to have_link, href: task_url(task, format: :html)
+        expect(page).to have_link, href: task_url(other_task, format: :html)
       end
     end
 
