@@ -325,23 +325,23 @@ describe '[STEP3] 仕上げのテスト' do
         click_button 'ログイン'
       end
 
-      it 'searchリンクのアイコンが表示される' do
-        is_expected.to have_selector '.fas fa-search'
+      it 'searchボタンのアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-search'
       end
       it 'Notificationリンクのアイコンが表示される' do
-        is_expected.to have_selector '.fas fa-bell'
+        is_expected.to have_selector '.fas.fa-bell'
       end
       it 'Usersリンクのアイコンが表示される' do
-        is_expected.to have_selector '.fas fa-users'
+        is_expected.to have_selector '.fas.fa-users'
       end
       it 'EventCalendarリンクのアイコンが表示される' do
-        is_expected.to have_selector '.fas fa-calendar-alt'
+        is_expected.to have_selector '.fas.fa-calendar-alt'
       end
       it 'TaskCalendarリンクのアイコンが表示される' do
-        is_expected.to have_selector '.fas fa-calendar-check'
+        is_expected.to have_selector '.fas.fa-calendar-check'
       end
       it 'MyPageリンクのアイコンが表示される' do
-        is_expected.to have_selector '.fas fa-house-user'
+        is_expected.to have_selector '.fas.fa-house-user'
       end
     end
 
@@ -356,8 +356,8 @@ describe '[STEP3] 仕上げのテスト' do
       end
 
       it 'ユーザ編集画面でエディットアイコンが表示される' do
-        visit user_path(current_path)
-        is_expected.to have_selector '.fas fa-user-edit'
+        visit user_path(user)
+        is_expected.to have_selector '.fas.fa-user-edit'
       end
     end
     context 'イベント詳細画面' do
@@ -371,12 +371,12 @@ describe '[STEP3] 仕上げのテスト' do
       end
 
       it 'イベント詳細画面でエディットアイコンが表示される' do
-        visit event_path(event.current_user)
-        is_expected.to have_selector '.fas fa-edit'
+        visit event_path(event)
+        is_expected.to have_selector '.fas.fa-edit'
       end
       it "イベント詳細画面でマップアイコンが表示される" do
         visit event_path(event)
-        is_expected.to have_selector '.fas fa-map-market-alt'
+        is_expected.to have_selector '.fas.fa-map-marker-alt'
       end
     end
     context 'タスク詳細画面' do
@@ -390,8 +390,8 @@ describe '[STEP3] 仕上げのテスト' do
       end
 
       it 'タスク詳細画面でエディットアイコンが表示される' do
-        visit task_path(task.current_user)
-        is_expected.to have_selector '.fas fa-edit'
+        visit task_path(task)
+        is_expected.to have_selector '.fas.fa-edit'
       end
     end
   end
