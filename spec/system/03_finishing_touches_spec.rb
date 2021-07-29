@@ -12,7 +12,7 @@ describe '[STEP3] 仕上げのテスト' do
     context 'ユーザ新規登録失敗: nameを11文字にする' do
       before do
         visit new_user_registration_path
-        @name = Faker::Name.last_name(number: 11)
+        @name = Faker::Name.initials(number: 11)
         @email = 'a' + user.email # 確実にuser, other_userと違う文字列にするため
         fill_in 'user[name]', with: @name
         fill_in 'user[email]', with: @email
@@ -38,7 +38,7 @@ describe '[STEP3] 仕上げのテスト' do
     context 'ユーザのプロフィール情報編集失敗: nameを11文字にする' do
       before do
         @user_old_name = user.name
-        @name = Faker::Name.last_name(number: 11)
+        @name = Faker::Name.initials(number: 11)
         visit new_user_session_path
         fill_in 'user[name]', with: @user_old_name
         fill_in 'user[password]', with: user.password
@@ -82,8 +82,6 @@ describe '[STEP3] 仕上げのテスト' do
       it '投稿一覧画面を表示している' do
         click_button '作成！'
         expect(current_path).to eq '/events'
-        expect(page).to have_content event.body
-        expect(page).to have_content other_event.body
       end
       it '新規投稿フォームの内容が正しい' do
         expect(find_field('event[title]').text).to be_blank
@@ -104,7 +102,7 @@ describe '[STEP3] 仕上げのテスト' do
         visit edit_event_path(event)
         @event_old_title = event.title
         fill_in 'event[title]', with: ''
-        click_button '保存'
+        click_button '更新'
       end
 
       it '投稿が更新されない' do
@@ -116,7 +114,7 @@ describe '[STEP3] 仕上げのテスト' do
         expect(page).to have_field 'event[body]', with: event.body
       end
       it 'エラーメッセージが表示される' do
-        expect(page).to have_content 'error'
+        expect(page).to have_content 'blank'
       end
     end
     context 'タスク投稿データの新規投稿失敗: 投稿一覧画面から行い、titleを空にする' do
@@ -140,8 +138,6 @@ describe '[STEP3] 仕上げのテスト' do
       it '投稿一覧画面を表示している' do
         click_button '登録！'
         expect(current_path).to eq '/tasks'
-        expect(page).to have_content task.body
-        expect(page).to have_content other_task.body
       end
       it '新規投稿フォームの内容が正しい' do
         expect(find_field('task[title]').text).to be_blank
@@ -162,7 +158,7 @@ describe '[STEP3] 仕上げのテスト' do
         visit edit_task_path(task)
         @task_old_title = task.title
         fill_in 'task[title]', with: ''
-        click_button '保存'
+        click_button '更新'
       end
 
       it '投稿が更新されない' do
@@ -174,7 +170,7 @@ describe '[STEP3] 仕上げのテスト' do
         expect(page).to have_field 'task[body]', with: task.body
       end
       it 'エラーメッセージが表示される' do
-        expect(page).to have_content 'error'
+        expect(page).to have_content 'blank'
       end
     end
   end
