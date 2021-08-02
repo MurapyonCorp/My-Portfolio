@@ -48,7 +48,14 @@
           <!--検索でヒットしたイベントのリストを取得する。-->
           <% @events.each do |event| %>
             <tr>
-              <td><%= attachment_image_tag event.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
+              <td>
+                <div class="d-flex flex-column">
+                  <div class="d-flex justify-content-center">
+                    <%= attachment_image_tag event.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %>
+                  </div>
+                  <%= event.user.name %>
+                </div>
+              </td>
               <td><%= link_to event.title, event_path(event) %></td>
               <td><%= event.body %></td>
               <td><%= event.location %></td>
@@ -81,7 +88,14 @@
           <!--検索でヒットしたイベントのリストを取得する。-->
           <% @tasks.each do |task| %>
             <tr>
-              <td><%= attachment_image_tag task.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
+              <td>
+                <div class="d-flex flex-column">
+                  <div class="d-flex justify-content-center">
+                    <%= attachment_image_tag task.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %>
+                  </div>
+                  <%= task.user.name %>
+                </div>
+              </td>
               <td><%= link_to task.title, task_path(task) %></td>
               <td><%= task.body %></td>
               <td><%= task.start_date.strftime("%Y,%m/%d %H:%M") %></td>
