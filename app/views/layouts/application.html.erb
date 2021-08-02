@@ -20,17 +20,17 @@
   <body data-turbolinks="false">
     <header class="sticky-top">
       <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #76b6ff;">
-        <div class="container">
+        <div class="container-fluid">
           <div class="ms-5">
             <%= link_to root_path, class:"logo" do %>
               <%= image_tag 'logo4.png', size: "65x65" %>
               <h1 class="d-flex align-items-center" style="font-size: 30px; color: #000;">&nbsp;Eventas</h1>
             <% end %>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <%= button_tag type: 'button', class:"navbar-toggler", 'data-bs-toggle': :collapse, 'data-bs-target': :'#navbarTogglerDemo01', 'aria-controls': :navbarTogglerDemo01, 'aria-expanded': :false, 'aria-label': :'Toggle navigation' do %>
             <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <% end %>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <% if user_signed_in? %>
               <ul class="navbar-nav ms-5">
                 <li class="btn-group me-5 d-flex align-items-center" role="group" aria-label="First group">
