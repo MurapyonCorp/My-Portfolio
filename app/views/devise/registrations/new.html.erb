@@ -6,20 +6,20 @@
         <h2 class="text-center">Sign up</h2>
       </div>
     </div>
-  
+
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
-  
+
       <div class="row my-5">
-        <div class="col-1 offset-md-3"><%= f.label "ユーザー名" %></div>
-        <div class="col-3 offset-md-3"><%= f.text_field :name, autofocus: true, placeholder: "Taroken", class:"form-control" %></div>
+        <div class="col-3 offset-md-3"><%= f.label "ユーザー名(10文字以内)" %></div>
+        <div class="col-3 offset-md-1"><%= f.text_field :name, autofocus: true, placeholder: "Taroken", class:"form-control" %></div>
       </div>
-  
+
       <div class="row my-5">
         <div class="col-2 offset-md-3"><%= f.label "メールアドレス" %></div>
         <div class="col-4 offset-md-2"><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class:"form-control" %></div>
       </div>
-  
+
       <div class="row my-5">
         <div class="col-2 offset-md-3">
           <%= f.label "パスワード" %>
@@ -29,17 +29,17 @@
         </div>
         <div class="col-2 offset-md-2"><%= f.password_field :password, autocomplete: "new-password", class:"form-control" %></div>
       </div>
-  
+
       <div class="row my-5">
         <div class="col-2 offset-md-3"><%= f.label "パスワード(確認用)" %></div>
         <div class="col-2 offset-md-2"><%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %></div>
       </div>
-  
+
       <div class="row mb-5">
         <div class="col-2 offset-md-5"><%= f.submit "登録",class:"col-12 btn btn-dark" %></div>
       </div>
     <% end %>
-  
+
     <div class="row mt-5">
       <div class="col-2 offset-md-10">
         <p>既に登録済みの方は<%= render "devise/shared/links" %>からログインしてください。</p>
