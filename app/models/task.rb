@@ -7,6 +7,16 @@ class Task < ApplicationRecord
   validates :body, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
+  validate :start_end_check
+  validate :start_check
+
+  def start_end_check         #開始時間と終了時間を比較する。
+    errors.add(:end_date, "は開始時刻より遅い時間を選択してください") if self.start_date > self.end_date
+  end
+
+  def start_check             #開始時間と現在の時刻を比較する。
+    errors.add(:start_date, "は現在の日時より遅い時間を選択してください") if self.start_date < Time.now
+  end
 
   def liked_by?(user)
     likes.where(user_id: user.id).exists?
