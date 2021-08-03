@@ -19,116 +19,118 @@
   </head>
 
   <body data-turbolinks="false">
-    <header class="sticky-top">
-      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #76b6ff;">
-        <div class="container">
-          <div class="ms-5">
-            <%= link_to root_path do %>
-              <div class="d-flex flex-row">
-                <%= image_tag 'logo4.png', size: "65x65" %>
-                <h1 class="d-flex align-items-center" style="font-size: 30px; color: #000;">&nbsp;Eventas</h1>
-              </div>
+    <div class="wrap">
+      <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #76b6ff;">
+          <div class="container">
+            <div class="ms-5">
+              <%= link_to root_path do %>
+                <div class="d-flex flex-row">
+                  <%= image_tag 'logo4.png', size: "65x65" %>
+                  <h1 class="d-flex align-items-center" style="font-size: 30px; color: #000;">&nbsp;Eventas</h1>
+                </div>
+              <% end %>
+            </div>
+            <%= button_tag type: 'button', class:"navbar-toggler", 'data-bs-toggle': :collapse, 'data-bs-target': :'#navbarTogglerDemo01', 'aria-controls': :navbarTogglerDemo01, 'aria-expanded': :false, 'aria-label': :'Toggle navigation' do %>
+              <span class="navbar-toggler-icon"></span>
             <% end %>
-          </div>
-          <%= button_tag type: 'button', class:"navbar-toggler", 'data-bs-toggle': :collapse, 'data-bs-target': :'#navbarTogglerDemo01', 'aria-controls': :navbarTogglerDemo01, 'aria-expanded': :false, 'aria-label': :'Toggle navigation' do %>
-            <span class="navbar-toggler-icon"></span>
-          <% end %>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <% if user_signed_in? %>
-              <ul class="navbar-nav ms-5">
-                <li class="btn-group me-5 d-flex align-items-center" role="group" aria-label="First group">
-                  <%= render "layouts/search" %>
-                </li>
-                <li class="btn-group me-5" role="group" aria-label="Second group">
-                  <div class="d-flex align-items-center">
-                    <div class="d-flex flex-row">
-                      <p class="d-flex align-items-center mb-0 text-center">Hi,&nbsp;</p>
-                      <p class="d-flex align-items-center mb-0"><strong><%= current_user.name %></strong>！</p>
-                    </div>
-                  </div>
-                </li>
-                <li class="btn-group" role="group" aria-label="Third group">
-                  <% if unchecked_notifications.any? %>
-                    <i class="fa fa-circle" style="color: #00fa9a; position: absolute; z-index: 1;"></i>
-                  <% end %>
-                  <li class="me-5">
-                    <div class="dropdown">
-                      <%= link_to 'notifications', class:"fs-2", 'role': :button, 'id': :dropdownMenuLink, 'data-bs-toggle': :dropdown, 'aria-expanded': :false, :style => "color: black;" do %>
-                        <i class="fas fa-bell" style="color: black;"></i>
-                      <% end %>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 500px">
-                        <h5 class="text-center">通知</h5>
-                        <%= link_to notifications_destroy_all_path, method: :delete do %>
-                          <i class="fas fa-trash" style="color: red;"></i>
-                          <h7 style="color: red;"><strong>全削除</strong></h7>
-                        <% end %>
-                        <%#= paginate @notifications %>
-                        <hr>
-                        <% if @notifications.exists? %>
-                          <li class="users-index">
-                            <%= render @notifications %>
-                          </li>
-                        <% else %>
-                          <li>通知はありません</li>
-                        <% end %>
-                      </ul>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+              <% if user_signed_in? %>
+                <ul class="navbar-nav ms-5">
+                  <li class="btn-group me-5 d-flex align-items-center" role="group" aria-label="First group">
+                    <%= render "layouts/search" %>
+                  </li>
+                  <li class="btn-group me-5" role="group" aria-label="Second group">
+                    <div class="d-flex align-items-center">
+                      <div class="d-flex flex-row">
+                        <p class="d-flex align-items-center mb-0 text-center">Hi,&nbsp;</p>
+                        <p class="d-flex align-items-center mb-0"><strong><%= current_user.name %></strong>！</p>
+                      </div>
                     </div>
                   </li>
-                </li>
-                <li class="btn-group me-5" role="group" aria-label="Fourth group">
-                  <%= link_to users_path, class:"fs-2", 'data-toggle': :tooltip, 'title': :"Users" do %>
-                    <i class="fas fa-users" style="color: dimgray;"></i>
-                  <% end %>
-                </li>
-                <li class="btn-group me-5" role="group" aria-label="Fifth group">
-                  <%= link_to events_path, class:"fs-2", 'data-toggle': :tooltip, 'title': :"Event Calendar" do %>
-                    <i class="fas fa-calendar-alt" style="color: forestgreen;"></i>
-                  <% end %>
-                </li>
-                <li class="btn-group me-5" role="group" aria-label="Sixth group">
-                  <%= link_to tasks_path, class:"fs-2", 'data-toggle': :tooltip, 'title': :"Task Calendar" do %>
-                    <i class="fas fa-calendar-check" style="color: #001fff;"></i>
-                  <% end %>
-                </li>
-                <li class="btn-group me-5" role="group" aria-label="Seventh group">
-                  <%= link_to user_path(current_user), class:"fs-2", 'data-toggle': :tooltip, 'title': :"My Page" do %>
-                    <i class="fas fa-house-user" style="color: #f9ff95;"></i>
-                  <% end %>
-                </li>
-                <li class="btn-group me-5 d-flex align-items-center" role="group" aria-label="Eighth group">
-                  <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-danger btn-sm d-flex align-items-center h-75" %>
-                </li>
-              </ul>
-            <% else %>
-              <ul class="navbar-nav ms-auto">
-                <li class="btn-group me-3" role="group" aria-label="First group">
-                  <%= link_to "About", home_about_path, class:"btn btn-dark" %>
-                </li>
-                <li class="btn-group me-3" role="group" aria-label="Second group">
-                  <%= link_to "Sign up", new_user_registration_path, class:"btn btn-warning" %>
-                </li>
-                <li class="btn-group me-3" role="group" aria-label="Third group">
-                  <%= link_to "Log in", new_user_session_path, class:"btn btn-success" %>
-                </li>
-              </ul>
-            <% end %>
+                  <li class="btn-group" role="group" aria-label="Third group">
+                    <% if unchecked_notifications.any? %>
+                      <i class="fa fa-circle" style="color: #00fa9a; position: absolute; z-index: 1;"></i>
+                    <% end %>
+                    <li class="me-5">
+                      <div class="dropdown">
+                        <%= link_to 'notifications', class:"fs-2", 'role': :button, 'id': :dropdownMenuLink, 'data-bs-toggle': :dropdown, 'aria-expanded': :false, :style => "color: black;" do %>
+                          <i class="fas fa-bell" style="color: black;"></i>
+                        <% end %>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 500px">
+                          <h5 class="text-center">通知</h5>
+                          <%= link_to notifications_destroy_all_path, method: :delete do %>
+                            <i class="fas fa-trash" style="color: red;"></i>
+                            <h7 style="color: red;"><strong>全削除</strong></h7>
+                          <% end %>
+                          <%#= paginate @notifications %>
+                          <hr>
+                          <% if @notifications.exists? %>
+                            <li class="users-index">
+                              <%= render @notifications %>
+                            </li>
+                          <% else %>
+                            <li>通知はありません</li>
+                          <% end %>
+                        </ul>
+                      </div>
+                    </li>
+                  </li>
+                  <li class="btn-group me-5" role="group" aria-label="Fourth group">
+                    <%= link_to users_path, class:"fs-2", 'data-toggle': :tooltip, 'title': :"Users" do %>
+                      <i class="fas fa-users" style="color: dimgray;"></i>
+                    <% end %>
+                  </li>
+                  <li class="btn-group me-5" role="group" aria-label="Fifth group">
+                    <%= link_to events_path, class:"fs-2", 'data-toggle': :tooltip, 'title': :"Event Calendar" do %>
+                      <i class="fas fa-calendar-alt" style="color: forestgreen;"></i>
+                    <% end %>
+                  </li>
+                  <li class="btn-group me-5" role="group" aria-label="Sixth group">
+                    <%= link_to tasks_path, class:"fs-2", 'data-toggle': :tooltip, 'title': :"Task Calendar" do %>
+                      <i class="fas fa-calendar-check" style="color: #001fff;"></i>
+                    <% end %>
+                  </li>
+                  <li class="btn-group me-5" role="group" aria-label="Seventh group">
+                    <%= link_to user_path(current_user), class:"fs-2", 'data-toggle': :tooltip, 'title': :"My Page" do %>
+                      <i class="fas fa-house-user" style="color: #f9ff95;"></i>
+                    <% end %>
+                  </li>
+                  <li class="btn-group me-5 d-flex align-items-center" role="group" aria-label="Eighth group">
+                    <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-danger btn-sm d-flex align-items-center h-75" %>
+                  </li>
+                </ul>
+              <% else %>
+                <ul class="navbar-nav ms-auto">
+                  <li class="btn-group me-3" role="group" aria-label="First group">
+                    <%= link_to "About", home_about_path, class:"btn btn-dark" %>
+                  </li>
+                  <li class="btn-group me-3" role="group" aria-label="Second group">
+                    <%= link_to "Sign up", new_user_registration_path, class:"btn btn-warning" %>
+                  </li>
+                  <li class="btn-group me-3" role="group" aria-label="Third group">
+                    <%= link_to "Log in", new_user_session_path, class:"btn btn-success" %>
+                  </li>
+                </ul>
+              <% end %>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <div class="container" style="background-color: #7fffd429;">
+          <%= yield %>
+        </div>
+      </main>
+      <footer class="sticky-bottom" style="background-color: #ff9933;">
+        <div class="container">
+          <div class="row">
+            <div class="col-2 offset-md-5 text-center d-flex align-items-center">
+              <p class="mb-0">©2021 Eventas Inc.</p>
+            </div>
           </div>
         </div>
-      </nav>
-    </header>
-    <main>
-      <div class="container" style="background-color: #7fffd429;">
-        <%= yield %>
-      </div>
-    </main>
-    <footer class="sticky-bottom" style="background-color: #ff9933;">
-      <div class="container">
-        <div class="row">
-          <div class="col-2 offset-md-5 text-center d-flex align-items-center">
-            <p class="mb-0">©2021 Eventas Inc.</p>
-          </div>
-        </div>
-      </div>
-    </footer>
+      </footer>
+    </div>
   </body>
 </html>
