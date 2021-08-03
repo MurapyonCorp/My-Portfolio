@@ -14,13 +14,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.css">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <!--以下のBootstrapを読み込んでしまうとNavbar collapseで閉じることが出来なくなってしまう。-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>-->
   </head>
 
   <body data-turbolinks="false">
     <header class="sticky-top">
       <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #76b6ff;">
-        <div class="container-fluid">
+        <div class="container">
           <div class="ms-5">
             <%= link_to root_path do %>
               <div class="d-flex flex-row">
