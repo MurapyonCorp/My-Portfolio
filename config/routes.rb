@@ -23,8 +23,11 @@ Rails.application.routes.draw do
   end
   # 検索機能実装のためのルーティングを設定する
   get "search" => "searches#search"
-  delete 'notifications/destroy_all' => 'notifications#destroy_all'
-  resources :notifications, only: [:index, :destroy]
+  resources :notifications, only: [:index, :destroy] do
+    collection do
+      delete 'destroy_all'
+    end
+  end
   get '/map_request', to: 'maps#map', as: 'map_request'
 end
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
