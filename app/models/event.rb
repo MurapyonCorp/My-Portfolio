@@ -4,16 +4,12 @@ class Event < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 100 }
   validates :body, presence: true
-  validates :location, presence: true
+  validates :location, presence: true, format: {with: /\A[a-zA-Zぁ-んァ-ン一-龥0-9０-９]/}
+  validates :location, presence: true, format: {without: /\A[0-9０-９]+\z/}
   validates :start_date, presence: true
   validates :end_date, presence: true
-  validate :location_character
   validate :start_end_check
   validate :start_check
-  
-  def location_character
-    errors.add(:location, "")
-  end
 
   def start_end_check         #開始時間と終了時間を比較する。
     errors.add(:end_date, "は開始時刻より遅い時間を選択してください") if self.start_date > self.end_date
