@@ -103,6 +103,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.10.0)
+      devise (>= 4.8.0)
+    devise-i18n-views (0.3.7)
     diff-lcs (1.4.4)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -386,6 +389,8 @@ DEPENDENCIES
   carrierwave (~> 2.0)
   coffee-rails (~> 4.2)
   devise
+  devise-i18n
+  devise-i18n-views
   dotenv-rails
   enum_help
   factory_bot_rails
