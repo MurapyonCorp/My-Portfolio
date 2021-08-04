@@ -4,7 +4,8 @@ class Event < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 100 }
   validates :body, presence: true
-  validates :location, presence: true
+  validates :location, presence: true, format: {with: /\A[a-zA-Zぁ-んァ-ン一-龥0-9０-９]/}
+  validates :location, presence: true, format: {without: /\A[0-9０-９]+\z/}
   validates :start_date, presence: true
   validates :end_date, presence: true
   validate :start_end_check
