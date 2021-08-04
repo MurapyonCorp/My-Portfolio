@@ -87,6 +87,7 @@ gem 'dotenv-rails'
 gem 'kaminari', '~> 1.2.1'
 
 gem 'geocoder'
+gem 'rails-i18n'
 
 group :production do
   gem 'mysql2'
