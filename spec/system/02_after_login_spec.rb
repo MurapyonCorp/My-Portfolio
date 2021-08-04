@@ -22,7 +22,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       subject { current_path }
 
       it 'search buttonを押すと、検索結果画面に遷移する' do
-        click_button 'button'
+        click_button type: 'submit'
         is_expected.to eq '/search'
       end
       it 'Usersを押すと、ユーザ一覧画面に遷移する' do
@@ -612,7 +612,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
     before do
       fill_in 'word', with: ''
       select 'User', from: :range
-      click_button 'button'
+      click_button type: 'submit'
     end
 
     context '表示の確認' do
@@ -640,7 +640,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
     before do
       fill_in 'word', with: ''
       select 'Event', from: :range
-      click_button 'button'
+      click_button type: 'submit'
     end
 
     context '表示の確認' do
@@ -674,7 +674,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
     before do
       fill_in 'word', with: ''
       select 'Task', from: :range
-      click_button 'button'
+      click_button type: 'submit'
     end
 
     context '表示の確認' do
