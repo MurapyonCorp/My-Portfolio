@@ -68,6 +68,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 
 gem 'bootstrap', '~>5.0'
 gem 'jquery-rails'
@@ -87,6 +89,7 @@ gem 'dotenv-rails'
 gem 'kaminari', '~> 1.2.1'
 
 gem 'geocoder'
+gem 'rails-i18n'
 
 group :production do
   gem 'mysql2'

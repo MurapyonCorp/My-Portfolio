@@ -5,7 +5,7 @@
 <!--新規投稿フォーム作成-->
 <% if @event.errors.any? %>
   <div id="error_explanation">
-    <h3><%= pluralize(@event.errors.count, "error") %> prohibited this obj from being saved:</h3>
+    <h3><%= pluralize(@event.errors.count, "個") %>の入力エラーがあります</h3>
     <ul>
         <% @event.errors.full_messages.each do |message| %>
       <li>

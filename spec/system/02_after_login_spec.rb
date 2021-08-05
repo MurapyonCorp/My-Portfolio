@@ -22,7 +22,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       subject { current_path }
 
       it 'search buttonを押すと、検索結果画面に遷移する' do
-        click_button 'button'
+        click_button type: 'submit'
         is_expected.to eq '/search'
       end
       it 'Usersを押すと、ユーザ一覧画面に遷移する' do
@@ -103,8 +103,8 @@ describe '[STEP2] ユーザログイン後のテスト' do
         fill_in 'event[title]', with: Faker::Lorem.characters(number: 5)
         fill_in 'event[body]', with: Faker::Lorem.characters(number: 20)
         fill_in 'event[location]', with: Faker::Nation.capital_city
-        fill_in 'event[start_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
-        fill_in 'event[end_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+        fill_in 'event[start_date]', with: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 1)
+        fill_in 'event[end_date]', with: Faker::Time.between(from: DateTime.now + 2, to: DateTime.now + 2)
       end
 
       it '自分の新しい投稿が正しく保存される' do
@@ -220,8 +220,8 @@ describe '[STEP2] ユーザログイン後のテスト' do
         fill_in 'event[title]', with: Faker::Lorem.characters(number: 4)
         fill_in 'event[body]', with: Faker::Lorem.characters(number: 19)
         fill_in 'event[location]', with: Faker::Nation.capital_city
-        fill_in 'event[start_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
-        fill_in 'event[end_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+        fill_in 'event[start_date]', with: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 1)
+        fill_in 'event[end_date]', with: Faker::Time.between(from: DateTime.now + 2, to: DateTime.now + 2)
         click_button '更新'
       end
 
@@ -310,8 +310,8 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         fill_in 'task[title]', with: Faker::Lorem.characters(number: 5)
         fill_in 'task[body]', with: Faker::Lorem.characters(number: 20)
-        fill_in 'task[start_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
-        fill_in 'task[end_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+        fill_in 'task[start_date]', with: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 1)
+        fill_in 'task[end_date]', with: Faker::Time.between(from: DateTime.now + 2, to: DateTime.now + 2)
       end
 
       it '自分の新しい投稿が正しく保存される' do
@@ -425,8 +425,8 @@ describe '[STEP2] ユーザログイン後のテスト' do
         @task_old_end_date = task.end_date
         fill_in 'task[title]', with: Faker::Lorem.characters(number: 4)
         fill_in 'task[body]', with: Faker::Lorem.characters(number: 19)
-        fill_in 'task[start_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
-        fill_in 'task[end_date]', with: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+        fill_in 'task[start_date]', with: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 1)
+        fill_in 'task[end_date]', with: Faker::Time.between(from: DateTime.now + 2, to: DateTime.now + 2)
         click_button '更新'
       end
 
@@ -612,7 +612,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
     before do
       fill_in 'word', with: ''
       select 'User', from: :range
-      click_button 'button'
+      click_button type: 'submit'
     end
 
     context '表示の確認' do
@@ -640,7 +640,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
     before do
       fill_in 'word', with: ''
       select 'Event', from: :range
-      click_button 'button'
+      click_button type: 'submit'
     end
 
     context '表示の確認' do
@@ -674,7 +674,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
     before do
       fill_in 'word', with: ''
       select 'Task', from: :range
-      click_button 'button'
+      click_button type: 'submit'
     end
 
     context '表示の確認' do

@@ -103,6 +103,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.10.0)
+      devise (>= 4.8.0)
+    devise-i18n-views (0.3.7)
     diff-lcs (1.4.4)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -232,6 +235,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.3.0)
       loofah (~> 2.3)
+    rails-i18n (5.1.3)
+      i18n (>= 0.7, < 2)
+      railties (>= 5.0, < 6)
     railties (5.2.6)
       actionpack (= 5.2.6)
       activesupport (= 5.2.6)
@@ -383,6 +389,8 @@ DEPENDENCIES
   carrierwave (~> 2.0)
   coffee-rails (~> 4.2)
   devise
+  devise-i18n
+  devise-i18n-views
   dotenv-rails
   enum_help
   factory_bot_rails
@@ -400,6 +408,7 @@ DEPENDENCIES
   pry-byebug
   puma (~> 3.11)
   rails (~> 5.2.6)
+  rails-i18n
   refile!
   refile-mini_magick
   rspec-rails

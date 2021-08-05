@@ -1,6 +1,6 @@
 <% if @task.errors.any? %>
   <div id="error_explanation">
-    <h3><%= pluralize(@task.errors.count, "error") %> prohibited this obj from being saved:</h3>
+    <h3><%= pluralize(@task.errors.count, "個") %>の入力エラーがあります</h3>
     <ul>
         <% @task.errors.full_messages.each do |message| %>
       <li>

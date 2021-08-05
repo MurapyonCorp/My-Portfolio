@@ -31,7 +31,7 @@ describe '[STEP3] 仕上げのテスト' do
       end
       it 'バリデーションエラーが表示される' do
         click_button '登録'
-        expect(page).to have_content "is too long (maximum is 10 characters)"
+        expect(page).to have_content "ユーザー名は10文字以内で入力してください"
       end
     end
 
@@ -55,7 +55,7 @@ describe '[STEP3] 仕上げのテスト' do
         expect(page).to have_field 'user[name]', with: @name
       end
       it 'バリデーションエラーが表示される' do
-        expect(page).to have_content "is too long (maximum is 10 characters)"
+        expect(page).to have_content "ユーザー名は10文字以内で入力してください"
       end
     end
 
@@ -89,7 +89,7 @@ describe '[STEP3] 仕上げのテスト' do
       end
       it 'バリデーションエラーが表示される' do
         click_button '作成！'
-        expect(page).to have_content "can't be blank"
+        expect(page).to have_content "タイトルを入力してください"
       end
     end
 
@@ -114,7 +114,7 @@ describe '[STEP3] 仕上げのテスト' do
         expect(page).to have_field 'event[body]', with: event.body
       end
       it 'エラーメッセージが表示される' do
-        expect(page).to have_content 'blank'
+        expect(page).to have_content 'タイトルを入力してください'
       end
     end
     context 'タスク投稿データの新規投稿失敗: 投稿一覧画面から行い、titleを空にする' do
@@ -145,7 +145,7 @@ describe '[STEP3] 仕上げのテスト' do
       end
       it 'バリデーションエラーが表示される' do
         click_button '登録！'
-        expect(page).to have_content "can't be blank"
+        expect(page).to have_content "タイトルを入力してください"
       end
     end
 
@@ -170,7 +170,7 @@ describe '[STEP3] 仕上げのテスト' do
         expect(page).to have_field 'task[body]', with: task.body
       end
       it 'エラーメッセージが表示される' do
-        expect(page).to have_content 'blank'
+        expect(page).to have_content 'タイトルを入力してください'
       end
     end
   end
