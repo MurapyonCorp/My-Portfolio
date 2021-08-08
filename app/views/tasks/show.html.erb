@@ -40,23 +40,21 @@
             <td class="check_box">
               <%= render 'checks/check_box', task: @task %>
             </td>
-            <% if current_user.own?(@task) %>
-              <td>
+            <td>
+              <% if current_user.own?(@task) %>
                 <i class="far fa-heart" style="font-size: 20px;"><%= @task.likes.count %></i>
                 <div id="count_area">
                   <%= render "task_comments/comment_count", task_comments: @task_comments %>
                 </div>
-              </td>
-            <% else %>
-              <td>
+              <% else %>
                 <div id="like_buttons_<%= @task.id %>">
                   <%= render "likes/like_button", task: @task %>
                 </div>
                 <div id="count_area">
                   <%= render "task_comments/comment_count", task_comments: @task_comments %>
                 </div>
-              </td>
-            <% end %>
+              <% end %>
+            </td>
             <td><%= @task.start_date.strftime("%Y,%m/%d %H:%M") %></td>
             <td><%= @task.end_date.strftime("%Y,%m/%d %H:%M") %></td>
           </tr>
