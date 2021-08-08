@@ -1,13 +1,19 @@
 class EventCommentsController < ApplicationController
   def create
-    event = Event.find(params[:event_id])
-    comment = current_user.event_comments.new(event_comment_params)
-    comment.event_id = event.id
-    comment.save
-    @event = comment.event
-    @event_comments = EventComment.includes(:event, :user).where(event_id: params[:event_id])
-    # 通知の作成
-    @event.create_notification_event_comment!(current_user, comment.id)
+    @event = Event.find(params[:event_id])
+    @comment = current_user.event_comments.new(event_comment_params)
+    @comment.event_id = @event.id
+    if @comment.save
+      @event = @comment.event
+      @event_comments = EventComment.includes(:event, :user).where(event_id: params[:event_id])
+      # 通知の作成
+      @event.create_notification_event_comment!(current_user, @comment.id)
+    else
+      @user = @event.user
+      @event_comments = EventComment.includes(:user).where(event_id: @event.id)
+      @event_comment = EventComment.new
+      render template: "events/show"
+    end
   end
 
   def destroy
