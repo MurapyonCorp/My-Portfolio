@@ -44,23 +44,21 @@
               <% end %>
             </td>
             <!--自分の投稿か否かをここから判断-->
-            <% if current_user.own?(@event) %>
-              <td>
+            <td>
+              <% if current_user.own?(@event) %>
                 <i class="far fa-heart" style="font-size: 20px;"><%= @event.favorites.count %></i>
                 <div id="count_area">
                   <%= render "event_comments/comment_count", event_comments: @event_comments %>
                 </div>
-              </td>
-            <% else %>
-              <td>
+              <% else %>
                 <div id="favorite_buttons_<%= @event.id %>">
                   <%= render "favorites/favorite_button", event: @event %>
                 </div>
                 <div id="count_area">
                   <%= render "event_comments/comment_count", event_comments: @event_comments %>
                 </div>
-              </td>
-            <% end %>
+              <% end %>
+            </td>
             <td><%= @event.start_date.strftime("%Y/%m/%d %H:%M") %></td>
             <td><%= @event.end_date.strftime("%Y/%m/%d %H:%M") %></td>
           </tr>
