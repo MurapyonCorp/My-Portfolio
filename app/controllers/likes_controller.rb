@@ -8,7 +8,7 @@ class LikesController < ApplicationController
     # 通知の作成
     @task.create_notification_by(current_user)
     respond_to do |format|
-      format.html { redirect_to request.referrer }
+      format.html { redirect_to request.referer }
       format.js
     end
   end
