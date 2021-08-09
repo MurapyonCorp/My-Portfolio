@@ -54,6 +54,9 @@
                   <%= render "task_comments/comment_count", task_comments: @task_comments %>
                 </div>
               <% end %>
+              <strong>
+                <%= link_to "いいねしたユーザー", task_likers_path(task_id: @task.id), :style => "color: black;" %>
+              </strong>
             </td>
             <td><%= @task.start_date.strftime("%Y,%m/%d %H:%M") %></td>
             <td><%= @task.end_date.strftime("%Y,%m/%d %H:%M") %></td>
