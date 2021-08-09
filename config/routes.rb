@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :events, only: [:create, :index, :show, :edit, :update, :destroy] do
     resource :favorites, only: [:create, :destroy]
+    resources :favoriters, only: [:index]
     resources :event_comments, only: [:create, :destroy]
     resources :maps, only: [:index]
   end
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   resources :tasks, only: [:create, :index, :show, :edit, :update, :destroy] do
     resource :checks, only: [:update]
     resource :likes, only: [:create, :destroy]
+    resources :likers, only: [:index]
     resources :task_comments, only: [:create, :destroy]
   end
   # 検索機能実装のためのルーティングを設定する
