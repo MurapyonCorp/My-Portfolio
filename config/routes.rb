@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :tasks, only: [:create, :index, :show, :edit, :update, :destroy] do
     resource :checks, only: [:update]
     resource :likes, only: [:create, :destroy]
+    resources :likers, only: [:index]
     resources :task_comments, only: [:create, :destroy]
   end
   # 検索機能実装のためのルーティングを設定する
