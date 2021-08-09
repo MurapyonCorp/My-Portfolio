@@ -58,6 +58,7 @@
                   <%= render "event_comments/comment_count", event_comments: @event_comments %>
                 </div>
               <% end %>
+              <%= link_to "いいねしたユーザー", event_favoriters_path(event_id: @event.id) %>
             </td>
             <td><%= @event.start_date.strftime("%Y/%m/%d %H:%M") %></td>
             <td><%= @event.end_date.strftime("%Y/%m/%d %H:%M") %></td>
