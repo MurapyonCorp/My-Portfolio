@@ -1,14 +1,16 @@
 class Task < ApplicationRecord
   belongs_to :user
-  enum pratical: { 実施済: true, 未実施: false }
+  enum pratical: { 未実施: false,  実施済: true}
   has_many :likes, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 100 }
   validates :body, presence: true
+  validates :pratical, presence: true, inclusion: { in: ["未実施", "実施済"]}
   validates :start_date, presence: true
   validates :end_date, presence: true
   validate :start_end_check
   validate :start_check
+  # , unless: -> { validation_context == :start_check }
 
   def start_end_check         #開始時間と終了時間を比較する。
     if (start_date != nil) && (end_date != nil)
@@ -16,9 +18,9 @@ class Task < ApplicationRecord
     end
   end
 
-  def start_check             #開始時間と現在の時刻を比較する。
+  def start_check             #開始時間と現在の時刻を比較する。開始時間を過ぎるとpraticalの更新が不可になる。
     if start_date != nil
-      errors.add(:start_date, "は現在の日時より遅い時間を選択してください") if self.start_date < Time.now
+      errors.add(:start_date, "は現在の日時より遅い時間を選択してください") if self.start_date < Time.zone.now
     end
   end
 
