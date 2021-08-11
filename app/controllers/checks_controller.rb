@@ -5,7 +5,7 @@ class ChecksController < ApplicationController
       @task.update(pratical: "未実施")
       # @task.update(pratical:true)
     else
-      @task.update(pratical: true)
+      @task.update(pratical: "実施済")
     end
   end
 end
