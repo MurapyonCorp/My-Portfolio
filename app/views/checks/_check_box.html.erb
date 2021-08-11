@@ -1,9 +1,9 @@
 <!--カレントユーザーかどうかのif-->
-<% if @user == current_user %>
+<% if user == current_user %>
   <%= link_to task_checks_path(task.id), remote:true, method: :patch do %>
     <%#= task.pratical %>
     <% if task.pratical == "実施済" %>
-      <%= check_box :pratical,{}, {checked: true}, class:"check" %>
+      <%= check_box :pratical, {}, {checked: true}, class:"check" %>
     <% else %>
       <%= check_box :pratical, {}, class:"check" %>
     <% end %>
