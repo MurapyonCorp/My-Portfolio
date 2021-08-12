@@ -8,23 +8,7 @@
       <table class="table table-hover table-inverse text-center">
         <thead>
           <tr class="table-primary">
-            <th></th>
-            <th>ユーザー名</th>
-            <th>自己紹介</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!--検索でヒットしたユーザーのリストを取得する。-->
-          <% @users.each do |user| %>
-            <tr>
-              <td><%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
-              <td><%= link_to user.name, user_path(user.id) %></td>
-              <td class="text-break"><%= user.introduction %></td>
-            </tr>
-          <% end %>
-          <!---->
-        </tbody>
-      </table>
+            <%= render 'layouts/user_index', users: @users %>
     </div>
     <%= paginate @users %>
   <!--対象のモデルがEventのとき-->
