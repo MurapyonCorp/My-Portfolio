@@ -6,6 +6,8 @@
           <th></th>
           <th>ユーザー名</th>
           <th>自己紹介</th>
+          <th>イベント数</th>
+          <th>タスク数</th>
         </tr>
       </thead>
       <tbody>
@@ -14,6 +16,19 @@
             <td><%= attachment_image_tag favorite.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
             <td><%= link_to favorite.user.name, user_path(favorite.user.id) %></td>
             <td class="text-break"><%= favorite.user.introduction %></td>
+            <% if (favorite.user.events.count == 0) && (favorite.user.tasks.count != 0) %>
+              <td></td>
+              <td><%= favorite.user.tasks.count %></td>
+            <% elsif (favorite.user.events.count != 0) && (favorite.user.tasks.count == 0) %>
+              <td><%= favorite.user.events.count %></td>
+              <td></td>
+            <% elsif (favorite.user.events.count == 0) && (favorite.user.tasks.count == 0) %>
+              <td></td>
+              <td></td>
+            <% else %>
+              <td><%= favorite.user.events.count %></td>
+              <td><%= favorite.user.tasks.count %></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
