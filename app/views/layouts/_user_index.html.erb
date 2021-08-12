@@ -1,0 +1,32 @@
+      <th></th>
+      <th>ユーザー名</th>
+      <th>自己紹介</th>
+      <th>イベント数</th>
+      <th>タスク数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!--ユーザー一覧のリストを取得する。-->
+    <% users.each do |user| %>
+      <tr>
+        <td><%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
+        <td><%= link_to user.name, user_path(user.id) %></td>
+        <td class="text-break"><%= user.introduction %></td>
+        <% if (user.events.count == 0) && (user.tasks.count != 0) %>
+          <td></td>
+          <td><%= user.tasks.count %></td>
+        <% elsif (user.events.count != 0) && (user.tasks.count == 0) %>
+          <td><%= user.events.count %></td>
+          <td></td>
+        <% elsif (user.events.count == 0) && (user.tasks.count == 0) %>
+          <td></td>
+          <td></td>
+        <% else %>
+          <td><%= user.events.count %></td>
+          <td><%= user.tasks.count %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    <!---->
+  </tbody>
+</table>
