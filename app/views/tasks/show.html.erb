@@ -38,7 +38,7 @@
               <% end %>
             </td>
             <td class="check_box">
-              <%= render 'checks/check_box', task: @task %>
+              <%= render 'checks/check_box', task: @task, user: @user %>
             </td>
             <td>
               <% if current_user.own?(@task) %>
