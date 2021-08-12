@@ -10,7 +10,6 @@ class Task < ApplicationRecord
   validates :end_date, presence: true
   validate :start_end_check
   validate :start_check
-  # , unless: -> { validation_context == :start_check }
 
   def start_end_check         #開始時間と終了時間を比較する。
     if (start_date != nil) && (end_date != nil)
