@@ -6,6 +6,8 @@
           <th></th>
           <th>ユーザー名</th>
           <th>自己紹介</th>
+          <th>イベント数</th>
+          <th>タスク数</th>
         </tr>
       </thead>
       <tbody>
@@ -14,6 +16,19 @@
             <td><%= attachment_image_tag like.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
             <td><%= link_to like.user.name, user_path(like.user.id) %></td>
             <td class="text-break"><%= like.user.introduction %></td>
+            <% if (like.user.events.count == 0) && (like.user.tasks.count != 0) %>
+              <td></td>
+              <td><%= like.user.tasks.count %></td>
+            <% elsif (like.user.events.count != 0) && (like.user.tasks.count == 0) %>
+              <td><%= like.user.events.count %></td>
+              <td></td>
+            <% elsif (like.user.events.count == 0) && (like.user.tasks.count == 0) %>
+              <td></td>
+              <td></td>
+            <% else %>
+              <td><%= like.user.events.count %></td>
+              <td><%= like.user.tasks.count %></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
