@@ -41,11 +41,11 @@ https://docs.google.com/spreadsheets/d/1pnR5TLdrZG-aVqDHHvB9sQlPxV0-zRIKNboJTWKU
 
 ## 基本設計書
 
-- データベース設計書  
+- データベース設計書
 
 https://app.diagrams.net/#G1qIyE57XAMrm8pXBTMxrl8Hhjub0gxqpe
 
-- フローチャート  
+- フローチャート
  
 https://app.diagrams.net/#G1er95iEudg_Nm7ygGk-7_vuqZkInmCAFi
 
