@@ -33,7 +33,7 @@ https://docs.google.com/spreadsheets/d/1xzIAAuVGu7kVxCX9QFdISH2AOLVhi-KoRranfgE2
 https://docs.google.com/spreadsheets/d/15XoIuLKHupXlPVB4AVqVkTEw1sNNk__fdGHkmpNHj8w/edit#gid=0
 
 - WBSシート  
-https://docs.google.com/spreadsheets/d/1R-oBBRl4Fhfz00hDaoFoC6f3eRxlgZMNS0RrX75SndQ/edit#gid=1773513600
+https://docs.google.com/spreadsheets/d/147g_zY_aGRR2M_sJjGDG-jI-4Nq3ZFPGJE-OA-k6IJU/edit#gid=735776390
 
 ## チャレンジ要素一覧
 
