@@ -69,4 +69,7 @@ class User < ApplicationRecord
       notification.save if notification.valid?
     end
   end
+
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
 end
