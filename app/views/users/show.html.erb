@@ -20,6 +20,28 @@
             <div class="col-md-1 offset-md-1">
               <%= render '/layouts/follow_button', user: @user %>
             </div>
+            <div class="col-md-1 offset-md-2">
+              <!--ログインしているユーザーと参照しているユーザーのIDが異なるとき-->
+              <% unless @user.id == current_user.id %>
+              <!--相互フォローしているとき-->
+                <% if (current_user.following?(@user)) && (@user.following?(current_user)) %>
+                  <% if @isRoom == true %>
+                    <%= link_to room_path(@roomId) do %>
+                      <i class="fas fa-envelope" style="color: blue;"></i>
+                    <% end %>
+                  <% else %>
+                    <%= form_with model: @room, local:true do |f| %>
+                      <%= fields_for @entry do |e| %>
+                        <%= e.hidden_field :user_id, :value => @user.id %>
+                      <% end %>
+                      <%= button_tag type: 'submit', class:"btn btn-default" do %>
+                        <i class="far fa-envelope" style="color: blue;"></i>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
           </div>
           <div class="row offset-md-1 px-3">
             <div class="col-md-6">
