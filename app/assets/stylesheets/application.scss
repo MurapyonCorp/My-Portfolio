@@ -59,8 +59,12 @@
  color: red;
 }
 
-.fas.fa-envelope, .far.fa-envelope {
+.fas.fa-envelope, .far.fa-envelope, .fas.fa-inbox {
  font-size: 40px;
+}
+
+.rooms_header {
+ background-color: $orange-300;
 }
 
 // input#word {
