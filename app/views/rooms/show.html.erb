@@ -6,16 +6,27 @@
 <% end %>
 <% if @messages.present? %>
   <% @messages.each do |message| %>
-    <%= message.content %>
-    <small><%= message.user.name %></small>
+    <%# if message.user == current_user %>
+
+    <%# else %>
+      <div class="row">
+        <div class="d-flex flex-row">
+          <div class="d-flex flex-column">
+            <%= attachment_image_tag message.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "35x35", class:"rounded-circle" %>
+            <p class="text-center"><%= message.user.name %></p>
+          </div>&nbsp;
+          <%= message.content %>
+        </div>
+      </div>
+    <%# end %>
   <% end %>
 <% else %>
   <h4 class="text-center">メッセージはありません</h4>
 <% end %>
-<%= form_with model: @message do |f| %>
-  <%= f.text_field :content, placeholder:"メッセージを入力", class:"form-control" %>
+<%= form_with model: @message, class:"d-flex flex-row pb-2" do |f| %>
+  <%= f.text_area :content, placeholder:"メッセージを入力", class:"form-control" %>
   <%= f.hidden_field :room_id, :value => @room.id %>
-  <%= button_tag type: 'submit', class:"btn btn-default" do %>
+  <%= f.button type: 'submit', class:"btn btn-default" do %>
     <i class="fas fa-paper-plane"></i>
   <% end %>
 <% end %>
