@@ -1,25 +1,39 @@
 <% @entries.each do |entry| %>
   <div class="d-flex flex-row ms-5">
-    <%= attachment_image_tag entry.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "60x60", class:"rounded-circle" %>&nbsp;&nbsp;
-    <h1><%= link_to entry.user.name, user_path(entry.user) %></h1>
+    <%= link_to attachment_image_tag(entry.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "60x60", class:"rounded-circle"), user_path(entry.user) %>&nbsp;&nbsp;
+    <h1><%= entry.user.name %></h1>
   </div>
 <% end %>
 <% if @messages.present? %>
-  <% @messages.each do |message| %>
-    <%# if message.user == current_user %>
-
-    <%# else %>
-      <div class="row">
-        <div class="d-flex flex-row">
-          <div class="d-flex flex-column">
-            <%= attachment_image_tag message.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "35x35", class:"rounded-circle" %>
-            <p class="text-center"><%= message.user.name %></p>
-          </div>&nbsp;
-          <%= message.content %>
-        </div>
-      </div>
-    <%# end %>
-  <% end %>
+  <table class="chat-table">
+    <% @messages.each do |message| %>
+      <% if message.user == current_user %>
+        <tr class="row justify-content-center">
+          <td>
+            <!-- 自分用の吹き出しCSSクラスを適用する -->
+            <div class="says">
+              <p><%= message.content %></p>
+            </div>
+          </td>
+        </tr>
+      <% else %>
+        <tr class="row justify-content-center">
+          <td>
+            <div class="float-right ms-2">
+              <%= message.user.name %><br>
+            </div>
+            <!-- アイコンを右側に表示する -->
+            <div class="d-flex flex-row">
+              <div class="me-3"><%= attachment_image_tag message.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "35x35", class:"rounded-circle" %></div>
+              <div class="other-user-says">
+                <p><%= message.content %></p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
 <% else %>
   <h4 class="text-center">メッセージはありません</h4>
 <% end %>
