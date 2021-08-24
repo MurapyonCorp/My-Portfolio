@@ -31,8 +31,8 @@
                     <% end %>
                   <% else %>
                     <%= form_with model: @room, local:true do |f| %>
-                      <%= fields_for @entry do |e| %>
-                        <%= e.hidden_field :user_id, :value => @user.id %>
+                      <%= fields_for @entry do |entry| %>
+                        <%= entry.hidden_field :user_id, :value => @user.id %>
                       <% end %>
                       <%= button_tag type: 'submit', class:"btn btn-default" do %>
                         <i class="far fa-envelope" style="color: blue;"></i>
