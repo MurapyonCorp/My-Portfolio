@@ -25,6 +25,11 @@
           <p style="font-size: 20px;">フォロワー&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= user.followers.count %></p>
         <% end %>
       </div>
+      <div class="col-md-1 offset-md-2">
+        <%= link_to rooms_path do %>
+          <i class="fas fa-inbox"></i>
+        <% end %>
+      </div>
     </div>
     <div class="row px-3">
       <div class="col-md-6">
