@@ -1,1 +1,21 @@
-<h1>Room show</h1>
+<% @entries.each do |entry| %>
+  <div class="d-flex flex-row ms-5">
+    <%= attachment_image_tag entry.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "60x60", class:"rounded-circle" %>&nbsp;&nbsp;
+    <h1><%= link_to entry.user.name, user_path(entry.user) %></h1>
+  </div>
+<% end %>
+<% if @messages.present? %>
+  <% @messages.each do |message| %>
+    <%= message.content %>
+    <small><%= message.user.name %></small>
+  <% end %>
+<% else %>
+  <h4 class="text-center">メッセージはありません</h4>
+<% end %>
+<%= form_with model: @message do |f| %>
+  <%= f.text_field :content, placeholder:"メッセージを入力", class:"form-control" %>
+  <%= f.hidden_field :room_id, :value => @room.id %>
+  <%= button_tag type: 'submit', class:"btn btn-default" do %>
+    <i class="fas fa-paper-plane"></i>
+  <% end %>
+<% end %>
