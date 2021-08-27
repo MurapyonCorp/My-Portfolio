@@ -11,15 +11,21 @@
         <tr class="row justify-content-center">
           <td>
             <!-- 自分用の吹き出しCSSクラスを適用する -->
+            <%= link_to message_path(message), class:"btn-sm btn-danger float-end ms-3", method: :delete do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
             <div class="says">
               <p><%= message.content %></p>
             </div>
+          </td>
+          <td class="d-flex justify-content-end">
+            <%= message.created_at.strftime("%m/%d %H:%M") %>
           </td>
         </tr>
       <% else %>
         <tr class="row justify-content-center">
           <td>
-            <div class="float-right ms-2">
+            <div class="ms-2">
               <%= message.user.name %><br>
             </div>
             <!-- アイコンを右側に表示する -->
@@ -29,6 +35,9 @@
                 <p><%= message.content %></p>
               </div>
             </div>
+          </td>
+          <td class="d-flex justify-content-start">
+            <%= message.created_at.strftime("%m/%d %H:%M") %>
           </td>
         </tr>
       <% end %>
