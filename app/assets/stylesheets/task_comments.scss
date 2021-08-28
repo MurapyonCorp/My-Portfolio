@@ -1,3 +1,49 @@
 // Place all the styles related to the TaskComments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// 自分のコメントの吹き出し
+.says-task {
+  float: right;
+  position: relative;
+  max-width: calc(50% - 56px);
+  padding: 16px;
+  background: #d3abff;
+  border-radius: 15px;
+  line-height: 1.5;
+  word-break: break-all;
+}
+.says-task:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  right: -19px;
+  border: 8px solid transparent;
+  border-right: 18px solid #d3abff;
+  -webkit-transform: rotate(145deg);
+  transform: rotate(145deg);
+}
+
+// 自分以外のコメント// 自分以外のコメントの吹き出し
+.other-user-says-task {
+  float: left;
+  position: relative;
+  max-width: calc(50% - 56px);
+  padding: 16px;
+  background: #f2ff89;
+  border-radius: 15px;
+  line-height: 1.5;
+  word-break: break-all;
+}
+.other-user-says-task:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  left: -19px;
+  border: 8px solid transparent;
+  border-right: 18px solid #f2ff89;
+  -webkit-transform: rotate(35deg);
+  transform: rotate(35deg);
+}
