@@ -3,21 +3,24 @@
   <% if event_comment.user == current_user %>
     <%= render "event_comments/event_comment", event_comment: event_comment %>
   <% else %>
-    <div class="row">
-      <div class="col-1 px-0">
-        <div class="row" style="width: 1%;">
-          <div class="col-1">
-            <%= attachment_image_tag event_comment.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
+    <table class="chat-table">
+      <tr class="row justify-content-center">
+        <td>
+          <!-- アイコンを右側に表示する -->
+          <div class="d-flex flex-row">
+            <div class="d-flex flex-column me-3">
+              <%= attachment_image_tag event_comment.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
+              <strong><h6><%= event_comment.user.name %></h6></strong>
+            </div>
+            <div class="other-user-says-event">
+              <p class="chat-content"><%= event_comment.comment %></p>
+            </div>
           </div>
-        </div>
-        <div class="row px-2">
-          <%= event_comment.user.name %>
-        </div>
-        <div class="row px-2">
+        </td>
+        <td class="d-flex justify-content-start">
           <%= event_comment.created_at.strftime("%m/%d %H:%M") %>
-        </div>
-      </div>
-      <%= event_comment.comment %>
-    </div>
+        </td>
+      </tr>
+    </table>
   <% end %>
 <% end %>
