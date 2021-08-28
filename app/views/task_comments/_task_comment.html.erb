@@ -1,24 +1,16 @@
-<div class="d-flex flex-row-reverse">
-  <div class="col-1">
-    <div class="d-flex flex-row-reverse col-9">
-      <div class="col-1 offset-2">
-        <%= attachment_image_tag task_comment.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
+<table class="chat-table">
+  <tr class="row justify-content-center">
+    <td>
+      <!-- 自分用の吹き出しCSSクラスを適用する -->
+      <%= link_to task_task_comment_path(@task.id, task_comment), class:"btn-sm btn-danger float-end ms-3", method: :delete, remote:true do %>
+        <i class="fas fa-trash-alt"></i>
+      <% end %>
+      <div class="says-task">
+        <p class="chat-content"><%= task_comment.comment %></p>
       </div>
-      <div class="col-1">
-        <!--もしコメントしたユーザーとログインしているユーザーが一致している場合に削除できるようにする-->
-        <% if task_comment.user == current_user %>
-          <%= link_to task_task_comment_path(@task.id, task_comment), method: :delete, remote:true do %>
-            <i class="fas fa-trash"></i>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="d-flex flex-row-reverse">
-      <%= task_comment.user.name %>
-    </div>
-    <div class="d-flex flex-row-reverse">
+    </td>
+    <td class="d-flex justify-content-end">
       <%= task_comment.created_at.strftime("%m/%d %H:%M") %>
-    </div>
-  </div>
-  <%= task_comment.comment %>
-</div>
+    </td>
+  </tr>
+</table>
