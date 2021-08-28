@@ -37,6 +37,9 @@
   font-size: 20px;
  }
 
+ .btn.btn-logout.btn-sm {
+  background-color: $pink-400;
+ }
 
 #map {
   width: 100%;
@@ -122,6 +125,10 @@
   transform: rotate(35deg);
 }
 
+.chat-content {
+ margin: 0;
+}
+
 // input#word {
 //  background-color: #66ff33;
 // }
@@ -149,3 +156,5 @@
 
 @import 'events';
 @import 'tasks';
+@import 'event_comments';
+@import 'task_comments';
