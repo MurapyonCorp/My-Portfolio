@@ -1,0 +1,36 @@
+<% messages.each do |message| %>
+  <% if message.user == current_user %>
+    <tr class="row justify-content-center">
+      <td>
+        <!-- 自分用の吹き出しCSSクラスを適用する -->
+        <%= link_to message_path(message), class:"btn-sm btn-danger float-end ms-3", method: :delete, remote:true do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+        <div class="says">
+          <p class="chat-content"><%= message.content %></p>
+        </div>
+      </td>
+      <td class="d-flex justify-content-end">
+        <%= message.created_at.strftime("%m/%d %H:%M") %>
+      </td>
+    </tr>
+  <% else %>
+    <tr class="row justify-content-center">
+      <td>
+        <!-- アイコンを右側に表示する -->
+        <div class="d-flex flex-row">
+          <div class="d-flex flex-column me-3">
+            <%= attachment_image_tag message.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "35x35", class:"rounded-circle" %>
+            <strong><h6><%= message.user.name %></h6></strong>
+          </div>
+          <div class="other-user-says">
+            <p class="chat-content"><%= message.content %></p>
+          </div>
+        </div>
+      </td>
+      <td class="d-flex justify-content-start">
+        <%= message.created_at.strftime("%m/%d %H:%M") %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>
