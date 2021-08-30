@@ -14,7 +14,8 @@ class MessagesController < ApplicationController
   def destroy
     message = Message.find(params[:id])
     message.destroy
-    @messages = Message.includes(:user)
+    @room = Room.find(params[:room_id])
+    @messages = Message.includes(:user).where(room_id: @room.id)
   end
 
   private
