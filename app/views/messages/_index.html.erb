@@ -3,7 +3,7 @@
     <tr class="row justify-content-center">
       <td>
         <!-- 自分用の吹き出しCSSクラスを適用する -->
-        <%= link_to message_path(message), class:"btn-sm btn-danger float-end ms-3", method: :delete, remote:true do %>
+        <%= link_to message_path(message, room_id: @room.id), class:"btn-sm btn-danger float-end ms-3", method: :delete, remote:true do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
         <div class="says">
