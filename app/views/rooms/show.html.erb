@@ -4,15 +4,15 @@
     <h1><%= entry.user.name %></h1>
   </div>
 <% end %>
-<% if @messages.present? %>
+<%# if @messages.present? %>
   <table class="chat-table">
     <tbody id="index">
       <%= render "messages/index", messages: @messages %>
     </tbody>
   </table>
-<% else %>
-  <h4 class="text-center">メッセージはありません</h4>
-<% end %>
+<%# else %>
+  <!--<h4 class="text-center">メッセージはありません</h4>-->
+<%# end %>
 <%= form_with model: @message, class:"d-flex flex-row pb-2", remote:true do |f| %>
   <%= f.text_area :content, placeholder:"メッセージを入力", class:"form-control" %>
   <%= f.hidden_field :room_id, :value => @room.id %>
