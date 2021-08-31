@@ -21,6 +21,9 @@ module NotificationsHelper
     when "task_comment" then
       @task_comment = TaskComment.find_by(id: @visiter_comment)
       tag.a(@visiter.name, href: user_path(@visiter), style: "font-weight: bold;") + "が" + tag.a('あなたの投稿', href: task_path(notification.task_id, checked: true), style: "font-weight: bold;") + "にコメントしました"
+    when "DM" then
+      @message = Message.find_by(id: notification.message_id)
+      tag.a(@visiter.name, href: user_path(@visiter), style: "font-weight: bold;") + "があなたに" + tag.a('メッセージ', href: room_path(notification.room_id, checked: true), style: "font-weight: bold;") + "を送りました"
     end
   end
 
