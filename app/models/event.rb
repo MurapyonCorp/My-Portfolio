@@ -38,12 +38,24 @@ class Event < ApplicationRecord
   # 通知モデルとのアソシエーション関係
   has_many :notifications, dependent: :destroy
   def create_notification_by(current_user)
-    notification = current_user.active_notifications.new(
+    temp = Notification.where(["visiter_id = ? and visited_id = ? and event_id = ? and action = ? ", current_user.id, user_id, id, 'favorite'])
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        event_id: id,
+        visited_id: user_id,
+        action: "favorite"
+      )
+      notification.save if notification.valid?
+    end
+  end
+
+  def destroy_notification_by(current_user)
+    notification = current_user.active_notifications.find_by(
       event_id: id,
       visited_id: user_id,
       action: "favorite"
     )
-    notification.save if notification.valid?
+    notification.destroy
   end
 
   def create_notification_event_comment!(current_user, event_comment_id)
