@@ -49,13 +49,16 @@
                     </div>
                   </li>
                   <li class="btn-group" role="group" aria-label="Third group">
-                    <% if unchecked_notifications.any? %>
-                      <i class="fa fa-circle" style="color: #00fa9a; position: absolute; z-index: 1;"></i>
-                    <% end %>
                     <li class="me-5">
                       <div class="dropdown">
-                        <%= link_to 'notifications', class:"fs-2", 'role': :button, 'id': :dropdownMenuLink, 'data-bs-toggle': :dropdown, 'aria-expanded': :false, :style => "color: black;" do %>
-                          <i class="fas fa-bell" style="color: black;"></i>
+                        <%= link_to 'notifications', class:"fs-2", 'role': :button, 'id': :dropdownMenuLink, 'data-bs-toggle': :dropdown, 'aria-expanded': :false do %>
+                          <i class="fas fa-bell" style="color: black;">
+                            <% if unchecked_notifications.any? %>
+                              <span class="position-absolute translate-middle badge rounded-pill text-black" style="font-size: 12px; background-color: #00fa9a;">
+                                <%= @notifications.count %>
+                              </span>
+                            <% end %>
+                          </i>
                         <% end %>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 500px">
                           <h5 class="text-center">通知</h5>
