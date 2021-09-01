@@ -1,81 +1,79 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table table-success table-hover table-inverse text-center">
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>タスク</th>
-            <th>詳細</th>
-            <th>実施状況</th>
-            <th></th>
-            <th>開始</th>
-            <th>終了</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <%= link_to user_path(@user) do %>
-                <div class="d-flex flex-column">
-                  <div class="d-flex justify-content-center">
-                    <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %>
-                  </div>
-                  <%= @user.name %>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-success table-hover table-inverse text-center">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>タスク</th>
+          <th>詳細</th>
+          <th>実施状況</th>
+          <th></th>
+          <th>開始</th>
+          <th>終了</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= link_to user_path(@user) do %>
+              <div class="d-flex flex-column">
+                <div class="d-flex justify-content-center">
+                  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %>
                 </div>
+                <%= @user.name %>
+              </div>
+            <% end %>
+          </td>
+          <td><%= @task.title %></td>
+          <td>
+            <!--投稿者にだけタスクの編集権限を付与-->
+            <% if @user == current_user %>
+              <%= @task.body %>
+              <%= link_to edit_task_path(@task) do %>
+                <i class="fas fa-edit"></i>
               <% end %>
-            </td>
-            <td><%= @task.title %></td>
-            <td>
-              <!--投稿者にだけタスクの編集権限を付与-->
-              <% if @user == current_user %>
-                <%= @task.body %>
-                <%= link_to edit_task_path(@task) do %>
-                  <i class="fas fa-edit"></i>
-                <% end %>
-              <% else %>
-                <%= @task.body %>
-              <% end %>
-            </td>
-            <td class="check_box">
-              <%= render 'checks/check_box', task: @task, user: @user %>
-            </td>
-            <td>
-              <% if current_user.own?(@task) %>
-                <i class="far fa-heart" style="font-size: 20px;"><%= @task.likes.count %></i>
-                <div id="count_area">
-                  <%= render "task_comments/comment_count", task_comments: @task_comments %>
-                </div>
-              <% else %>
-                <div id="like_buttons_<%= @task.id %>">
-                  <%= render "likes/like_button", task: @task %>
-                </div>
-                <div id="count_area">
-                  <%= render "task_comments/comment_count", task_comments: @task_comments %>
-                </div>
-              <% end %>
-              <strong>
-                <%= link_to "いいねしたユーザー", task_likers_path(task_id: @task.id), :style => "color: black;" %>
-              </strong>
-            </td>
-            <td><%= @task.start_date.strftime("%Y,%m/%d %H:%M") %></td>
-            <td><%= @task.end_date.strftime("%Y,%m/%d %H:%M") %></td>
-          </tr>
-        </tbody>
-      </table>
+            <% else %>
+              <%= @task.body %>
+            <% end %>
+          </td>
+          <td class="check_box">
+            <%= render 'checks/check_box', task: @task, user: @user %>
+          </td>
+          <td>
+            <% if current_user.own?(@task) %>
+              <i class="far fa-heart" style="font-size: 20px;"><%= @task.likes.count %></i>
+              <div id="count_area">
+                <%= render "task_comments/comment_count", task_comments: @task_comments %>
+              </div>
+            <% else %>
+              <div id="like_buttons_<%= @task.id %>">
+                <%= render "likes/like_button", task: @task %>
+              </div>
+              <div id="count_area">
+                <%= render "task_comments/comment_count", task_comments: @task_comments %>
+              </div>
+            <% end %>
+            <strong>
+              <%= link_to "いいねしたユーザー", task_likers_path(task_id: @task.id), :style => "color: black;" %>
+            </strong>
+          </td>
+          <td><%= @task.start_date.strftime("%Y,%m/%d %H:%M") %></td>
+          <td><%= @task.end_date.strftime("%Y,%m/%d %H:%M") %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!--コメント一覧を表示する-->
+<div id="comment_area">
+  <%= render "task_comments/index", task_comments: @task_comments %>
+</div>
+<!--コメント投稿フォームを表示する-->
+<div class="row">
+  <%= form_with(model:[@task, @task_comment], remote: true) do |f| %>
+    <%= f.text_area :comment, rows:'5',placeholder: "コメント投稿欄", class:"form-control" %>
+    <div class="col-12 d-flex justify-content-end my-2">
+      <%= f.submit "送信", class:"btn btn-outline-warning" %>
     </div>
-  </div>
-  <!--コメント一覧を表示する-->
-  <div id="comment_area">
-    <%= render "task_comments/index", task_comments: @task_comments %>
-  </div>
-  <!--コメント投稿フォームを表示する-->
-  <div class="row">
-    <%= form_with(model:[@task, @task_comment], remote: true) do |f| %>
-      <%= f.text_area :comment, rows:'5',placeholder: "コメント投稿欄", class:"form-control" %>
-      <div class="col-12 d-flex justify-content-end my-2">
-        <%= f.submit "送信", class:"btn btn-outline-warning" %>
-      </div>
-    <% end %>
-  </div>
+  <% end %>
 </div>
