@@ -49,6 +49,7 @@ class Task < ApplicationRecord
     end
   end
 
+  # いいねを外した時の通知
   def destroy_notification_by(current_user)
     notification = current_user.active_notifications.find_by(
       task_id: id,
