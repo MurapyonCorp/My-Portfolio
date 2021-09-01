@@ -70,6 +70,15 @@ class User < ApplicationRecord
     end
   end
 
+  # アンフォロー時の通知
+  def destroy_notification_follow!(current_user, visited_id)
+    notification = current_user.active_notifications.find_by(
+      visited_id: visited_id,
+      action: 'follow'
+    )
+    notification.destroy
+  end
+
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
 end
