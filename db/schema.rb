@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 2021_08_20_122322) do
     t.integer "task_id"
     t.integer "event_comment_id"
     t.integer "task_comment_id"
+    t.integer "room_id"
+    t.integer "message_id"
     t.string "action"
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", null: false
