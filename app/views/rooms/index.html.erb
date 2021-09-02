@@ -8,10 +8,13 @@
   </thead>
   <tbody>
     <% @anotherEntries.each do |entry| %>
-      <tr>
-        <td><%= attachment_image_tag entry.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
-        <td><%= link_to entry.user.name, room_path(entry.room.id) %></td>
-      </tr>
+      <% if (current_user.following?(entry.user)) && (entry.user.following?(current_user)) %>
+        <tr>
+          <td><%= attachment_image_tag entry.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
+          <td><%= link_to entry.user.name, room_path(entry.room) %></td>
+        </tr>
+      <% else %>
+      <% end %>
     <% end %>
   </tbody>
 </table>
