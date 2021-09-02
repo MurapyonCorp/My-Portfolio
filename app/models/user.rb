@@ -27,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def following?(user)
-    followings.include?(user)
+    followings.joins(:followings).include?(user)
   end
 
   # イベントモデルとのアソシエーションの関係
