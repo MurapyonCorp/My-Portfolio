@@ -70,7 +70,7 @@
                           <hr>
                           <% if @notifications.exists? %>
                             <li class="users-index">
-                              <%= render @notifications %>
+                              <%= render @notifications.includes(:event, :task) %>
                             </li>
                           <% else %>
                             <li>通知はありません</li>
