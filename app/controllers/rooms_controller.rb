@@ -28,8 +28,8 @@ class RoomsController < ApplicationController
       @message = Message.new
       @entries = @room.entries.includes(:user).where.not(user_id: current_user.id)
       if params[:checked].present?
-      notification = @room.notifications.find_by!(visited_id: current_user.id)
-      notification.update!(checked: true)
+      notifications = @room.notifications.where!(visited_id: current_user.id)
+      notifications.update(checked: true)
       end
     else
       redirect_back(fallback_location: users_path)
