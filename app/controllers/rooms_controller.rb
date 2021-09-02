@@ -23,16 +23,22 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
-    if Entry.where(user_id: current_user.id, room_id: @room.id).present?
-      @messages = @room.messages.includes(:user)
-      @message = Message.new
-      @entries = @room.entries.includes(:user).where.not(user_id: current_user.id)
-      if params[:checked].present?
-      notifications = @room.notifications.where!(visited_id: current_user.id)
-      notifications.update(checked: true)
+    opponent_users = Entry.where.not(user_id: current_user.id).where(room_id: @room.id)
+    @opponent_user = opponent_users.first.user
+    if (current_user.following?(@opponent_user)) && (@opponent_user.following?(current_user))
+      if Entry.where(user_id: current_user.id, room_id: @room.id).present?
+        @messages = @room.messages.includes(:user)
+        @message = Message.new
+        @entries = @room.entries.includes(:user).where.not(user_id: current_user.id)
+        if params[:checked].present?
+        notifications = @room.notifications.where!(visited_id: current_user.id)
+        notifications.update(checked: true)
+        end
+      else
+        redirect_back(fallback_location: users_path)
       end
     else
-      redirect_back(fallback_location: users_path)
+      redirect_to user_path(@opponent_user)
     end
   end
 
