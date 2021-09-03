@@ -72,7 +72,8 @@
 <div class="row">
   <%= form_with(model:[@task, @task_comment], remote: true) do |f| %>
     <%= f.text_area :comment, rows:'5',placeholder: "コメント投稿欄", class:"form-control" %>
-    <div class="col-12 d-flex justify-content-end my-2">
+    <div class="d-flex justify-content-between my-2">
+      <%= render 'layouts/top_back' %>
       <%= f.submit "送信", class:"btn btn-outline-warning" %>
     </div>
   <% end %>
