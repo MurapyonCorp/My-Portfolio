@@ -9,7 +9,7 @@
           <!-- アイコンを右側に表示する -->
           <div class="d-flex flex-row">
             <div class="d-flex flex-column me-3">
-              <%= attachment_image_tag task_comment.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
+              <%= link_to (attachment_image_tag task_comment.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "40x40"), user_path(task_comment.user) %>
               <strong><h6><%= task_comment.user.name %></h6></strong>
             </div>
             <div class="other-user-says-task">
