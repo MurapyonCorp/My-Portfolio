@@ -20,7 +20,7 @@
         <!-- アイコンを右側に表示する -->
         <div class="d-flex flex-row">
           <div class="d-flex flex-column me-3">
-            <%= attachment_image_tag message.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "35x35", class:"rounded-circle" %>
+            <%= link_to (attachment_image_tag message.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "35x35", class:"rounded-circle"), user_path(message.user) %>
             <strong><h6><%= message.user.name %></h6></strong>
           </div>
           <div class="other-user-says">
