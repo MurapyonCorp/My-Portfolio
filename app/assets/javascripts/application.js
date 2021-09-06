@@ -171,3 +171,12 @@ function google_cal_load(){
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+
+$(function() {
+  $('#top_button a').on('click',function(event) {
+    $('body, html').animate({
+      scrollTop:0
+    }, 50);
+    event.preventDefault();
+  });
+});

@@ -1,0 +1,21 @@
+<h1 class="text-center">Rooms</h1>
+<table class="table table-hover table-inverse text-center">
+  <thead>
+    <tr class="rooms_header">
+      <th></th>
+      <th>ユーザー名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @anotherEntries.each do |entry| %>
+      <% if (current_user.following?(entry.user)) && (entry.user.following?(current_user)) %>
+        <tr>
+          <td><%= attachment_image_tag entry.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
+          <td><%= link_to entry.user.name, room_path(entry.room) %></td>
+        </tr>
+      <% else %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @anotherEntries %>

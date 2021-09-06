@@ -16,6 +16,12 @@ class FavoritesController < ApplicationController
   def destroy
     @event = Event.find(params[:event_id])
     favorite = current_user.favorites.find_by(event_id: @event.id)
+    # 通知の削除
+    @event.destroy_notification_by(current_user)
+    respond_to do |format|
+      format.html { redirect_to request.referrer }
+      format.js
+    end
     favorite.destroy
   end
 end

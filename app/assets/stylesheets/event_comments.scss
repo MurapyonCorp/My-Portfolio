@@ -1,3 +1,49 @@
 // Place all the styles related to the EventComments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// 自分のコメントの吹き出し
+.says-event {
+  float: right;
+  position: relative;
+  max-width: calc(50% - 56px);
+  padding: 16px;
+  background: #a7ff46;
+  border-radius: 15px;
+  line-height: 1.5;
+  word-break: break-all;
+}
+.says-event:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  right: -19px;
+  border: 8px solid transparent;
+  border-right: 18px solid #a7ff46;
+  -webkit-transform: rotate(145deg);
+  transform: rotate(145deg);
+}
+
+// 自分以外のコメント// 自分以外のコメントの吹き出し
+.other-user-says-event {
+  float: left;
+  position: relative;
+  max-width: calc(50% - 56px);
+  padding: 16px;
+  background: #ffb0ea;
+  border-radius: 15px;
+  line-height: 1.5;
+  word-break: break-all;
+}
+.other-user-says-event:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  left: -19px;
+  border: 8px solid transparent;
+  border-right: 18px solid #ffb0ea;
+  -webkit-transform: rotate(35deg);
+  transform: rotate(35deg);
+}

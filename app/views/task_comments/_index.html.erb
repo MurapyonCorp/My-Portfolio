@@ -3,21 +3,24 @@
   <% if task_comment.user == current_user %>
     <%= render "task_comments/task_comment", task_comment: task_comment %>
   <% else %>
-    <div class="row">
-      <div class="col-1 px-0">
-        <div class="row" style="width: 1%;">
-          <div class="col-1">
-            <%= attachment_image_tag task_comment.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
+    <table class="chat-table">
+      <tr class="row justify-content-center">
+        <td>
+          <!-- アイコンを右側に表示する -->
+          <div class="d-flex flex-row">
+            <div class="d-flex flex-column me-3">
+              <%= link_to (attachment_image_tag task_comment.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "40x40"), user_path(task_comment.user) %>
+              <strong><h6><%= task_comment.user.name %></h6></strong>
+            </div>
+            <div class="other-user-says-task">
+              <p class="chat-content"><%= task_comment.comment %></p>
+            </div>
           </div>
-        </div>
-        <div class="row px-2">
-          <%= task_comment.user.name %>
-        </div>
-        <div class="row px-2">
+        </td>
+        <td class="d-flex justify-content-start">
           <%= task_comment.created_at.strftime("%m/%d %H:%M") %>
-        </div>
-      </div>
-      <%= task_comment.comment %>
-    </div>
+        </td>
+      </tr>
+    </table>
   <% end %>
 <% end %>

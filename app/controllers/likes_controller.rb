@@ -16,6 +16,12 @@ class LikesController < ApplicationController
   def destroy
     @task = Task.find(params[:task_id])
     like = current_user.likes.find_by(task_id: @task.id)
+    # 通知の削除
+    @task.destroy_notification_by(current_user)
+    respond_to do |format|
+      format.html { redirect_to request.referer }
+      format.js
+    end
     like.destroy
   end
 end

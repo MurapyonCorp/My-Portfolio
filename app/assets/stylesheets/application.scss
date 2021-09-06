@@ -37,6 +37,9 @@
   font-size: 20px;
  }
 
+ .btn.btn-logout.btn-sm {
+  background-color: $pink-400;
+ }
 
 #map {
   width: 100%;
@@ -57,6 +60,32 @@
 
 #error_explanation {
  color: red;
+}
+
+.fas.fa-envelope, .far.fa-envelope, .fas.fa-inbox {
+ font-size: 40px;
+}
+
+.rooms_header {
+ background-color: $orange-300;
+}
+
+.fas.fa-paper-plane {
+ font-size: 20px;
+}
+
+.chat-table {
+ width: 100%;
+ margin-bottom: 10px;
+}
+
+.chat-content {
+ margin: 0;
+}
+
+#top_button {
+ font-size: 29px;
+ height: 38px;
 }
 
 // input#word {
@@ -86,3 +115,6 @@
 
 @import 'events';
 @import 'tasks';
+@import 'event_comments';
+@import 'task_comments';
+@import 'rooms';

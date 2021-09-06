@@ -9,6 +9,8 @@ class RelationshipsController < ApplicationController
 
   def destroy
     current_user.unfollow(params[:user_id])
+    # 通知の削除
+    @user.destroy_notification_follow!(current_user, params[:user_id])
     redirect_to request.referer
   end
 

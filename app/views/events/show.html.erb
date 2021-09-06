@@ -1,85 +1,84 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table table-secondary table-hover table-inverse text-center">
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>タイトル</th>
-            <th class="text-break">概要</th>
-            <th>場所</th>
-            <th></th>
-            <th>開始</th>
-            <th>終了</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <%= link_to user_path(@user) do %>
-                <div class="d-flex flex-column">
-                  <div class="d-flex justify-content-center">
-                    <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %>
-                  </div>
-                  <%= @user.name %>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-secondary table-hover table-inverse text-center">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>タイトル</th>
+          <th class="text-break">概要</th>
+          <th>場所</th>
+          <th></th>
+          <th>開始</th>
+          <th>終了</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= link_to user_path(@user) do %>
+              <div class="d-flex flex-column">
+                <div class="d-flex justify-content-center">
+                  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %>
                 </div>
+                <%= @user.name %>
+              </div>
+            <% end %>
+          </td>
+          <td><%= @event.title %></td>
+          <td>
+            <!--投稿者にだけイベントの編集権限を付与-->
+            <% if @user == current_user %>
+              <%= @event.body %>
+              <%= link_to edit_event_path(@event) do %>
+                <i class="fas fa-edit"></i>
               <% end %>
-            </td>
-            <td><%= @event.title %></td>
-            <td>
-              <!--投稿者にだけイベントの編集権限を付与-->
-              <% if @user == current_user %>
-                <%= @event.body %>
-                <%= link_to edit_event_path(@event) do %>
-                  <i class="fas fa-edit"></i>
-                <% end %>
-              <% else %>
-                <%= @event.body %>
-              <% end %>
-            </td>
-            <td>
-              <%= @event.location %>
-              <%= link_to event_maps_path(event_id: @event.id) do %>
-                <i class="fas fa-map-marker-alt"></i>
-              <% end %>
-            </td>
-            <!--自分の投稿か否かをここから判断-->
-            <td>
-              <% if current_user.own?(@event) %>
-                <i class="far fa-heart" style="font-size: 20px;"><%= @event.favorites.count %></i>
-                <div id="count_area">
-                  <%= render "event_comments/comment_count", event_comments: @event_comments %>
-                </div>
-              <% else %>
-                <div id="favorite_buttons_<%= @event.id %>">
-                  <%= render "favorites/favorite_button", event: @event %>
-                </div>
-                <div id="count_area">
-                  <%= render "event_comments/comment_count", event_comments: @event_comments %>
-                </div>
-              <% end %>
-              <strong>
-                <%= link_to "いいねしたユーザー", event_favoriters_path(event_id: @event.id), :style => "color: black;" %>
-              </strong>
-            </td>
-            <td><%= @event.start_date.strftime("%Y/%m/%d %H:%M") %></td>
-            <td><%= @event.end_date.strftime("%Y/%m/%d %H:%M") %></td>
-          </tr>
-        </tbody>
-      </table>
+            <% else %>
+              <%= @event.body %>
+            <% end %>
+          </td>
+          <td>
+            <%= @event.location %>
+            <%= link_to event_maps_path(event_id: @event.id) do %>
+              <i class="fas fa-map-marker-alt"></i>
+            <% end %>
+          </td>
+          <!--自分の投稿か否かをここから判断-->
+          <td>
+            <% if current_user.own?(@event) %>
+              <i class="far fa-heart" style="font-size: 20px;"><%= @event.favorites.count %></i>
+              <div id="count_area">
+                <%= render "event_comments/comment_count", event_comments: @event_comments %>
+              </div>
+            <% else %>
+              <div id="favorite_buttons_<%= @event.id %>">
+                <%= render "favorites/favorite_button", event: @event %>
+              </div>
+              <div id="count_area">
+                <%= render "event_comments/comment_count", event_comments: @event_comments %>
+              </div>
+            <% end %>
+            <strong>
+              <%= link_to "いいねしたユーザー", event_favoriters_path(event_id: @event.id), :style => "color: black;" %>
+            </strong>
+          </td>
+          <td><%= @event.start_date.strftime("%Y/%m/%d %H:%M") %></td>
+          <td><%= @event.end_date.strftime("%Y/%m/%d %H:%M") %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!--コメント一覧を表示する-->
+<div id="comment_area">
+  <%= render "event_comments/index", event_comments: @event_comments %>
+</div>
+<!--コメント投稿フォームを表示する-->
+<div class="row">
+  <%= form_with(model:[@event, @event_comment], remote: true) do |f| %>
+    <%= f.text_area :comment, rows:'5',placeholder: "コメント投稿欄", class:"form-control" %>
+    <div class="d-flex justify-content-between my-2">
+      <%= render 'layouts/top_back' %>
+      <%= f.submit "送信", class:"btn btn-outline-info" %>
     </div>
-  </div>
-  <!--コメント一覧を表示する-->
-  <div id="comment_area">
-    <%= render "event_comments/index", event_comments: @event_comments %>
-  </div>
-  <!--コメント投稿フォームを表示する-->
-  <div class="row">
-    <%= form_with(model:[@event, @event_comment], remote: true) do |f| %>
-      <%= f.text_area :comment, rows:'5',placeholder: "コメント投稿欄", class:"form-control" %>
-      <div class="col-12 d-flex justify-content-end my-2">
-        <%= f.submit "送信", class:"btn btn-outline-info" %>
-      </div>
-    <% end %>
-  </div>
+  <% end %>
 </div>

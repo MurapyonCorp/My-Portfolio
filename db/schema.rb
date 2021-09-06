@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_14_055748) do
+ActiveRecord::Schema.define(version: 2021_08_20_122322) do
+
+  create_table "entries", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "event_comments", force: :cascade do |t|
     t.text "comment"
@@ -45,6 +52,14 @@ ActiveRecord::Schema.define(version: 2021_07_14_055748) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "room_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.integer "visiter_id"
     t.integer "visited_id"
@@ -52,6 +67,8 @@ ActiveRecord::Schema.define(version: 2021_07_14_055748) do
     t.integer "task_id"
     t.integer "event_comment_id"
     t.integer "task_comment_id"
+    t.integer "room_id"
+    t.integer "message_id"
     t.string "action"
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", null: false
@@ -61,6 +78,12 @@ ActiveRecord::Schema.define(version: 2021_07_14_055748) do
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

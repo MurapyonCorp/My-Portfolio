@@ -23,8 +23,8 @@ class EventsController < ApplicationController
     @event_comments = EventComment.includes(:user).where(event_id: @event.id)
     # 通知から遷移したときの専用viewの表示
     if params[:checked].present?
-      notification = @event.notifications.find_by!(visited_id: current_user.id) #@event.notifications.find_by!で@eventが持っている通知を持ってくる。さらにvisited_idが自分のuser_idを持っているモノを探す。
-      notification.update!(checked: true)
+      notifications = @event.notifications.where!(visited_id: current_user.id) #@event.notifications.find_by!で@eventが持っている通知を持ってくる。さらにvisited_idが自分のuser_idを持っているモノを探す。
+      notifications.update(checked: true)
     end
     # コメント投稿するための空のメソッドを呼び出す
     @event_comment = EventComment.new

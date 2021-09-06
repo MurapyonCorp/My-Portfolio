@@ -1,14 +1,20 @@
 <div class="dropdown">
-  <a class="fs-3" href="notifications" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
-    <i class="fas fa-bell" style="color: black;"></i>
-  </a>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 250px">
+  <%= link_to 'notifications', class:"fs-2", 'role': :button, 'id': :dropdownMenuLink, 'data-bs-toggle': :dropdown, 'aria-expanded': :false do %>
+    <i class="fas fa-bell" style="color: black;">
+      <% if unchecked_notifications.any? %>
+        <span class="position-absolute translate-middle badge rounded-pill text-black" style="font-size: 12px; background-color: #00fa9a;">
+          <%= @notifications.count %>
+        </span>
+      <% end %>
+    </i>
+  <% end %>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 500px">
     <h5 class="text-center">通知</h5>
-    <%= link_to notifications_destroy_all_path, method: :delete do %>
-      <i class="fas fa-trash" style="color: black;"></i>
-      <h7 style="color: black;">全削除</h7>
+    <%= link_to destroy_all_notifications_path, method: :delete do %>
+      <i class="fas fa-trash" style="color: red;"></i>
+      <h7 style="color: red;"><strong>全削除</strong></h7>
     <% end %>
-    <%= paginate @notifications %>
+    <%#= paginate @notifications %>
     <hr>
     <% if @notifications.exists? %>
       <li class="users-index">

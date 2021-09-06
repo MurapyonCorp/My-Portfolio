@@ -38,12 +38,25 @@ class Task < ApplicationRecord
   # 通知モデルとのアソシエーション関係
   has_many :notifications, dependent: :destroy
   def create_notification_by(current_user)
-    notification = current_user.active_notifications.new(
+    temp = Notification.where(["visiter_id = ? and visited_id = ? and event_id = ? and action = ? ", current_user.id, user_id, id, 'favorite'])
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        task_id: id,
+        visited_id: user_id,
+        action: "like"
+      )
+      notification.save if notification.valid?
+    end
+  end
+
+  # いいねを外した時の通知
+  def destroy_notification_by(current_user)
+    notification = current_user.active_notifications.find_by(
       task_id: id,
       visited_id: user_id,
       action: "like"
     )
-    notification.save if notification.valid?
+    notification.destroy
   end
 
   def create_notification_task_comment!(current_user, task_comment_id)

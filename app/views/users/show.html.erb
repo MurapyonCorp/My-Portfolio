@@ -1,100 +1,120 @@
-<main>
-  <p id="notice"></p>
-  <div class="container">
-    <!--ユーザー詳細ページにアクセスしたユーザーが現在ログインしているユーザーならばマイページを表示させる-->
-    <% if @user == current_user %>
-      <%= render '/layouts/mypage', user: @user, events: @events, tasks: @tasks %>
-    <% else %>
-      <div class="row">
-        <h1>User details</h1>
+<p id="notice"></p>
+<div class="container">
+  <!--ユーザー詳細ページにアクセスしたユーザーが現在ログインしているユーザーならばマイページを表示させる-->
+  <% if @user == current_user %>
+    <%= render '/layouts/mypage', user: @user, events: @events, tasks: @tasks %>
+  <% else %>
+    <div class="row">
+      <h1>User details</h1>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mt-3">
+        <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "200x200" %>
       </div>
-      <div class="row">
-        <div class="col-md-4 mt-3">
-          <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "200x200" %>
-        </div>
-        <div class="col-md-7 offset-md-1">
-          <!--ユーザー情報を表示させる-->
-          <div class="row offset-md-1 mt-3 px-3">
-              <%= render "relationships/follow_count", user: @user %>
-            <!--フォローボタンを追加-->
-            <div class="col-md-1 offset-md-1">
-              <%= render '/layouts/follow_button', user: @user %>
-            </div>
+      <div class="col-md-7 offset-md-1">
+        <!--ユーザー情報を表示させる-->
+        <div class="row offset-md-1 mt-3 px-3">
+            <%= render "relationships/follow_count", user: @user %>
+          <!--フォローボタンを追加-->
+          <div class="col-md-1 offset-md-1">
+            <%= render '/layouts/follow_button', user: @user %>
           </div>
-          <div class="row offset-md-1 px-3">
-            <div class="col-md-6">
-              <p style="font-size: 20px;">ユーザー名</p>
-            </div>
-            <div class="col-md-6">
-              <p style="font-size: 20px;"><%= @user.name %></p>
-            </div>
-          </div>
-          <div class="row offset-md-1 px-3">
-            <div class="col-md-6">
-              <p style="font-size: 20px;">自己紹介</p>
-            </div>
-            <div class="col-md-6">
-              <p class="text-break" style="font-size: 20px;"><%= @user.introduction %></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-6">
-          <h4 class="text-center">イベント</h4>
-          <table class="table table-hover table-inverse text-center">
-            <thead>
-              <tr class="bg-info">
-                <th>タイトル</th>
-                <th>概要</th>
-                <th>場所</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @events.each do |event| %>
-                <tr class="white">
-                  <td>
-                    <%= link_to event.title, event_path(event) %>
-                  </td>
-                  <td><%= event.body %></td>
-                  <td><%= event.location %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <%= paginate @events %>
-        </div>
-        <div class="col-6">
-          <h4 class="text-center">タスク</h4>
-          <table class="table table-hover table-inverse text-center">
-            <thead>
-              <tr class="bg-success" style="color: #fff;">
-                <th>タスク</th>
-                <th>詳細</th>
-                <th>実施状況</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @tasks.each do |task| %>
-                <tr class="white">
-                  <td>
-                    <%= link_to task.title, task_path(task) %>
-                  </td>
-                  <td><%= task.body %></td>
-                  <td>
-                    <% if task.pratical == "実施済" %>
-                      <%= task.pratical %>
-                    <% else %>
-                      <p class="mb-0" style="color: red;"><%= task.pratical %></p>
+          <div class="col-md-1 offset-md-2">
+            <!--ログインしているユーザーと参照しているユーザーのIDが異なるとき-->
+            <% unless @user.id == current_user.id %>
+            <!--相互フォローしているとき-->
+              <% if (current_user.following?(@user)) && (@user.following?(current_user)) %>
+                <% if @isRoom == true %>
+                  <%= link_to room_path(@roomId), 'data-toggle': :tooltip, 'title': :"Message" do %>
+                    <i class="fas fa-envelope" style="color: blue;"></i>
+                  <% end %>
+                <% else %>
+                  <%= form_with model: @room, local:true do |f| %>
+                    <%= fields_for @entry do |entry| %>
+                      <%= entry.hidden_field :user_id, :value => @user.id %>
                     <% end %>
-                  </td>
-                </tr>
+                    <%= button_tag type: 'submit', class:"btn btn-default", 'data-toggle': :tooltip, 'title': :"New Message" do %>
+                      <i class="far fa-envelope" style="color: blue;"></i>
+                    <% end %>
+                  <% end %>
+                <% end %>
               <% end %>
-            </tbody>
-          </table>
-          <%= paginate @tasks %>
+            <% end %>
+          </div>
+        </div>
+        <div class="row offset-md-1 px-3">
+          <div class="col-md-6">
+            <p style="font-size: 20px;">ユーザー名</p>
+          </div>
+          <div class="col-md-6">
+            <p style="font-size: 20px;"><%= @user.name %></p>
+          </div>
+        </div>
+        <div class="row offset-md-1 px-3">
+          <div class="col-md-6">
+            <p style="font-size: 20px;">自己紹介</p>
+          </div>
+          <div class="col-md-6">
+            <p class="text-break" style="font-size: 20px;"><%= @user.introduction %></p>
+          </div>
         </div>
       </div>
-    <% end %>
-  </div>
-</main>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <h4 class="text-center">イベント</h4>
+        <table class="table table-hover table-inverse text-center">
+          <thead>
+            <tr class="bg-info">
+              <th>タイトル</th>
+              <th>概要</th>
+              <th>場所</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @events.each do |event| %>
+              <tr class="white">
+                <td>
+                  <%= link_to event.title, event_path(event) %>
+                </td>
+                <td><%= event.body %></td>
+                <td><%= event.location %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @events %>
+      </div>
+      <div class="col-6">
+        <h4 class="text-center">タスク</h4>
+        <table class="table table-hover table-inverse text-center">
+          <thead>
+            <tr class="bg-success" style="color: #fff;">
+              <th>タスク</th>
+              <th>詳細</th>
+              <th>実施状況</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tasks.each do |task| %>
+              <tr class="white">
+                <td>
+                  <%= link_to task.title, task_path(task) %>
+                </td>
+                <td><%= task.body %></td>
+                <td>
+                  <% if task.pratical == "実施済" %>
+                    <%= task.pratical %>
+                  <% else %>
+                    <p class="mb-0" style="color: red;"><%= task.pratical %></p>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @tasks %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -26,13 +26,13 @@
 
 ## 設計書
 
-- アプリケーション詳細設計書  
+- アプリケーション詳細設計書
 https://docs.google.com/spreadsheets/d/1xzIAAuVGu7kVxCX9QFdISH2AOLVhi-KoRranfgE2Fto/edit#gid=0
 
 - テーブル定義書
 https://docs.google.com/spreadsheets/d/15XoIuLKHupXlPVB4AVqVkTEw1sNNk__fdGHkmpNHj8w/edit#gid=0
 
-- WBSシート  
+- WBSシート
 https://docs.google.com/spreadsheets/d/147g_zY_aGRR2M_sJjGDG-jI-4Nq3ZFPGJE-OA-k6IJU/edit#gid=735776390
 
 ## チャレンジ要素一覧
@@ -43,11 +43,11 @@ https://docs.google.com/spreadsheets/d/1pnR5TLdrZG-aVqDHHvB9sQlPxV0-zRIKNboJTWKU
 
 - データベース設計書
 
-https://app.diagrams.net/#G1qIyE57XAMrm8pXBTMxrl8Hhjub0gxqpe
+https://drive.google.com/file/d/1qIyE57XAMrm8pXBTMxrl8Hhjub0gxqpe/view?usp=sharing
 
 - フローチャート
- 
-https://app.diagrams.net/#G1er95iEudg_Nm7ygGk-7_vuqZkInmCAFi
+
+https://drive.google.com/file/d/1er95iEudg_Nm7ygGk-7_vuqZkInmCAFi/view?usp=sharing
 
 ## 開発環境
 

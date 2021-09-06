@@ -31,5 +31,7 @@ Rails.application.routes.draw do
     end
   end
   get '/map_request', to: 'maps#map', as: 'map_request'
+  resources :messages, only: [:create, :destroy]
+  resources :rooms, only: [:create, :show, :index]
 end
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
