@@ -10,15 +10,15 @@ class RoomsController < ApplicationController
 
   def index
     # ログインユーザーに紐付いたエントリーを取得する。
-    @currentEntries = current_user.entries.includes(:room)
+    @current_entries = current_user.entries.includes(:room)
     # ログインユーザーが属しているRoomのidを格納するための空配列を生成。
-    myRoomIds = []
+    myroom_ids = []
     # each文を使ってログインユーザーのRoomのidを配列に格納する。
-    @currentEntries.each do |entry|
-      myRoomIds << entry.room.id
+    @current_entries.each do |entry|
+      myroom_ids << entry.room.id
     end
     # Entryテーブルのログインユーザーが入っているroomのidとログインユーザーではない他ユーザーのuser_idをanotherEntriesに格納する。
-    @anotherEntries = Entry.includes(:room, :user).where(room_id: myRoomIds).where('user_id != ?',@user.id).page(params[:page])
+    @anotherEntries = Entry.includes(:room, :user).where(room_id: myroom_ids).where('user_id != ?',@user.id).page(params[:page])
   end
 
   def show
